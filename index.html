@@ -609,20 +609,22 @@
             const chatbotMessages = document.getElementById('chatbot-messages');
 
             if (chatbotToggle && chatbotContainer && chatbotCloseBtn && chatbotForm && chatbotInput && chatbotMessages) {
-                const responses = {
-                    "price": "The launch price for a unit is ₹32,50,000. You can find more details in the Investment Plan.",
-                    "investment": "Project Ananta offers a unique investment opportunity with guaranteed returns. You can ask about the 'launch price', 'down payment', or 'rental income'.",
-                    "location": "Project Ananta is strategically located in Datia, near the Pitambara Peeth Temple and has excellent connectivity via NH 44.",
-                    "amenities": "We offer exclusive amenities including a luxury pool, spa, gym, fine dining, a rooftop terrace, and more. You can see them in the amenities section.",
-                    "possession": "Possession is scheduled for 24 months from the launch. You'll be enjoying your luxury apartment in no time!",
-                    "contact": "You can reach us via the contact form on the website, or call us at +91 123 456 7890. Our team is ready to assist you.",
-                    "download": "You can download the Investment Plan by clicking the button in the main section of the page.",
-                    "hello": "Hello! Welcome to Project Ananta. How can I assist you today?",
-                    "hi": "Hi there! How can I help you with Project Ananta?",
-                    "bye": "Goodbye! Feel free to ask if you have more questions.",
-                    "thanks": "You're welcome! Is there anything else I can help you with?",
-                    "default": "I'm sorry, I didn't quite understand. You can ask me about 'price', 'location', 'amenities', 'possession', or 'contact' details."
-                };
+                 const knowledgeBase = {
+        // ... same knowledge base as before
+       "cost|price|investment|how much": "The launch price for a unit in Project Ananta starts at ₹32,50,000, with a 25% down payment of ₹8,12,500. We also offer flexible payment plans and have tie-ups with major banks for easy home loans. For a full breakdown, please download the Investment Plan from our website.",
+    "amenities|facilities|features": "Project Ananta offers exclusive amenities like a luxury swimming pool, a state-of-the-art gym, a community hall, a dedicated children's play area, and landscaped gardens. For your peace of mind, we provide 24/7 security with CCTV surveillance and power backup.",
+    "benefits|returns|guarantee|buyback|rental": "Investors enjoy a guaranteed monthly rental of ₹25,000 for the first 3 years. Key benefits include a lifetime free maintenance contract, a buyback guarantee with assured appreciation after 5 years, and 15 days of complimentary stay annually with food & beverage credits.",
+    "location|where|address": "Project Ananta is strategically located in Datia, Madhya Pradesh. It's situated near the main highway, offering excellent connectivity. The project is just a 10-minute drive from the Datia Railway Station and is in close proximity to the renowned Pitambara Peeth temple. For a detailed map, please visit the Location section on our website.",
+    "contact|phone|email|touch": "You can reach our sales team via phone at <a href='tel:+911234567890'>+91 123 456 7890</a> or by email at <a href='mailto:invest@globaloneconsulting.com'>invest@globaloneconsulting.com</a>. You can also schedule a call back using the contact form on our website.",
+    "possession|when|ready|completion": "The project construction is on schedule. Possession for the first phase of units is planned for Q4 2025, which is within 24 months from the launch.",
+    "highlights|units|towers|size": "Project Ananta consists of 5 luxury towers, with a total of 460 units. We offer two configurations: 1BHK (50 sqm) and spacious 3BHK (135 sqm) apartments, designed for modern living.",
+    "rera|approval|legal": "Yes, Project Ananta is a fully RERA-approved project. Our RERA registration number is MP/RERA/PROJECT/XXXX/2023. All legal approvals and titles are clear and can be reviewed on the official RERA portal.",
+    "developer|builder|who": "Project Ananta is a flagship project by 'Global One Properties', a reputed developer with over 20 years of experience in delivering high-quality residential and commercial projects across India.",
+    "visit|sample flat|see": "Absolutely! Our sample flat is ready for viewing. You can schedule a site visit by contacting our sales team or by booking a slot through our website. We are open for visits from 10 AM to 6 PM, seven days a week.",
+    "hello|hi|hey": "Hello! I am the Ananta Assistant. How can I help you with Project Ananta today?",
+    "thanks|thank you": "You're welcome! Feel free to ask if anything else comes to mind.",
+    "bye|goodbye": "Goodbye! We look forward to hearing from you soon. Have a great day!"
+    };
                 let welcomed = false;
 
                 chatbotToggle.addEventListener('click', () => {
