@@ -104,9 +104,8 @@
         .testimonial-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); }
         @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-        /* === PATH CORRECTION FOR HERO IMAGE === */
         #animated-hero-bg {
-            background-image: url('images/h0010.jpg'); /* CORRECTED PATH */
+            background-image: url('images/h0010.jpg');
             background-size: cover;
             background-position: center 100%;
             animation: rise 10s ease-out forwards;
@@ -137,8 +136,8 @@
         /* Chatbot Styles */
         #chatbot-toggle-button { position: fixed; bottom: 25px; left: 25px; width: 60px; height: 60px; background: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728); color: #111; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); z-index: 998; transition: transform 0.3s ease; font-family: 'Montserrat', sans-serif; font-size: 2rem; font-weight: 700; }
         #chatbot-toggle-button:hover { transform: scale(1.1); }
-        #chatbot-container { position: fixed; bottom: 100px; left: 25px; width: 350px; max-width: 90vw; height: 500px; max-height: 70vh; background-color: var(--chatbot-dark); border: 1px solid var(--chatbot-gold); border-radius: 10px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); z-index: 999; display: flex; flex-direction: column; overflow: hidden; transform: scale(0.95) translateY(10px); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: bottom left; }
-        #chatbot-container.visible { transform: scale(1) translateY(0); opacity: 1; }
+        #chatbot-container { position: fixed; bottom: 100px; left: 25px; width: 350px; max-width: 90vw; height: 500px; max-height: 70vh; background-color: var(--chatbot-dark); border: 1px solid var(--chatbot-gold); border-radius: 10px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); z-index: 999; display: flex; flex-direction: column; overflow: hidden; transform: scale(0.95) translateY(10px); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: bottom left; visibility: hidden; }
+        #chatbot-container.visible { transform: scale(1) translateY(0); opacity: 1; visibility: visible; }
         #chatbot-header { background-color: var(--chatbot-light-dark); padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--chatbot-gold); }
         #chatbot-header h3 { color: var(--chatbot-gold); font-size: 1rem; font-weight: 600; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
         #chatbot-close-btn { background: none; border: none; color: var(--chatbot-text); font-size: 2rem; cursor: pointer; line-height: 1; }
@@ -204,7 +203,6 @@
     <section class="py-10 bg-gray-800 relative overflow-hidden">
         <div class="absolute inset-0 z-0">
             <video autoplay loop muted playsinline class="w-full h-full object-cover" loading="lazy">
-                <!-- === PATH CORRECTION FOR VIDEO === -->
                 <source src="images/4525107-uhd_3840_2160_24fps - Trim.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -224,7 +222,6 @@
     <section id="about" class="py-16 bg-gray-900 relative overflow-hidden">
         <div class="absolute inset-0 z-0">
             <video autoplay loop muted playsinline class="w-full h-full object-cover" loading="lazy">
-                <!-- === PATH CORRECTION FOR VIDEO === -->
                 <source src="images/7578550-uhd_3840_2160_30fps - Trim.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -264,7 +261,7 @@
         </div>
     </section>
 
-   <!-- Amenities Section (Images are external Pexels links, no path correction needed) -->
+   <!-- Amenities Section -->
     <section id="amenities" class="py-16 bg-gray-900 overflow-hidden">
         <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -332,7 +329,8 @@
 
     <!-- Testimonials Section -->
     <section class="py-16 bg-gray-800 relative overflow-hidden">
-        <div class="absolute inset-0 z-0"><video autoplay loop muted playsinline class="w-full h-full object-cover" loading="lazy"><source src="videos/testimonials_background.mp4" type="video/mp4"></video><div class="absolute inset-0 bg-black opacity-75"></div></div>
+        <!-- === CORRECTED VIDEO PATH === -->
+        <div class="absolute inset-0 z-0"><video autoplay loop muted playsinline class="w-full h-full object-cover" loading="lazy"><source src="images/testimonials_background.mp4" type="video/mp4"></video><div class="absolute inset-0 bg-black opacity-75"></div></div>
         <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl text-gray-100 mb-4">What Our Investors Say</h2><div class="w-24 h-1 bg-[#9c7c38] mx-auto mb-6"></div><p class="text-gray-400 max-w-3xl mx-auto">Hear from our satisfied investors who have already secured their place in Project Ananta.</p>
@@ -352,8 +350,8 @@
 
 <!-- Location Section -->
 <section id="location" class="py-16 bg-gray-900 relative overflow-hidden">
-    <!-- === PATH CORRECTION FOR VIDEO === -->
-    <div class="absolute inset-0 z-0"><video autoplay loop muted playsinline class="w-full h-full object-cover" loading="lazy"><source src="videos/location_overview_background.mp4" type="video/mp4"></video><div class="absolute inset-0 bg-black opacity-80"></div></div>
+    <!-- === CORRECTED VIDEO PATH === -->
+    <div class="absolute inset-0 z-0"><video autoplay loop muted playsinline class="w-full h-full object-cover" loading="lazy"><source src="images/location_overview_background.mp4" type="video/mp4"></video><div class="absolute inset-0 bg-black opacity-80"></div></div>
     <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center mb-12"><h2 class="text-3xl md:text-4xl text-gray-100 mb-4">Prime Location</h2><div class="w-24 h-1 bg-[#9c7c38] mx-auto mb-6"></div><p class="text-gray-400 max-w-3xl mx-auto">Project Ananta is strategically located to offer convenience, connectivity, and a serene environment.</p></div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -425,7 +423,6 @@
                 <div><h3 class="text-xl md:text-2xl tracking-widest">GLOBAL ONE</h3><p class="text-xs md:text-sm tracking-wider mt-2">CONSULTING</p></div>
                 <div><h3 class="text-xl md:text-2xl tracking-widest">GLOBAL ONE</h3><p class="text-xs md:text-sm tracking-wider mt-2">INDUSTRIES</p></div>
                 <div><h3 class="text-xl md:text-2xl tracking-widest">GLOBAL ONE</h3><p class="text-xs md:text-sm tracking-wider mt-2">RETAILS</p></div>
-                <!-- === PATH CORRECTION FOR IMAGE === -->
                 <div class="flex justify-center"><img src="images/10.png" alt="Global One Group Logo" class="w-32 h-32 md:w-40 md:h-40" loading="lazy"></div>
                 <div><h3 class="text-xl md:text-2xl tracking-widest">GLOBAL ONE</h3><p class="text-xs md:text-sm tracking-wider mt-2">AIR WAYS</p></div>
                 <div><h3 class="text-xl md:text-2xl tracking-widest">GLOBAL ONE</h3><p class="text-xs md:text-sm tracking-wider mt-2">TECHSOLUTIONS</p></div>
@@ -449,7 +446,7 @@
 
     <!-- Chatbot Components -->
     <div id="chatbot-toggle-button">A</div>
-    <div id="chatbot-container" class="hidden">
+    <div id="chatbot-container">
         <div id="chatbot-header">
             <h3>Ananta Assistant</h3>
             <button id="chatbot-close-btn">×</button>
@@ -568,7 +565,6 @@
             });
 
             // Contact Form Script
-            // NOTE: For this form to work, a server-side endpoint is required.
             const mainContactForm = document.getElementById('main-contact-form');
             if (mainContactForm) {
                 const formStatusMessage = document.getElementById('form-status-message');
@@ -601,114 +597,115 @@
             if(currentYearSpan) currentYearSpan.textContent = new Date().getFullYear();
             
           
-function initializeChatbot() {
-    // --- DOM Elements ---
-    const toggleButton = document.getElementById('chatbot-toggle-button');
-    const chatContainer = document.getElementById('chatbot-container');
-    const closeButton = document.getElementById('chatbot-close-btn');
-    const messageContainer = document.getElementById('chatbot-messages');
-    const chatForm = document.getElementById('chatbot-form');
-    const inputField = document.getElementById('chatbot-input');
+            function initializeChatbot() {
+                // --- DOM Elements ---
+                const toggleButton = document.getElementById('chatbot-toggle-button');
+                const chatContainer = document.getElementById('chatbot-container');
+                const closeButton = document.getElementById('chatbot-close-btn');
+                const messageContainer = document.getElementById('chatbot-messages');
+                const chatForm = document.getElementById('chatbot-form');
+                const inputField = document.getElementById('chatbot-input');
 
-    // --- Knowledge Base (No changes here) ---
-    const knowledgeBase = {
-        // ... same knowledge base as before
-       "cost|price|investment|how much": "The launch price for a unit in Project Ananta starts at ₹32,50,000, with a 25% down payment of ₹8,12,500. We also offer flexible payment plans and have tie-ups with major banks for easy home loans. For a full breakdown, please download the Investment Plan from our website.",
-    "amenities|facilities|features": "Project Ananta offers exclusive amenities like a luxury swimming pool, a state-of-the-art gym, a community hall, a dedicated children's play area, and landscaped gardens. For your peace of mind, we provide 24/7 security with CCTV surveillance and power backup.",
-    "benefits|returns|guarantee|buyback|rental": "Investors enjoy a guaranteed monthly rental of ₹25,000 for the first 3 years. Key benefits include a lifetime free maintenance contract, a buyback guarantee with assured appreciation after 5 years, and 15 days of complimentary stay annually with food & beverage credits.",
-    "location|where|address": "Project Ananta is strategically located in Datia, Madhya Pradesh. It's situated near the main highway, offering excellent connectivity. The project is just a 10-minute drive from the Datia Railway Station and is in close proximity to the renowned Pitambara Peeth temple. For a detailed map, please visit the Location section on our website.",
-    "contact|phone|email|touch": "You can reach our sales team via phone at <a href='tel:+911234567890'>+91 123 456 7890</a> or by email at <a href='mailto:invest@globaloneconsulting.com'>invest@globaloneconsulting.com</a>. You can also schedule a call back using the contact form on our website.",
-    "possession|when|ready|completion": "The project construction is on schedule. Possession for the first phase of units is planned for Q4 2025, which is within 24 months from the launch.",
-    "highlights|units|towers|size": "Project Ananta consists of 5 luxury towers, with a total of 460 units. We offer two configurations: 1BHK (50 sqm) and spacious 3BHK (135 sqm) apartments, designed for modern living.",
-    "rera|approval|legal": "Yes, Project Ananta is a fully RERA-approved project. Our RERA registration number is MP/RERA/PROJECT/XXXX/2023. All legal approvals and titles are clear and can be reviewed on the official RERA portal.",
-    "developer|builder|who": "Project Ananta is a flagship project by 'Global One Properties', a reputed developer with over 20 years of experience in delivering high-quality residential and commercial projects across India.",
-    "visit|sample flat|see": "Absolutely! Our sample flat is ready for viewing. You can schedule a site visit by contacting our sales team or by booking a slot through our website. We are open for visits from 10 AM to 6 PM, seven days a week.",
-    "hello|hi|hey": "Hello! I am the Ananta Assistant. How can I help you with Project Ananta today?",
-    "thanks|thank you": "You're welcome! Feel free to ask if anything else comes to mind.",
-    "bye|goodbye": "Goodbye! We look forward to hearing from you soon. Have a great day!"
-    };
-    const defaultResponse = "I'm sorry, I can only answer questions about Project Ananta. Please try asking about the price, location, or amenities. For other inquiries, please use the contact form.";
+                // --- Knowledge Base ---
+                const knowledgeBase = {
+                    "cost|price|investment|how much": "The launch price for a unit in Project Ananta starts at ₹32,50,000, with a 25% down payment of ₹8,12,500. We also offer flexible payment plans and have tie-ups with major banks for easy home loans. For a full breakdown, please download the Investment Plan from our website.",
+                    "amenities|facilities|features": "Project Ananta offers exclusive amenities like a luxury swimming pool, a state-of-the-art gym, a community hall, a dedicated children's play area, and landscaped gardens. For your peace of mind, we provide 24/7 security with CCTV surveillance and power backup.",
+                    "benefits|returns|guarantee|buyback|rental": "Investors enjoy a guaranteed monthly rental of ₹25,000 for the first 3 years. Key benefits include a lifetime free maintenance contract, a buyback guarantee with assured appreciation after 5 years, and 15 days of complimentary stay annually with food & beverage credits.",
+                    "location|where|address": "Project Ananta is strategically located in Datia, Madhya Pradesh. It's situated near the main highway, offering excellent connectivity. The project is just a 10-minute drive from the Datia Railway Station and is in close proximity to the renowned Pitambara Peeth temple. For a detailed map, please visit the Location section on our website.",
+                    "contact|phone|email|touch": "You can reach our sales team via phone at <a href='tel:+911234567890'>+91 123 456 7890</a> or by email at <a href='mailto:invest@globaloneconsulting.com'>invest@globaloneconsulting.com</a>. You can also schedule a call back using the contact form on our website.",
+                    "possession|when|ready|completion": "The project construction is on schedule. Possession for the first phase of units is planned for Q4 2025, which is within 24 months from the launch.",
+                    "highlights|units|towers|size": "Project Ananta consists of 5 luxury towers, with a total of 460 units. We offer two configurations: 1BHK (50 sqm) and spacious 3BHK (135 sqm) apartments, designed for modern living.",
+                    "rera|approval|legal": "Yes, Project Ananta is a fully RERA-approved project. Our RERA registration number is MP/RERA/PROJECT/XXXX/2023. All legal approvals and titles are clear and can be reviewed on the official RERA portal.",
+                    "developer|builder|who": "Project Ananta is a flagship project by 'Global One Properties', a reputed developer with over 20 years of experience in delivering high-quality residential and commercial projects across India.",
+                    "visit|sample flat|see": "Absolutely! Our sample flat is ready for viewing. You can schedule a site visit by contacting our sales team or by booking a slot through our website. We are open for visits from 10 AM to 6 PM, seven days a week.",
+                    "hello|hi|hey": "Hello! I am the Ananta Assistant. How can I help you with Project Ananta today?",
+                    "thanks|thank you": "You're welcome! Feel free to ask if anything else comes to mind.",
+                    "bye|goodbye": "Goodbye! We look forward to hearing from you soon. Have a great day!"
+                };
+                const defaultResponse = "I'm sorry, I can only answer questions about Project Ananta. Please try asking about the price, location, or amenities. For other inquiries, please use the contact form.";
 
-    // --- Functions ---
-    const toggleChat = (forceOpen = false, forceClose = false) => {
-        const isVisible = chatContainer.classList.contains('visible');
-        if (forceClose || (isVisible && !forceOpen)) {
-            chatContainer.classList.remove('visible');
-        } else {
-            chatContainer.classList.add('visible');
-            inputField.focus();
-            if(messageContainer.children.length === 0) {
-                 setTimeout(() => displayMessage(knowledgeBase["hello|hi|hey"], 'bot'), 500);
+                // --- Functions ---
+                const toggleChat = (forceOpen = false, forceClose = false) => {
+                    const isVisible = chatContainer.classList.contains('visible');
+                    if (forceClose || (isVisible && !forceOpen)) {
+                        chatContainer.classList.remove('visible');
+                    } else {
+                        chatContainer.classList.add('visible');
+                        inputField.focus();
+                        if(messageContainer.children.length === 0) {
+                            setTimeout(() => displayMessage(knowledgeBase["hello|hi|hey"], 'bot'), 500);
+                        }
+                    }
+                };
+                
+                const displayMessage = (message, sender) => {
+                    const typingIndicator = messageContainer.querySelector('.typing-indicator');
+                    if (typingIndicator) typingIndicator.remove();
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = `chat-message ${sender}`;
+                    messageDiv.innerHTML = message; // Use innerHTML to render links
+                    messageContainer.appendChild(messageDiv);
+                    messageContainer.scrollTop = messageContainer.scrollHeight;
+                };
+
+                const showTypingIndicator = () => {
+                    const typingDiv = document.createElement('div');
+                    typingDiv.className = 'chat-message bot typing-indicator';
+                    typingDiv.innerHTML = '<span></span><span></span><span></span>';
+                    messageContainer.appendChild(typingDiv);
+                    messageContainer.scrollTop = messageContainer.scrollHeight;
+                };
+
+                const getBotResponse = (userInput) => {
+                    const lowerInput = userInput.toLowerCase();
+                    let response = defaultResponse;
+                    for (const keywords in knowledgeBase) {
+                        const keywordArray = keywords.split('|');
+                        if (keywordArray.some(keyword => lowerInput.includes(keyword))) {
+                            response = knowledgeBase[keywords];
+                            break;
+                        }
+                    }
+                    setTimeout(() => {
+                        showTypingIndicator();
+                        setTimeout(() => displayMessage(response, 'bot'), 1200);
+                    }, 500);
+                };
+
+                const handleFormSubmit = (e) => {
+                    e.preventDefault();
+                    const userInput = inputField.value.trim();
+                    if (userInput) {
+                        displayMessage(userInput, 'user');
+                        inputField.value = '';
+                        getBotResponse(userInput);
+                    }
+                };
+
+                // --- Event Listeners ---
+                toggleButton.addEventListener('click', () => toggleChat());
+                closeButton.addEventListener('click', () => toggleChat(false, true));
+                chatForm.addEventListener('submit', handleFormSubmit);
+
+                // --- Logic for one-time automatic pop-up ---
+                const autoOpenChat = () => {
+                    const hasAutoOpened = sessionStorage.getItem('anantaChatAutoOpened');
+                    if (!hasAutoOpened) {
+                        setTimeout(() => {
+                            toggleChat(true); // Force open the chat
+                            sessionStorage.setItem('anantaChatAutoOpened', 'true');
+                        }, 5000); // 5 seconds delay
+                    }
+                };
+
+                autoOpenChat();
             }
-        }
-    };
-    
-    // ... displayMessage, showTypingIndicator, getBotResponse, handleFormSubmit functions are unchanged ...
-    const displayMessage = (message, sender) => {
-        const typingIndicator = messageContainer.querySelector('.typing-indicator');
-        if (typingIndicator) typingIndicator.remove();
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `chat-message ${sender}`;
-        messageDiv.innerHTML = message;
-        messageContainer.appendChild(messageDiv);
-        messageContainer.scrollTop = messageContainer.scrollHeight;
-    };
-    const showTypingIndicator = () => {
-        const typingDiv = document.createElement('div');
-        typingDiv.className = 'chat-message bot typing-indicator';
-        typingDiv.innerHTML = '<span></span><span></span><span></span>';
-        messageContainer.appendChild(typingDiv);
-        messageContainer.scrollTop = messageContainer.scrollHeight;
-    };
-    const getBotResponse = (userInput) => {
-        const lowerInput = userInput.toLowerCase();
-        let response = defaultResponse;
-        for (const keywords in knowledgeBase) {
-            const keywordArray = keywords.split('|');
-            if (keywordArray.some(keyword => lowerInput.includes(keyword))) {
-                response = knowledgeBase[keywords];
-                break;
-            }
-        }
-        setTimeout(() => {
-            showTypingIndicator();
-            setTimeout(() => displayMessage(response, 'bot'), 1200);
-        }, 500);
-    };
-    const handleFormSubmit = (e) => {
-        e.preventDefault();
-        const userInput = inputField.value.trim();
-        if (userInput) {
-            displayMessage(userInput, 'user');
-            inputField.value = '';
-            getBotResponse(userInput);
-        }
-    };
 
+            // ===================================
+            // === THIS IS THE FIX - CALL THE FUNCTION ===
+            // ===================================
+            initializeChatbot();
 
-    // --- Event Listeners ---
-    toggleButton.addEventListener('click', () => toggleChat());
-    closeButton.addEventListener('click', () => toggleChat(false, true));
-    chatForm.addEventListener('submit', handleFormSubmit);
-
-    // --- ADDED: Logic for one-time automatic pop-up ---
-    const autoOpenChat = () => {
-        // Check sessionStorage to see if the bot has already auto-opened
-        const hasAutoOpened = sessionStorage.getItem('anantaChatAutoOpened');
-
-        if (!hasAutoOpened) {
-            // Wait 5 seconds before opening the chat
-            setTimeout(() => {
-                toggleChat(true); // Force open the chat
-                // Set the flag in sessionStorage so it doesn't open again
-                sessionStorage.setItem('anantaChatAutoOpened', 'true');
-            }, 5000); // 5000 milliseconds = 5 seconds
-        }
-    };
-
-    // Call the auto-open function
-    autoOpenChat();
-}
         });
     </script>
 </body>
