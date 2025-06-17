@@ -600,16 +600,18 @@
             const currentYearSpan = document.getElementById('currentYear');
             if(currentYearSpan) currentYearSpan.textContent = new Date().getFullYear();
             
-            // CHATBOT SCRIPT
-            const chatbotToggle = document.getElementById('chatbot-toggle-button');
-            const chatbotContainer = document.getElementById('chatbot-container');
-            const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
-            const chatbotForm = document.getElementById('chatbot-form');
-            const chatbotInput = document.getElementById('chatbot-input');
-            const chatbotMessages = document.getElementById('chatbot-messages');
+          
+function initializeChatbot() {
+    // --- DOM Elements ---
+    const toggleButton = document.getElementById('chatbot-toggle-button');
+    const chatContainer = document.getElementById('chatbot-container');
+    const closeButton = document.getElementById('chatbot-close-btn');
+    const messageContainer = document.getElementById('chatbot-messages');
+    const chatForm = document.getElementById('chatbot-form');
+    const inputField = document.getElementById('chatbot-input');
 
-            if (chatbotToggle && chatbotContainer && chatbotCloseBtn && chatbotForm && chatbotInput && chatbotMessages) {
-                 const knowledgeBase = {
+    // --- Knowledge Base (No changes here) ---
+    const knowledgeBase = {
         // ... same knowledge base as before
        "cost|price|investment|how much": "The launch price for a unit in Project Ananta starts at ₹32,50,000, with a 25% down payment of ₹8,12,500. We also offer flexible payment plans and have tie-ups with major banks for easy home loans. For a full breakdown, please download the Investment Plan from our website.",
     "amenities|facilities|features": "Project Ananta offers exclusive amenities like a luxury swimming pool, a state-of-the-art gym, a community hall, a dedicated children's play area, and landscaped gardens. For your peace of mind, we provide 24/7 security with CCTV surveillance and power backup.",
@@ -625,64 +627,88 @@
     "thanks|thank you": "You're welcome! Feel free to ask if anything else comes to mind.",
     "bye|goodbye": "Goodbye! We look forward to hearing from you soon. Have a great day!"
     };
-                let welcomed = false;
+    const defaultResponse = "I'm sorry, I can only answer questions about Project Ananta. Please try asking about the price, location, or amenities. For other inquiries, please use the contact form.";
 
-                chatbotToggle.addEventListener('click', () => {
-                    chatbotContainer.classList.add('visible');
-                    chatbotInput.focus();
-                    if (!welcomed) {
-                        addMessage('bot', "Welcome to Project Ananta! Ask me anything about the project, like 'price', 'location', or 'amenities'.");
-                        welcomed = true;
-                    }
-                });
-
-                chatbotCloseBtn.addEventListener('click', () => chatbotContainer.classList.remove('visible'));
-
-                chatbotForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const userInput = chatbotInput.value.trim();
-                    if (userInput) {
-                        addMessage('user', userInput);
-                        chatbotInput.value = '';
-                        showTypingIndicator();
-                        setTimeout(() => generateBotResponse(userInput), 1200);
-                    }
-                });
-
-                function addMessage(sender, text) {
-                    const messageElement = document.createElement('div');
-                    messageElement.classList.add('chat-message', sender);
-                    messageElement.innerHTML = text;
-                    chatbotMessages.appendChild(messageElement);
-                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-                }
-                
-                function showTypingIndicator() {
-                    const typingIndicator = document.createElement('div');
-                    typingIndicator.classList.add('chat-message', 'bot', 'typing-indicator');
-                    typingIndicator.innerHTML = `<span></span><span></span><span></span>`;
-                    chatbotMessages.appendChild(typingIndicator);
-                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-                }
-
-                function removeTypingIndicator() {
-                    const indicator = chatbotMessages.querySelector('.typing-indicator');
-                    if (indicator) indicator.remove();
-                }
-
-                function generateBotResponse(userInput) {
-                    removeTypingIndicator();
-                    const lowerCaseInput = userInput.toLowerCase();
-                    let botResponse = responses.default;
-                    for (const key in responses) {
-                        if (lowerCaseInput.includes(key)) {
-                            botResponse = responses[key];
-                            break;
-                        }
-                    }
-                    addMessage('bot', botResponse);
-                }
+    // --- Functions ---
+    const toggleChat = (forceOpen = false, forceClose = false) => {
+        const isVisible = chatContainer.classList.contains('visible');
+        if (forceClose || (isVisible && !forceOpen)) {
+            chatContainer.classList.remove('visible');
+        } else {
+            chatContainer.classList.add('visible');
+            inputField.focus();
+            if(messageContainer.children.length === 0) {
+                 setTimeout(() => displayMessage(knowledgeBase["hello|hi|hey"], 'bot'), 500);
             }
+        }
+    };
+    
+    // ... displayMessage, showTypingIndicator, getBotResponse, handleFormSubmit functions are unchanged ...
+    const displayMessage = (message, sender) => {
+        const typingIndicator = messageContainer.querySelector('.typing-indicator');
+        if (typingIndicator) typingIndicator.remove();
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `chat-message ${sender}`;
+        messageDiv.innerHTML = message;
+        messageContainer.appendChild(messageDiv);
+        messageContainer.scrollTop = messageContainer.scrollHeight;
+    };
+    const showTypingIndicator = () => {
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'chat-message bot typing-indicator';
+        typingDiv.innerHTML = '<span></span><span></span><span></span>';
+        messageContainer.appendChild(typingDiv);
+        messageContainer.scrollTop = messageContainer.scrollHeight;
+    };
+    const getBotResponse = (userInput) => {
+        const lowerInput = userInput.toLowerCase();
+        let response = defaultResponse;
+        for (const keywords in knowledgeBase) {
+            const keywordArray = keywords.split('|');
+            if (keywordArray.some(keyword => lowerInput.includes(keyword))) {
+                response = knowledgeBase[keywords];
+                break;
+            }
+        }
+        setTimeout(() => {
+            showTypingIndicator();
+            setTimeout(() => displayMessage(response, 'bot'), 1200);
+        }, 500);
+    };
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        const userInput = inputField.value.trim();
+        if (userInput) {
+            displayMessage(userInput, 'user');
+            inputField.value = '';
+            getBotResponse(userInput);
+        }
+    };
+
+
+    // --- Event Listeners ---
+    toggleButton.addEventListener('click', () => toggleChat());
+    closeButton.addEventListener('click', () => toggleChat(false, true));
+    chatForm.addEventListener('submit', handleFormSubmit);
+
+    // --- ADDED: Logic for one-time automatic pop-up ---
+    const autoOpenChat = () => {
+        // Check sessionStorage to see if the bot has already auto-opened
+        const hasAutoOpened = sessionStorage.getItem('anantaChatAutoOpened');
+
+        if (!hasAutoOpened) {
+            // Wait 5 seconds before opening the chat
+            setTimeout(() => {
+                toggleChat(true); // Force open the chat
+                // Set the flag in sessionStorage so it doesn't open again
+                sessionStorage.setItem('anantaChatAutoOpened', 'true');
+            }, 5000); // 5000 milliseconds = 5 seconds
+        }
+    };
+
+    // Call the auto-open function
+    autoOpenChat();
+}
         });
     </script>
 </body>
