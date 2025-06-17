@@ -293,7 +293,7 @@
                             <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/3144580/pexels-photo-3144580.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Modern Bar and Lounge" /></div>
                             <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Comfortable Living Area" /></div>
                         </div>
-                        <div class="hero-bg_wrap-slides scroll2">
+                        <div class="hero-bg_wrap_slides scroll2">
                             <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Fine Dining Restaurant" /></div>
                             <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Spacious Apartment Interior" /></div>
                             <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/3144580/pexels-photo-3144580.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Modern Bar and Lounge" /></div>
@@ -307,7 +307,7 @@
                             <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/6434622/pexels-photo-6434622.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Private Cinema" /></div>
                             <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/439391/pexels-photo-439391.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Lobby and Concierge Desk" /></div>
                         </div>
-                        <div class="hero-bg_wrap-slides scroll3">
+                        <div class="hero-bg_wrap_slides scroll3">
                             <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/2507010/pexels-photo-2507010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Rooftop Terrace" /></div>
                             <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/220551/pexels-photo-220551.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Business Conference Room" /></div>
                             <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/6434622/pexels-photo-6434622.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Private Cinema" /></div>
@@ -329,7 +329,6 @@
 
     <!-- Testimonials Section -->
     <section class="py-16 bg-gray-800 relative overflow-hidden">
-        <!-- === CORRECTED VIDEO PATH === -->
         <div class="absolute inset-0 z-0"><video autoplay loop muted playsinline class="w-full h-full object-cover" loading="lazy"><source src="images/testimonials_background.mp4" type="video/mp4"></video><div class="absolute inset-0 bg-black opacity-75"></div></div>
         <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-12">
@@ -350,7 +349,6 @@
 
 <!-- Location Section -->
 <section id="location" class="py-16 bg-gray-900 relative overflow-hidden">
-    <!-- === CORRECTED VIDEO PATH === -->
     <div class="absolute inset-0 z-0"><video autoplay loop muted playsinline class="w-full h-full object-cover" loading="lazy"><source src="images/location_overview_background.mp4" type="video/mp4"></video><div class="absolute inset-0 bg-black opacity-80"></div></div>
     <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center mb-12"><h2 class="text-3xl md:text-4xl text-gray-100 mb-4">Prime Location</h2><div class="w-24 h-1 bg-[#9c7c38] mx-auto mb-6"></div><p class="text-gray-400 max-w-3xl mx-auto">Project Ananta is strategically located to offer convenience, connectivity, and a serene environment.</p></div>
@@ -389,6 +387,7 @@
                             <div class="mb-4"><label for="main-phone" class="block text-gray-300 mb-2 text-sm">Mobile Number</label><input type="tel" id="main-phone" name="phone" class="w-full px-3 py-2 rounded-lg"></div>
                               <div class="mb-6">
                                 <label for="main-interest" class="block text-gray-300 mb-2 text-sm">I'm interested in...</label>
+                                <!-- UPDATED: Added name="message" attribute -->
                                <select id="main-interest" name="message" class="w-full px-3 py-2 rounded-lg bg-gray-900 text-white" required>
                                     <option value="" disabled selected>Please select an option</option>
                                     <option value="Provide a catalog">Provide a catalog</option>
@@ -470,6 +469,70 @@
     <!-- Your Custom JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // ... (all your other JS for animations, chatbot, etc. goes here) ...
+
+            // ===============================================
+            // === START: UPDATED CONTACT FORM SCRIPT      ===
+            // ===============================================
+            const mainContactForm = document.getElementById('main-contact-form');
+            if (mainContactForm) {
+                const formStatusMessage = document.getElementById('form-status-message');
+                const submitButton = mainContactForm.querySelector('button[type="submit"]');
+
+                mainContactForm.addEventListener('submit', async (e) => {
+                    e.preventDefault(); // Prevent default browser submission
+
+                    // Create a data object from the form
+                    const formData = new FormData(mainContactForm);
+                    const data = {
+                        name: formData.get('name'),
+                        email: formData.get('email'),
+                        phone: formData.get('phone'),
+                        message: formData.get('message'),
+                    };
+                    
+                    submitButton.textContent = 'Sending...';
+                    submitButton.disabled = true;
+                    formStatusMessage.textContent = '';
+
+                    try {
+                        // =========================================================================
+                        // IMPORTANT: Replace this URL with your actual deployed Vercel backend URL
+                        // =========================================================================
+                        const backendUrl = 'https://your-vercel-app-name.vercel.app/api/contact'; 
+
+                        const response = await fetch(backendUrl, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(data),
+                        });
+
+                        const result = await response.json();
+
+                        if (response.ok) {
+                            formStatusMessage.textContent = result.message;
+                            formStatusMessage.className = 'mt-4 text-center text-green-400';
+                            mainContactForm.reset(); // Clear the form on success
+                        } else {
+                            throw new Error(result.message);
+                        }
+                    } catch (error) {
+                        formStatusMessage.textContent = error.message || 'An error occurred. Please try again.';
+                        formStatusMessage.className = 'mt-4 text-center text-red-400';
+                    } finally {
+                        submitButton.textContent = 'Send Message';
+                        submitButton.disabled = false;
+                    }
+                });
+            }
+            // ===============================================
+            // === END: UPDATED CONTACT FORM SCRIPT        ===
+            // ===============================================
+
+
+            // Your other existing JavaScript functions (hero animations, chatbot, etc.)
             // Hero sentence animation
             const paragraphContainer = document.getElementById('hero-paragraph-container');
             if (paragraphContainer) {
@@ -563,20 +626,6 @@
                     card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
                 });
             });
-
-            // Contact Form Script
-            const mainContactForm = document.getElementById('main-contact-form');
-            if (mainContactForm) {
-                const formStatusMessage = document.getElementById('form-status-message');
-                const submitButton = mainContactForm.querySelector('button[type="submit"]');
-                mainContactForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    submitButton.textContent = 'Sending...';
-                    submitButton.disabled = true;
-                    formStatusMessage.textContent = 'Form submission is for demo only. A server is needed.';
-                    formStatusMessage.className = 'mt-4 text-center text-yellow-400';
-                });
-            }
 
             // Smooth scroll for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -701,9 +750,6 @@
                 autoOpenChat();
             }
 
-            // ===================================
-            // === THIS IS THE FIX - CALL THE FUNCTION ===
-            // ===================================
             initializeChatbot();
 
         });
