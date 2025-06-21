@@ -35,7 +35,26 @@
             overflow: hidden;
             z-index: 99;
         }
-        .splash-content { text-align: center; }
+        .splash-content {
+            text-align: center;
+            position: relative; /* Make this the positioning context for the video */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #splash-ring-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px; /* Adjust size to be larger than the text */
+            height: 700px;
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            pointer-events: none; /* Prevent video from being interactive */
+            z-index: 10;
+        }
         .splash-ananta {
             font-family: 'Tiro Devanagari Hindi', serif;
             font-size: 7rem;
@@ -43,6 +62,8 @@
             font-weight: 400;
             text-transform: none;
             animation: glow 2.5s ease-in-out infinite alternate;
+            position: relative; /* Required for z-index to work */
+            z-index: 11; /* Ensure text is on top of the video */
         }
         @keyframes glow {
             from {
@@ -163,6 +184,12 @@
 <body>
       <section id="splash-screen">
         <div class="splash-content">
+            <!-- Ring animation video -->
+            <video id="splash-ring-video" autoplay muted playsinline preload="auto">
+                <!-- IMPORTANT: Replace 'ring-animation.mp4' with the actual path to your video file. -->
+                <source src="ring-animation.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
             <h1 class="splash-ananta">अनंता</h1>
         </div>
         <div class="scroll-down-indicator">
