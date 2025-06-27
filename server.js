@@ -1,50 +1,49 @@
-require('dotenv').config(); // Load environment variables from .env file
-
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const path = require('path');
-const session = require('express-session');
 
-// Import routes
+// Import the API routes we created
 const apiRoutes = require('./routes/api');
-const adminRoutes = require('./routes/admin');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-
-// --- Database Connection ---
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => console.log('MongoDB Connected...'))
-  .catch(err => console.error(err));
+const PORT = 3000; // The port our server will run on
 
 // --- Middleware ---
-app.use(express.json()); // To parse JSON bodies
-app.use(express.urlencoded({ extended: true })); // To parse URL-encoded bodies (for form submissions)
-app.use(express.static(path.join(__dirname, 'public'))); // Serve static files from 'public' folder
+// Enable Cross-Origin Resource Sharing (CORS)
+app.use(cors());
 
-// --- Session Middleware ---
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false } // Set to true if using HTTPS
-}));
+// Enable the express server to parse JSON and URL-encoded bodies
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// --- View Engine Setup ---
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+// --- Database Connection ---
+// Connect to your local MongoDB instance.
+// 'project-ananta-db' is the name of the database that will be created.
+const MONGO_URI = 'mongodb://127.0.0.1:27017/project-ananta-db';
 
-// --- Routes ---
-app.use('/api', apiRoutes);       // Use API routes for paths starting with /api
-app.use('/admin', adminRoutes);   // Use Admin routes for paths starting with /admin
+mongoose.connect(MONGO_URI)
+    .then(() => console.log('Successfully connected to MongoDB.'))
+    .catch(err => {
+        console.error('Database connection error:', err);
+        process.exit(1); // Exit the application if the DB connection fails
+    });
 
-// --- Root Redirect ---
-// Redirect the base URL to the main site page
-app.get('/', (req, res) => {
+// --- API Routes ---
+// Tell the server to use our API routes for any request starting with /api
+app.use('/api', apiRoutes);
+
+// --- Serve Static Files ---
+// This tells Express to serve all files from the 'public' directory (index.html, images, etc.)
+app.use(express.static(path.join(__dirname, 'public')));
+
+// A catch-all to send the main HTML file for any other requests.
+app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// --- Start Server ---
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+// --- Start the Server ---
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log('Open this URL in your browser to see the website.');
+});
