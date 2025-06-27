@@ -1,29 +1,23 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const contactSchema = new mongoose.Schema({
+// Define the schema for a contact submission
+const contactSchema = new Schema({
     name: {
         type: String,
-        required: true,
-        trim: true
+        required: true
     },
     email: {
         type: String,
-        required: true,
-        trim: true
+        required: true
     },
-    phone  
-      : {
+    phone: {
         type: String,
-        trim: true
+        required: false // Phone is not marked as required in the form
     },
     message: {
         type: String,
-        required: true,
-        enum: [
-            'Provide a catalog', 
-            'Provide an investment plan', 
-            'Provide brochures'
-        ]
+        required: true // This will hold the value from the 'I'm interested in...' select box
     },
     submittedAt: {
         type: Date,
@@ -31,6 +25,8 @@ const contactSchema = new mongoose.Schema({
     }
 });
 
+// Create a model from the schema
 const ContactSubmission = mongoose.model('ContactSubmission', contactSchema);
 
+// Export the model
 module.exports = ContactSubmission;
