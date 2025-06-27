@@ -547,12 +547,10 @@
     <!-- Scroll to Top Button -->
     <div class="scroll-to-top"> ↑ </div>
 
-    <!-- Your Custom JavaScript -->
+     <!-- Your Custom JavaScript -->
     <script>
-        // All your existing Javascript remains the same.
-        // The responsiveness is handled by the HTML and CSS changes above.
         document.addEventListener('DOMContentLoaded', () => {
-            // ... (The entire script from your previous request goes here, it doesn't need changes for responsiveness)
+            // --- Splash Screen ---
             setTimeout(() => {
                 const splashScreen = document.getElementById('splash-screen');
                 if (splashScreen) {
@@ -560,93 +558,62 @@
                 }
                 document.body.classList.remove('splash-active');
             }, 4000);
-            const express = require('express');
-const router = express.Router();
-const ContactSubmission = require('../models/contact');
+            
+            // --- Contact Form Submission Logic ---
+            const mainContactForm = document.getElementById('main-contact-form');
+            if (mainContactForm) {
+                const formStatusMessage = document.getElementById('form-status-message');
+                const submitButton = mainContactForm.querySelector('button[type="submit"]');
 
+                mainContactForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
 
-// POST /api/contact - Receives form submissions
-router.post('/contact', async (req, res) => {
-    try {
-        const { name, email, phone, message } = req.body;
+                    const originalButtonText = submitButton.textContent;
+                    submitButton.textContent = 'Sending...';
+                    submitButton.disabled = true;
+                    formStatusMessage.textContent = '';
+                    formStatusMessage.className = 'mt-4 text-center';
 
-        // Basic validation
-        if (!name || !email || !message) {
-            return res.status(400).json({ success: false, message: 'Name, email, and message are required.' });
-        }
+                    const formData = new FormData(mainContactForm);
+                    const data = Object.fromEntries(formData.entries());
 
-        const newSubmission = new ContactSubmission({
-            name,
-            email,
-            phone,
-            message
-        });
+                    try {
+                        // This fetch call will now correctly go to http://localhost:3000/api/contact
+                        const response = await fetch('/api/contact', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(data),
+                        });
 
-        await newSubmission.save();
+                        const result = await response.json();
 
-        res.status(201).json({ success: true, message: 'Message received successfully!' });
-
-    } catch (error) {
-        console.error("Error saving contact submission:", error);
-        res.status(500).json({ success: false, message: 'Server error. Please try again later.' });
-    }
-});
-
-module.exports = router;
-
-           const mainContactForm = document.getElementById('main-contact-form');
-if (mainContactForm) {
-    const formStatusMessage = document.getElementById('form-status-message');
-    const submitButton = mainContactForm.querySelector('button[type="submit"]');
-
-    mainContactForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-
-        const originalButtonText = submitButton.textContent;
-        submitButton.textContent = 'Sending...';
-        submitButton.disabled = true;
-        formStatusMessage.textContent = '';
-        formStatusMessage.className = 'mt-4 text-center';
-
-        // More reliable way to get form data, this automatically finds the new select box
-        const formData = new FormData(mainContactForm);
-        const data = Object.fromEntries(formData.entries());
-
-        try {
-            // Ensure this is your correct API endpoint
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
-
-            if (response.ok) {
-                // Success (status 200-299)
-                formStatusMessage.textContent = 'Message sent successfully! We will get back to you soon.';
-                formStatusMessage.classList.add('text-green-400');
-                mainContactForm.reset();
-                submitButton.textContent = 'Sent!';
-                // Button remains disabled after successful submission
-            } else {
-                // Server responded with an error (status 4xx, 5xx)
-                const errorResult = await response.json().catch(() => ({ message: 'An unknown server error occurred.' }));
-                throw new Error(errorResult.message);
+                        if (response.ok) {
+                            // Success (status 200-299)
+                            formStatusMessage.textContent = result.message || 'Message sent successfully!';
+                            formStatusMessage.classList.add('text-green-400');
+                            mainContactForm.reset();
+                            submitButton.textContent = 'Sent!';
+                            // Button remains disabled after a successful submission to prevent duplicates
+                        } else {
+                            // Server responded with an error (status 4xx, 5xx)
+                            throw new Error(result.message || 'An unknown server error occurred.');
+                        }
+                    } catch (error) {
+                        console.error('Form submission error:', error);
+                        formStatusMessage.textContent = error.message || 'Could not connect. Please check your network and try again.';
+                        formStatusMessage.classList.add('text-red-400');
+                        // Re-enable the button if the submission failed
+                        submitButton.textContent = originalButtonText;
+                        submitButton.disabled = false;
+                    }
+                });
             }
-        } catch (error) {
-            console.error('Form submission error:', error);
-            formStatusMessage.textContent = error.message || 'Could not connect. Please check your internet and try again.';
-            formStatusMessage.classList.add('text-red-400');
-        } finally {
-            // Re-enable the button ONLY if the submission failed
-            if (!submitButton.textContent.includes('Sent!')) {
-                submitButton.textContent = originalButtonText;
-                submitButton.disabled = false;
-            }
-        }
-    });
-}
+
+            // --- ALL OTHER FRONTEND JAVASCRIPT ---
+            // (The rest of your JS for animations, chatbot, etc. goes here)
+
             const paragraphContainer = document.getElementById('hero-paragraph-container');
             if (paragraphContainer) {
                 const originalP = paragraphContainer.querySelector('p');
