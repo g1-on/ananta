@@ -1,28 +1,29 @@
 const express = require('express');
 const router = express.Router();
-const ContactSubmission = require('../models/contact');
+const ContactSubmission = require('../models/contact'); // Import the model
 
-
-// POST /api/contact - Receives form submissions
+// POST /api/contact - Receives and saves form submissions
 router.post('/contact', async (req, res) => {
     try {
         const { name, email, phone, message } = req.body;
 
         // Basic validation
         if (!name || !email || !message) {
-            return res.status(400).json({ success: false, message: 'Name, email, and message are required.' });
+            return res.status(400).json({ success: false, message: 'Name, email, and interest are required.' });
         }
 
         const newSubmission = new ContactSubmission({
             name,
             email,
             phone,
-            message
+            message // This comes from the 'name' attribute of your select box
         });
 
+        // Save the new submission to the database
         await newSubmission.save();
 
-        res.status(201).json({ success: true, message: 'Message received successfully!' });
+        // Send a success response back to the form
+        res.status(201).json({ success: true, message: 'Message received successfully! We will get back to you soon.' });
 
     } catch (error) {
         console.error("Error saving contact submission:", error);
