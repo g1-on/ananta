@@ -13,18 +13,18 @@ Deliver a modern, performant, single-page marketing site for *Project Ananta* (l
 
 ---
 ## 2  Key Pages / Sections
-| # | Section | Content Source (old site) | New Animation / Interaction |
+| Status | # | Section | Content Source (old site) | New Animation / Interaction |
 |---|---------|--------------------------|-----------------------------|
-| 1 | **Splash / Pre-loader** | `<section id="splash-screen">` (Ananta Devanagari headline & ring video) | Fade-in logo + GSAP SplitText letter stagger, then auto-scroll cue. Lenis paused until imagesLoaded complete. |
-| 2 | **Hero** | Headline: “Luxury Service Apartments in Lucknow” (implied); CTA “Know More” | Parallax background image (scale 1.2 → 1) & headline slide-up on page load. |
-| 3 | **Stats Counters** | `.counter-value` elements (₹ investment, units sold, etc.) | Count-up once 35 % visible via IntersectionObserver. Sticky on wide screens. |
-| 4 | **About / Highlights** | `<section id="about">` lists 5 Towers, 800 units, etc. | Split 2-column; left text block scroll-reveals list items. Sticky asset on right that cross-fades images. |
-| 5 | **Amenities** | Grid of 18 + amenity images (old “amenities-wrapper”). | Pinned horizontal scroll (desktop) using Lenis + ScrollTrigger; simple vertical masonry on mobile. |
-| 6 | **Testimonials** | Cards with name, role, quote. | Infinite marquee built with GSAP `to({x:"-=50%"})` + hover-pause. |
-| 7 | **Location** | Copy + Map placeholder video. | Embed Mapbox GL with grayscale tiles; fade-in pins as they enter view. |
-| 8 | **Contact** | Name, email, phone, message form (posts to Express route). | Floating-label inputs; GSAP shake on invalid submit; success modal. |
-| 9 | **Our Group** | Logos of 10 group companies. | Grid zoom-in on hover; IntersectionObserver fade-in sequence. |
-| 10 | **Utility** | Scroll-to-top button, chatbot toggle. | Button scales in after hero; chatbot slides from bottom-left. |
+| [ ] | 1 | **Splash / Pre-loader** | `<section id="splash-screen">` (Ananta Devanagari headline & ring video) | Fade-in logo + GSAP SplitText letter stagger, then auto-scroll cue. Lenis paused until imagesLoaded complete. |
+| [ ] | 2 | **Hero** | Headline: “Luxury Service Apartments in Lucknow” (implied); CTA “Know More” | Parallax background image (scale 1.2 → 1) & headline slide-up on page load. |
+| [ ] | 3 | **Stats Counters** | `.counter-value` elements (₹ investment, units sold, etc.) | Count-up once 35 % visible via IntersectionObserver. Sticky on wide screens. |
+| [ ] | 4 | **About / Highlights** | `<section id="about">` lists 5 Towers, 800 units, etc. | Split 2-column; left text block scroll-reveals list items. Sticky asset on right that cross-fades images. |
+| [ ] | 5 | **Amenities** | Grid of 18 + amenity images (old “amenities-wrapper”). | Pinned horizontal scroll (desktop) using Lenis + ScrollTrigger; simple vertical masonry on mobile. |
+| [ ] | 6 | **Testimonials** | Cards with name, role, quote. | Infinite marquee built with GSAP `to({x:"-=50%"})` + hover-pause. |
+| [ ] | 7 | **Location** | Copy + Map placeholder video. | Embed Mapbox GL with grayscale tiles; fade-in pins as they enter view. |
+| [ ] | 8 | **Contact** | Name, email, phone, message form (posts to Express route). | Floating-label inputs; GSAP shake on invalid submit; success modal. |
+| [ ] | 9 | **Our Group** | Logos of 10 group companies. | Grid zoom-in on hover; IntersectionObserver fade-in sequence. |
+| [ ] | 10 | **Utility** | Scroll-to-top button, chatbot toggle. | Button scales in after hero; chatbot slides from bottom-left. |
 
 ---
 ## 3  Technical Stack
