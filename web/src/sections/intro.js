@@ -15,12 +15,9 @@ export function initIntro() {
     pos.y = e.clientY;
   });
   gsap.ticker.add(() => {
-    gsap.to(dot, {
-      x: pos.x - dot.offsetWidth / 2,
-      y: pos.y - dot.offsetHeight / 2,
-      duration: 0.15,
-      ease: 'power2.out',
-      overwrite: true,
+    gsap.set(dot, {
+      x: gsap.utils.interpolate(Number(dot._gsTransform?.x || 0), pos.x - dot.offsetWidth / 2, 0.2),
+      y: gsap.utils.interpolate(Number(dot._gsTransform?.y || 0), pos.y - dot.offsetHeight / 2, 0.2),
     });
   });
 
