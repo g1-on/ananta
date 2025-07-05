@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import SplitType from 'split-type';
 import imagesLoaded from 'imagesloaded';
 import { initStatsCounters } from './sections/stats.js';
+import { initAboutReveal } from './sections/about.js';
 
 // Tailwind CSS is imported via link tag.
 
@@ -32,5 +33,6 @@ imagesLoaded(document.body, { background: true }, () => {
       ease: 'power4.out',
     });
     initStatsCounters();
+  initAboutReveal();
 });
 });
