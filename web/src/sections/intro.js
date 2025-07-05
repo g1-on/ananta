@@ -23,11 +23,53 @@ export function initIntro() {
     });
   });
 
-  // subtle logo animation pulsing
-  const logo = startBtn.querySelector('img');
-  if (logo) {
-    gsap.to(logo, { scale: 1.07, duration: 1.5, yoyo: true, repeat: -1, ease: 'sine.inOut' });
-  }
+    // load and animate SVG logos
+  const logoContainer = document.getElementById('logoContainer');
+  const svgFiles = [
+    '/Ananta logo 1.svg',
+    '/Global One consulting final logo.svg',
+  ];
+
+  Promise.all(svgFiles.map((src) => fetch(src).then((r) => r.text()))).then((texts) => {
+    texts.forEach((txt, idx) => {
+      logoContainer.insertAdjacentHTML('beforeend', txt);
+      const svg = logoContainer.lastElementChild;
+      svg.classList.add('svgLogo');
+      svg.style.width = '100%';
+      svg.style.height = 'auto';
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+      // make fill version invisible initially
+      gsap.set(svg, { opacity: 0 });
+
+      // create stroke clone
+      const strokeSvg = svg.cloneNode(true);
+      strokeSvg.classList.add('strokeLogo');
+      strokeSvg.querySelectorAll('*').forEach((el) => {
+        el.setAttribute('fill', 'none');
+        el.setAttribute('stroke', '#000');
+        el.setAttribute('stroke-width', '4');
+      });
+      logoContainer.insertBefore(strokeSvg, svg);
+
+      // animate paths
+      const paths = strokeSvg.querySelectorAll('path, polygon, line, polyline, circle, rect');
+      paths.forEach((p) => {
+        const len = typeof p.getTotalLength === 'function' ? p.getTotalLength() : 1000;
+        gsap.set(p, { strokeDasharray: len, strokeDashoffset: len });
+      });
+      gsap.to(paths, {
+        strokeDashoffset: 0,
+        duration: 2,
+        stagger: 0.01,
+        ease: 'none',
+        onComplete: () => {
+          gsap.to(svg, { opacity: 1, duration: 0.6 });
+          gsap.to(strokeSvg, { opacity: 0, duration: 0.6, delay: 0.3 });
+        },
+      });
+    });
+  });
 
   startBtn.addEventListener('click', () => {
     const tl = gsap.timeline({ defaults: { ease: 'power4.inOut' } });
