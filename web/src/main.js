@@ -9,6 +9,7 @@ import { initTestimonialsMarquee } from './sections/testimonials.js';
 import { initContactForm } from './sections/contact.js';
 import { initMap } from './sections/location.js';
 import { initOurGroupReveal } from './sections/ourGroup.js';
+import { initIntro } from './sections/intro.js';
 
 // Tailwind CSS is imported via link tag.
 
@@ -24,10 +25,14 @@ function raf(time) {
 requestAnimationFrame(raf);
 
 // Wait for images before starting animations
+imagesLoaded(document.body, () => {
+  initIntro();
+});
+
 imagesLoaded(document.body, { background: true }, () => {
   document.body.classList.add('loaded');
 
-  // SplitText
+  // SplitText animations
   document.querySelectorAll('.headline').forEach((el) => {
     const split = new SplitType(el, { types: 'chars' });
     gsap.from(split.chars, {
@@ -37,12 +42,13 @@ imagesLoaded(document.body, { background: true }, () => {
       duration: 1.2,
       ease: 'power4.out',
     });
-    initStatsCounters();
+  });
+
+  initStatsCounters();
   initAboutReveal();
   initAmenitiesScroll();
   initTestimonialsMarquee();
   initContactForm();
   initMap();
   initOurGroupReveal();
-});
 });
