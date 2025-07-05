@@ -6,6 +6,7 @@ import { initStatsCounters } from './sections/stats.js';
 import { initAboutReveal } from './sections/about.js';
 import { initAmenitiesScroll } from './sections/amenities.js';
 import { initTestimonialsMarquee } from './sections/testimonials.js';
+import { initContactForm } from './sections/contact.js';
 
 // Tailwind CSS is imported via link tag.
 
@@ -38,5 +39,6 @@ imagesLoaded(document.body, { background: true }, () => {
   initAboutReveal();
   initAmenitiesScroll();
   initTestimonialsMarquee();
+  initContactForm();
 });
 });
