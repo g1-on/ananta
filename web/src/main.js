@@ -4,6 +4,7 @@ import SplitType from 'split-type';
 import imagesLoaded from 'imagesloaded';
 import { initStatsCounters } from './sections/stats.js';
 import { initAboutReveal } from './sections/about.js';
+import { initAmenitiesScroll } from './sections/amenities.js';
 
 // Tailwind CSS is imported via link tag.
 
@@ -34,5 +35,6 @@ imagesLoaded(document.body, { background: true }, () => {
     });
     initStatsCounters();
   initAboutReveal();
+  initAmenitiesScroll();
 });
 });
