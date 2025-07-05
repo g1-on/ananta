@@ -41,11 +41,12 @@ export function initIntro() {
       svg.style.height = 'auto';
       svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
 
-      // make fill version invisible initially
-      gsap.set(svg, { opacity: 0 });
+      // scale larger and invisible initially
+      gsap.set(svg, { opacity: 0, scale:1.4, transformOrigin:'center' });
 
       // create stroke clone
       const strokeSvg = svg.cloneNode(true);
+      gsap.set(strokeSvg,{scale:1.4,transformOrigin:'center'});
       strokeSvg.classList.add('strokeLogo');
       strokeSvg.querySelectorAll('*').forEach((el) => {
         el.setAttribute('fill', 'none');
