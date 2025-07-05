@@ -1,22 +1,16 @@
-import mapboxgl from 'mapbox-gl';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 export function initMap() {
   const mapEl = document.getElementById('map');
   if (!mapEl) return;
 
-  mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN || '';
-  if (!mapboxgl.accessToken) {
-    mapEl.textContent = 'Map unavailable (missing token)';
-    mapEl.classList.add('text-center', 'py-20');
-    return;
-  }
 
-  const map = new mapboxgl.Map({
-    container: mapEl,
-    style: 'mapbox://styles/mapbox/streets-v11',
-    center: [80.9462, 26.8467], // Lucknow
-    zoom: 12,
-  });
+  const map = L.map(mapEl).setView([26.8467, 80.9462], 13);
 
-  new mapboxgl.Marker().setLngLat([80.9462, 26.8467]).addTo(map);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+  }).addTo(map);
+
+  L.marker([26.8467, 80.9462]).addTo(map);
 }
