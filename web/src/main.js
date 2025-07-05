@@ -2,6 +2,7 @@ import Lenis from '@studio-freight/lenis';
 import { gsap } from 'gsap';
 import SplitType from 'split-type';
 import imagesLoaded from 'imagesloaded';
+import { initStatsCounters } from './sections/stats.js';
 
 // Tailwind CSS is imported via link tag.
 
@@ -30,5 +31,6 @@ imagesLoaded(document.body, { background: true }, () => {
       duration: 1.2,
       ease: 'power4.out',
     });
-  });
+    initStatsCounters();
+});
 });
