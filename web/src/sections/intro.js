@@ -1,4 +1,5 @@
 import { gsap } from 'gsap';
+import SplitType from 'split-type';
 
 export function initIntro() {
   const intro = document.getElementById('intro');
@@ -26,8 +27,8 @@ export function initIntro() {
     // load and animate SVG logos
   const logoContainer = document.getElementById('logoContainer');
   const svgFiles = [
-    '/Ananta logo 1.svg',
-    '/Global One consulting final logo.svg',
+    '/logos/ananta.svg',
+    '/logos/company.svg',
   ];
 
   Promise.all(svgFiles.map((src) => fetch(src).then((r) => r.text()))).then((texts) => {
@@ -72,7 +73,11 @@ export function initIntro() {
   });
 
   startBtn.addEventListener('click', () => {
-    const tl = gsap.timeline({ defaults: { ease: 'power4.inOut' } });
+    // tagline explode animation
+    const split = new SplitType('#tagline', { types: 'chars' });
+    gsap.fromTo(split.chars, {scale:1, opacity:1}, {scale:1.6, opacity:0, duration:0.6, stagger:0.02, ease:'power2.in'});
+
+    const tl = gsap.timeline({ defaults: { ease: 'power4.inOut' }, delay:0.6 });
     tl.to(startBtn, { scale: 20, duration: 1 })
       .to(intro, { opacity: 0, duration: 0.6 }, '-=0.4')
       .set(intro, { display: 'none' })
