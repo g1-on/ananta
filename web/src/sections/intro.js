@@ -7,19 +7,27 @@ export function initIntro() {
   const startBtn = document.getElementById('startBtn');
   const dot = document.getElementById('dotCursor');
 
-  // follow cursor
-  const setX = gsap.quickSetter(dot, 'x', 'px');
-  const setY = gsap.quickSetter(dot, 'y', 'px');
-  let mouseX = 0;
-  let mouseY = 0;
+  // follow cursor with slight delay
+  let pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
   window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+    pos.x = e.clientX;
+    pos.y = e.clientY;
   });
   gsap.ticker.add(() => {
-    setX(mouseX - 8); // center
-    setY(mouseY - 8);
+    gsap.to(dot, {
+      x: pos.x - dot.offsetWidth / 2,
+      y: pos.y - dot.offsetHeight / 2,
+      duration: 0.15,
+      ease: 'power2.out',
+      overwrite: true,
+    });
   });
+
+  // subtle logo animation pulsing
+  const logo = startBtn.querySelector('img');
+  if (logo) {
+    gsap.to(logo, { scale: 1.07, duration: 1.5, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+  }
 
   startBtn.addEventListener('click', () => {
     const tl = gsap.timeline({ defaults: { ease: 'power4.inOut' } });
