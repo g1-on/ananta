@@ -10,15 +10,19 @@ export function initIntro() {
 
   // follow cursor with slight delay
   let pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+  let currentX = pos.x;
+  let currentY = pos.y;
   window.addEventListener('mousemove', (e) => {
     pos.x = e.clientX;
     pos.y = e.clientY;
   });
+  const qx = gsap.quickSetter(dot,'x','px');
+  const qy = gsap.quickSetter(dot,'y','px');
   gsap.ticker.add(() => {
-    gsap.set(dot, {
-      x: gsap.utils.interpolate(Number(dot._gsTransform?.x || 0), pos.x - dot.offsetWidth / 2, 0.2),
-      y: gsap.utils.interpolate(Number(dot._gsTransform?.y || 0), pos.y - dot.offsetHeight / 2, 0.2),
-    });
+    currentX += (pos.x - currentX) * 0.2;
+    currentY += (pos.y - currentY) * 0.2;
+    qx(currentX - dot.offsetWidth/2);
+    qy(currentY - dot.offsetHeight/2);
   });
 
     // load and animate SVG logos
