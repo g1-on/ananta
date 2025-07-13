@@ -68,7 +68,9 @@ export function initIntro() {
       this.targets.forEach((t) => this.stick(t));
       this.data.last.x = math.lerp(this.data.last.x, this.data.current.x, this.data.ease);
       this.data.last.y = math.lerp(this.data.last.y, this.data.current.y, this.data.ease);
-      this.el.style.transform = `translate3d(${this.data.last.x}px, ${this.data.last.y}px,0)`;
+      const offsetX = this.el.offsetWidth / 2;
+      const offsetY = this.el.offsetHeight / 2;
+      this.el.style.transform = `translate3d(${this.data.last.x - offsetX}px, ${this.data.last.y - offsetY}px,0)`;
       requestAnimationFrame(this.run.bind(this));
     }
   }
@@ -77,10 +79,7 @@ export function initIntro() {
 
     // load and animate SVG logos
   const logoContainer = document.getElementById('logoContainer');
-  const svgFiles = [
-    '/logos/ananta.svg',
-    '/logos/company.svg',
-  ];
+  const svgFiles = ['/logos/company.svg'];
 
   Promise.all(svgFiles.map((src) => fetch(src).then((r) => r.text()))).then((texts) => {
     texts.forEach((txt, idx) => {
