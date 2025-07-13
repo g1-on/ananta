@@ -8,22 +8,72 @@ export function initIntro() {
   const startBtn = document.getElementById('startBtn');
   const dot = document.getElementById('dotCursor');
 
-  // follow cursor with slight delay
-  let pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-  let currentX = pos.x;
-  let currentY = pos.y;
-  window.addEventListener('mousemove', (e) => {
-    pos.x = e.clientX;
-    pos.y = e.clientY;
-  });
-  const qx = gsap.quickSetter(dot,'x','px');
-  const qy = gsap.quickSetter(dot,'y','px');
-  gsap.ticker.add(() => {
-    currentX += (pos.x - currentX) * 0.2;
-    currentY += (pos.y - currentY) * 0.2;
-    qx(currentX - dot.offsetWidth/2);
-    qy(currentY - dot.offsetHeight/2);
-  });
+  // --- Sticky cursor (forked variant) ---
+  const math = { lerp: (a, b, n) => (1 - n) * a + n * b };
+
+  class StickyCursor {
+    constructor() {
+      this.el = dot; // element with data-cursor
+      this.stickies = [...document.querySelectorAll('[data-hover]')];
+      this.data = {
+        mouse: { x: 0, y: 0 },
+        current: { x: 0, y: 0 },
+        last: { x: 0, y: 0 },
+        ease: 0.15,
+        dist: 40,
+      };
+      this.state = { stick: false };
+      this.getTargets();
+      window.addEventListener('mousemove', this.onMouseMove.bind(this), { passive: true });
+      requestAnimationFrame(this.run.bind(this));
+    }
+
+    onMouseMove(e) {
+      this.data.mouse.x = e.pageX;
+      this.data.mouse.y = e.pageY;
+      this.data.current.x = e.pageX;
+      this.data.current.y = e.pageY;
+    }
+
+    getTargets() {
+      this.targets = this.stickies.map((el) => {
+        const bounds = el.getBoundingClientRect();
+        return {
+          el,
+          x: bounds.left + bounds.width / 2,
+          y: bounds.top + bounds.height / 2,
+          minus: bounds.width / 2 + 10,
+        };
+      });
+    }
+
+    stick(target) {
+      const dx = target.x - this.data.mouse.x;
+      const dy = target.y - this.data.mouse.y;
+      const h = Math.hypot(dx, dy);
+      if (h < this.data.dist && !this.state.stick) {
+        this.state.stick = true;
+        this.data.ease = 0.075;
+        this.data.current.x = target.x - target.minus;
+        this.data.current.y = target.y;
+        this.el.classList.add('is-active');
+      } else if (this.state.stick && h >= this.data.dist) {
+        this.state.stick = false;
+        this.data.ease = 0.15;
+        this.el.classList.remove('is-active');
+      }
+    }
+
+    run() {
+      this.targets.forEach((t) => this.stick(t));
+      this.data.last.x = math.lerp(this.data.last.x, this.data.current.x, this.data.ease);
+      this.data.last.y = math.lerp(this.data.last.y, this.data.current.y, this.data.ease);
+      this.el.style.transform = `translate3d(${this.data.last.x}px, ${this.data.last.y}px,0)`;
+      requestAnimationFrame(this.run.bind(this));
+    }
+  }
+
+  new StickyCursor();
 
     // load and animate SVG logos
   const logoContainer = document.getElementById('logoContainer');
