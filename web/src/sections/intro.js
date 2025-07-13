@@ -29,10 +29,10 @@ export function initIntro() {
     }
 
     onMouseMove(e) {
-      this.data.mouse.x = e.pageX;
-      this.data.mouse.y = e.pageY;
-      this.data.current.x = e.pageX;
-      this.data.current.y = e.pageY;
+      this.data.mouse.x = e.clientX;
+      this.data.mouse.y = e.clientY;
+      this.data.current.x = e.clientX;
+      this.data.current.y = e.clientY;
     }
 
     getTargets() {
@@ -66,8 +66,9 @@ export function initIntro() {
 
     run() {
       this.targets.forEach((t) => this.stick(t));
-      this.data.last.x = math.lerp(this.data.last.x, this.data.current.x, this.data.ease);
-      this.data.last.y = math.lerp(this.data.last.y, this.data.current.y, this.data.ease);
+      // move instantly (no lag)
+      this.data.last.x = this.data.current.x;
+      this.data.last.y = this.data.current.y;
       const offsetX = this.el.offsetWidth / 2;
       const offsetY = this.el.offsetHeight / 2;
       this.el.style.transform = `translate3d(${this.data.last.x - offsetX}px, ${this.data.last.y - offsetY}px,0)`;
@@ -88,6 +89,12 @@ export function initIntro() {
       svg.classList.add('svgLogo');
       svg.style.width = '100%';
       svg.style.height = 'auto';
+      // ensure visible fill colour
+      svg.querySelectorAll('*').forEach(el=>{
+        if(!el.getAttribute('fill') || el.getAttribute('fill')==='none'){
+          el.setAttribute('fill','#000');
+        }
+      });
       svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
 
       // scale larger and invisible initially
