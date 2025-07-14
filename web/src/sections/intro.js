@@ -55,9 +55,9 @@ export function initIntro() {
     const cy = bounds.top  + bounds.height / 2;
 
     const tl = gsap.timeline({ defaults: { ease: 'power4.inOut' } });
-    if (logoSvg) {
-      tl.to(logoSvg, { scale: 0, duration: 0.25, transformOrigin: 'center' });
-    }
+    // shrink the entire logo container first
+    tl.to(logoHolder, { scale: 0, duration: 0.3, transformOrigin: 'center center' });
+
     // create white mask overlay
     const mask = document.createElement('div');
     mask.style.position = 'fixed';
