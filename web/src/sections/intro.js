@@ -9,19 +9,19 @@ export function initIntro() {
   const logoHolder = document.getElementById('logoContainer');
   const dot        = document.getElementById('dotCursor');
 
-  /* ------------------------------------------------------------------
-     1. Exact-follow custom cursor
-  ------------------------------------------------------------------ */
+  /* -------------------------------------------------------------
+     1. Exact-follow custom cursor (arrow hidden via CSS)
+  ------------------------------------------------------------- */
   dot.style.position  = 'fixed';
-  dot.style.transform = 'translate(-50%, -50%)'; // keep centre aligned
+  dot.style.transform = 'translate(-50%, -50%)';
   window.addEventListener('mousemove', (e) => {
     dot.style.left = `${e.clientX}px`;
     dot.style.top  = `${e.clientY}px`;
   });
 
-  /* ------------------------------------------------------------------
-     2. Load one company logo and fade it in
-  ------------------------------------------------------------------ */
+  /* -------------------------------------------------------------
+     2. Load single company logo then fade in (no delay)
+  ------------------------------------------------------------- */
   fetch('/logos/company.svg')
     .then((r) => r.text())
     .then((svgText) => {
@@ -35,10 +35,11 @@ export function initIntro() {
       }
     });
 
-  /* ------------------------------------------------------------------
-     3. Click animation – tagline explode, overlay fade
-  ------------------------------------------------------------------ */
+  /* -------------------------------------------------------------
+     3. Click → tagline explode + circular mask reveal
+  ------------------------------------------------------------- */
   startBtn.addEventListener('click', () => {
+    // a) explode tagline text
     const split = new SplitType('#tagline', { types: 'chars' });
     gsap.fromTo(
       split.chars,
@@ -46,10 +47,17 @@ export function initIntro() {
       { scale: 1.6, opacity: 0, duration: 0.6, stagger: 0.02, ease: 'power2.in' }
     );
 
+    // b) prepare circular clip-path centred on logo
+    const bounds = logoHolder.getBoundingClientRect();
+    const cx = bounds.left + bounds.width  / 2;
+    const cy = bounds.top  + bounds.height / 2;
+    gsap.set(intro, { clipPath: `circle(0px at ${cx}px ${cy}px)` });
+
+    // c) animate mask, then hide overlay & restore scroll
     gsap.timeline({ defaults: { ease: 'power4.inOut' }, delay: 0.6 })
-      .to(startBtn, { scale: 20, duration: 1 })
-      .to(intro,    { opacity: 0, duration: 0.6 }, '-=0.4')
-      .set(intro,   { display: 'none' })
+      .to(intro, { clipPath: `circle(150% at ${cx}px ${cy}px)`, duration: 1.2 })
+      .to(intro, { opacity: 0, duration: 0.4 }, '-=0.4')
+      .set(intro, { display: 'none', clipPath: 'none' })
       .set(document.body, { overflow: 'auto' });
   });
 }
