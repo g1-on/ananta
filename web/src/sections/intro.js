@@ -7,6 +7,7 @@ export function initIntro() {
 
   const startBtn   = document.getElementById('startBtn');
   const logoHolder = document.getElementById('logoContainer');
+  let logoSvg = null;
   const dot        = document.getElementById('dotCursor');
 
   /* -------------------------------------------------------------
@@ -31,12 +32,13 @@ export function initIntro() {
         svg.style.width  = '100%';
         svg.style.height = 'auto';
         svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-        gsap.fromTo(svg, { opacity: 0 }, { opacity: 1, duration: 1 });
+        gsap.set(svg, { opacity: 1 });
+        logoSvg = svg;
       }
     });
 
   /* -------------------------------------------------------------
-     3. Click → tagline explode + circular mask reveal
+     3. Click → logo shrink then circular mask reveal
   ------------------------------------------------------------- */
   startBtn.addEventListener('click', () => {
     // a) explode tagline text
@@ -47,17 +49,29 @@ export function initIntro() {
       { scale: 1.6, opacity: 0, duration: 0.6, stagger: 0.02, ease: 'power2.in' }
     );
 
-    // b) prepare circular clip-path centred on logo
+    // b) shrink logo quickly, then expand mask
     const bounds = logoHolder.getBoundingClientRect();
     const cx = bounds.left + bounds.width  / 2;
     const cy = bounds.top  + bounds.height / 2;
-    gsap.set(intro, { clipPath: `circle(0px at ${cx}px ${cy}px)` });
 
-    // c) animate mask, then hide overlay & restore scroll
-    gsap.timeline({ defaults: { ease: 'power4.inOut' }, delay: 0.6 })
-      .to(intro, { clipPath: `circle(150% at ${cx}px ${cy}px)`, duration: 1.2 })
-      .to(intro, { opacity: 0, duration: 0.4 }, '-=0.4')
-      .set(intro, { display: 'none', clipPath: 'none' })
-      .set(document.body, { overflow: 'auto' });
+    const tl = gsap.timeline({ defaults: { ease: 'power4.inOut' } });
+    if (logoSvg) {
+      tl.to(logoSvg, { scale: 0, duration: 0.25, transformOrigin: 'center' });
+    }
+    // create white mask overlay
+    const mask = document.createElement('div');
+    mask.style.position = 'fixed';
+    mask.style.inset = '0';
+    mask.style.background = '#ffffff';
+    mask.style.zIndex = '60';
+    document.body.appendChild(mask);
+
+    tl.set(mask, { clipPath: `circle(0px at ${cx}px ${cy}px)` })
+      .to(mask, { clipPath: `circle(150% at ${cx}px ${cy}px)`, duration: 0.9 })
+      .add(() => {
+        intro.remove();
+        mask.remove();
+        document.body.style.overflow = 'auto';
+      });
   });
 }
