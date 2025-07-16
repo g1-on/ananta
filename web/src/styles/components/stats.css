@@ -1,0 +1,640 @@
+/* Enhanced Statistics Section Styles with Day Theme and Luxury Animations */
+
+/* Stats section base styles with theme awareness and gradient animations */
+#stats {
+  position: relative;
+  background: linear-gradient(135deg, 
+    var(--theme-bg) 0%, 
+    var(--theme-bg-secondary) 100%);
+  overflow: hidden;
+  transition: all var(--transition-theme) var(--transition-luxury);
+}
+
+/* Day to dusk theme transition backgrounds */
+.stats-day-theme {
+  background: linear-gradient(135deg, 
+    #ffffff 0%, 
+    #f8f8f8 30%,
+    #f0f0f0 70%,
+    #e8e8e8 100%);
+  color: #1a1a1a;
+  animation: dayToDuskGradient 8s ease-in-out infinite alternate;
+}
+
+/* Background gradient animation from day to dusk */
+@keyframes dayToDuskGradient {
+  0% {
+    background: linear-gradient(135deg, 
+      #ffffff 0%, 
+      #f8f8f8 30%,
+      #f0f0f0 70%,
+      #e8e8e8 100%);
+  }
+  50% {
+    background: linear-gradient(135deg, 
+      #f5f5f5 0%, 
+      #ebebeb 30%,
+      #e0e0e0 70%,
+      #d5d5d5 100%);
+  }
+  100% {
+    background: linear-gradient(135deg, 
+      #e8e8e8 0%, 
+      #dcdcdc 30%,
+      #d0d0d0 70%,
+      #c4c4c4 100%);
+  }
+}
+
+/* Dusk theme transition */
+.stats-dusk-theme {
+  background: linear-gradient(135deg, 
+    #2a2a2a 0%, 
+    #3a3a3a 30%,
+    #4a4a4a 70%,
+    #5a5a5a 100%);
+  color: #e0e0e0;
+  animation: duskGradient 6s ease-in-out infinite alternate;
+}
+
+@keyframes duskGradient {
+  0% {
+    background: linear-gradient(135deg, 
+      #2a2a2a 0%, 
+      #3a3a3a 30%,
+      #4a4a4a 70%,
+      #5a5a5a 100%);
+  }
+  100% {
+    background: linear-gradient(135deg, 
+      #1a1a1a 0%, 
+      #2a2a2a 30%,
+      #3a3a3a 70%,
+      #4a4a4a 100%);
+  }
+}
+
+/* Stats section decorative background */
+#stats::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, 
+    rgba(236, 187, 79, 0.05) 0%, 
+    transparent 50%),
+    radial-gradient(circle at 80% 20%, 
+    rgba(236, 187, 79, 0.03) 0%, 
+    transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Container positioning */
+#stats .container-luxury {
+  position: relative;
+  z-index: 2;
+}
+
+/* Section title styling */
+.section-title {
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--theme-accent) 50%, 
+    transparent 100%);
+  transition: all var(--transition-theme) var(--transition-luxury);
+}
+
+/* Stat card base styles */
+.stat-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(236, 187, 79, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* Enhanced stat card hover effects with Gold highlights */
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(236, 187, 79, 0.15) 30%,
+    rgba(255, 215, 0, 0.2) 50%,
+    rgba(236, 187, 79, 0.15) 70%,
+    transparent 100%);
+  transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    transparent 0%,
+    rgba(236, 187, 79, 0.1) 25%,
+    rgba(255, 215, 0, 0.2) 50%,
+    rgba(212, 175, 55, 0.1) 75%,
+    transparent 100%);
+  border-radius: 18px;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.stat-card:hover::before {
+  left: 100%;
+}
+
+.stat-card:hover::after {
+  opacity: 1;
+}
+
+.stat-card:hover {
+  transform: translateY(-12px) scale(1.03);
+  box-shadow: 
+    0 25px 50px rgba(236, 187, 79, 0.2),
+    0 15px 30px rgba(255, 215, 0, 0.1),
+    0 0 0 2px rgba(236, 187, 79, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: rgba(236, 187, 79, 0.5);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* Enhanced micro-interactions for card elements */
+.stat-card:hover .stat-icon {
+  transform: scale(1.15) rotate(8deg) translateY(-2px);
+  filter: drop-shadow(0 8px 16px rgba(236, 187, 79, 0.4));
+  animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+  0%, 100% { 
+    filter: drop-shadow(0 8px 16px rgba(236, 187, 79, 0.4)); 
+  }
+  50% { 
+    filter: drop-shadow(0 12px 24px rgba(236, 187, 79, 0.6)); 
+  }
+}
+
+.stat-card:hover .stat-counter {
+  transform: scale(1.08) translateY(-1px);
+  text-shadow: 
+    0 4px 8px rgba(236, 187, 79, 0.3),
+    0 0 20px rgba(255, 215, 0, 0.2);
+  color: #d4af37;
+}
+
+.stat-card:hover .stat-label {
+  color: #b8860b;
+  transform: translateY(-1px);
+  letter-spacing: 0.12em;
+}
+
+.stat-card:hover .stat-description {
+  opacity: 1;
+  transform: translateY(-1px);
+  color: #8b7355;
+}
+
+/* Enhanced progress bar hover effects */
+.stat-card:hover .stat-progress-bar {
+  background: linear-gradient(90deg, 
+    #ecbb4f 0%, 
+    #ffd700 25%,
+    #ffed4e 50%,
+    #ffd700 75%,
+    #d4af37 100%);
+  box-shadow: 
+    0 2px 8px rgba(236, 187, 79, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.stat-card:hover .stat-progress-container {
+  background: rgba(236, 187, 79, 0.2);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Stat card content positioning */
+.stat-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Stat icon styling */
+.stat-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+  filter: drop-shadow(0 4px 8px rgba(236, 187, 79, 0.2));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-card:hover .stat-icon {
+  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 6px 12px rgba(236, 187, 79, 0.3));
+}
+
+/* Stat counter styling */
+.stat-counter {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 100;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--theme-accent);
+  margin-bottom: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-shadow: 0 2px 4px rgba(236, 187, 79, 0.1);
+}
+
+.stat-card:hover .stat-counter {
+  transform: scale(1.05);
+  text-shadow: 0 4px 8px rgba(236, 187, 79, 0.2);
+}
+
+/* Stat label styling */
+.stat-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--theme-text);
+  margin-bottom: 0.75rem;
+  transition: color var(--transition-theme) var(--transition-luxury);
+}
+
+/* Stat description styling */
+.stat-description {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 0.75rem;
+  color: var(--theme-text-secondary);
+  line-height: 1.4;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+  transition: all var(--transition-theme) var(--transition-luxury);
+}
+
+.stat-card:hover .stat-description {
+  opacity: 1;
+}
+
+/* Progress bar container */
+.stat-progress-container {
+  width: 100%;
+  height: 4px;
+  background: rgba(236, 187, 79, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Progress bar fill */
+.stat-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, 
+    #ecbb4f 0%, 
+    #ffd700 50%, 
+    #d4af37 100%);
+  border-radius: 2px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Progress bar shimmer effect */
+.stat-progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.4) 50%, 
+    transparent 100%);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .stat-card {
+    padding: 1.5rem;
+  }
+  
+  .stat-counter {
+    font-size: 2.5rem;
+  }
+  
+  .stat-icon {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #stats {
+    padding: 4rem 0;
+  }
+  
+  .stat-card {
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  
+  .stat-counter {
+    font-size: 2rem;
+  }
+  
+  .stat-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .stat-label {
+    font-size: 0.75rem;
+  }
+  
+  .stat-description {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .stat-counter {
+    font-size: 1.75rem;
+  }
+  
+  .stat-card {
+    padding: 1rem;
+  }
+}
+
+/* Animation states for GSAP */
+.stat-card.animate-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.stat-counter.animate-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.stat-progress-bar.animate-in {
+  transform: scaleX(1);
+}
+
+/* Theme-aware text colors */
+.theme-aware-text {
+  color: var(--theme-text);
+  transition: color var(--transition-theme) var(--transition-luxury);
+}
+
+.theme-aware-text-secondary {
+  color: var(--theme-text-secondary);
+  transition: color var(--transition-theme) var(--transition-luxury);
+}
+
+/* Accessibility improvements */
+.stat-card:focus {
+  outline: 2px solid var(--theme-accent);
+  outline-offset: 2px;
+}
+
+.stat-card:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .stat-card,
+  .stat-counter,
+  .stat-icon,
+  .stat-progress-bar {
+    transition: none;
+    animation: none;
+  }
+  
+  .stat-card:hover {
+    transform: none;
+  }
+  
+  .stat-progress-bar::after {
+    animation: none;
+  }
+}
+
+/* Theme transition states */
+.stats-transitioning {
+  background: linear-gradient(135deg, 
+    #f0f0f0 0%, 
+    #e0e0e0 25%,
+    #d0d0d0 50%,
+    #c0c0c0 75%,
+    #b0b0b0 100%);
+  animation: transitionGradient 4s ease-in-out infinite alternate;
+}
+
+@keyframes transitionGradient {
+  0% {
+    background: linear-gradient(135deg, 
+      #f0f0f0 0%, 
+      #e0e0e0 25%,
+      #d0d0d0 50%,
+      #c0c0c0 75%,
+      #b0b0b0 100%);
+  }
+  100% {
+    background: linear-gradient(135deg, 
+      #e0e0e0 0%, 
+      #d0d0d0 25%,
+      #c0c0c0 50%,
+      #b0b0b0 75%,
+      #a0a0a0 100%);
+  }
+}
+
+/* Stats entering state */
+.stats-entering {
+  animation: sectionPulse 3s ease-in-out infinite;
+}
+
+@keyframes sectionPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.005);
+  }
+}
+
+/* Enhanced floating animation for cards */
+.stat-card.floating {
+  animation: cardFloat 4s ease-in-out infinite;
+}
+
+@keyframes cardFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Luxury entrance animation keyframes */
+@keyframes luxuryFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(15px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+}
+
+@keyframes iconSparkle {
+  0%, 100% {
+    filter: drop-shadow(0 8px 16px rgba(236, 187, 79, 0.4));
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    filter: drop-shadow(0 12px 24px rgba(255, 215, 0, 0.6));
+    transform: scale(1.05) rotate(2deg);
+  }
+  50% {
+    filter: drop-shadow(0 16px 32px rgba(236, 187, 79, 0.8));
+    transform: scale(1.1) rotate(0deg);
+  }
+  75% {
+    filter: drop-shadow(0 12px 24px rgba(255, 215, 0, 0.6));
+    transform: scale(1.05) rotate(-2deg);
+  }
+}
+
+/* Enhanced progress bar animations */
+@keyframes progressGlow {
+  0%, 100% {
+    box-shadow: 0 2px 8px rgba(236, 187, 79, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 16px rgba(255, 215, 0, 0.6);
+  }
+}
+
+.stat-progress-bar.glowing {
+  animation: progressGlow 2s ease-in-out infinite;
+}
+
+/* CSS custom properties for theme transitions */
+:root {
+  --stats-theme-progress: 0;
+  --stats-day-bg: #ffffff;
+  --stats-dusk-bg: #2a2a2a;
+  --stats-transition-bg: color-mix(in srgb, var(--stats-day-bg) calc(100% - var(--stats-theme-progress) * 100%), var(--stats-dusk-bg) calc(var(--stats-theme-progress) * 100%));
+}
+
+/* Dynamic theme-aware backgrounds using CSS custom properties */
+.stats-theme-dynamic {
+  background: var(--stats-transition-bg);
+  transition: background 0.3s ease;
+}
+
+/* Enhanced accessibility and focus states */
+.stat-card:focus-visible {
+  outline: 3px solid rgba(236, 187, 79, 0.6);
+  outline-offset: 4px;
+  box-shadow: 
+    0 0 0 2px rgba(236, 187, 79, 0.3),
+    0 8px 16px rgba(236, 187, 79, 0.2);
+}
+
+.stat-card:focus-visible .stat-counter {
+  color: #d4af37;
+  text-shadow: 0 2px 4px rgba(236, 187, 79, 0.3);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .stat-card {
+    border: 2px solid #000;
+    background: #fff;
+  }
+  
+  .stat-counter {
+    color: #000;
+    text-shadow: none;
+  }
+  
+  .stat-progress-bar {
+    background: #000;
+  }
+}
+
+/* Print styles */
+@media print {
+  #stats {
+    background: white !important;
+    color: black !important;
+    animation: none !important;
+  }
+  
+  .stat-card {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  
+  .stat-counter {
+    color: #ecbb4f !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  
+  .stat-progress-bar {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,289 @@
+/* Custom Cursor Styles - Luxury Gold Theme */
+
+/* Hide default cursor across the entire site */
+* {
+  cursor: none !important;
+}
+
+/* Custom cursor elements */
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--theme-accent, #ecbb4f);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transform-origin: center;
+  transition: background-color 0.3s ease;
+  will-change: transform, opacity, width, height;
+}
+
+.custom-cursor-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--theme-accent, #ecbb4f);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0;
+  background: transparent;
+  transform-origin: center;
+  transition: border-color 0.3s ease;
+  will-change: transform, opacity, width, height;
+}
+
+/* Theme-specific cursor colors */
+[data-theme="dawn"] .custom-cursor-dot {
+  background-color: #ecbb4f;
+}
+
+[data-theme="dawn"] .custom-cursor-follower {
+  border-color: #ecbb4f;
+}
+
+[data-theme="day"] .custom-cursor-dot {
+  background-color: #d4af37;
+}
+
+[data-theme="day"] .custom-cursor-follower {
+  border-color: #d4af37;
+}
+
+[data-theme="dusk"] .custom-cursor-dot {
+  background-color: #ffd700;
+}
+
+[data-theme="dusk"] .custom-cursor-follower {
+  border-color: #ffd700;
+}
+
+[data-theme="night"] .custom-cursor-dot {
+  background-color: #ecbb4f;
+}
+
+[data-theme="night"] .custom-cursor-follower {
+  border-color: #ecbb4f;
+}
+
+/* Cursor state variations */
+.custom-cursor-dot.hover-state {
+  width: 4px;
+  height: 4px;
+  opacity: 0.8;
+  transform: scale(1.2);
+}
+
+.custom-cursor-follower.hover-state {
+  width: 48px;
+  height: 48px;
+  opacity: 0.5;
+  transform: scale(1.2);
+}
+
+.custom-cursor-dot.click-state {
+  width: 12px;
+  height: 12px;
+  opacity: 1;
+  transform: scale(0.8);
+}
+
+.custom-cursor-follower.click-state {
+  width: 24px;
+  height: 24px;
+  opacity: 0.6;
+  transform: scale(0.8);
+}
+
+.custom-cursor-dot.drag-state {
+  width: 6px;
+  height: 6px;
+  opacity: 0.9;
+  transform: scale(1.1);
+  mix-blend-mode: multiply;
+}
+
+.custom-cursor-follower.drag-state {
+  width: 40px;
+  height: 40px;
+  opacity: 0.5;
+  transform: scale(1.1);
+  mix-blend-mode: multiply;
+}
+
+.custom-cursor-dot.text-state {
+  width: 2px;
+  height: 2px;
+  opacity: 0.6;
+  transform: scale(1);
+}
+
+.custom-cursor-follower.text-state {
+  width: 20px;
+  height: 20px;
+  opacity: 0.4;
+  transform: scale(1);
+}
+
+/* Interactive element cursor hints */
+[data-cursor="hover"]:hover ~ .custom-cursor-dot,
+a:hover ~ .custom-cursor-dot,
+button:hover ~ .custom-cursor-dot,
+.btn-luxury:hover ~ .custom-cursor-dot {
+  background-color: var(--theme-accent, #ecbb4f);
+  box-shadow: 0 0 20px rgba(236, 187, 79, 0.4);
+}
+
+[data-cursor="hover"]:hover ~ .custom-cursor-follower,
+a:hover ~ .custom-cursor-follower,
+button:hover ~ .custom-cursor-follower,
+.btn-luxury:hover ~ .custom-cursor-follower {
+  border-color: var(--theme-accent, #ecbb4f);
+  box-shadow: 0 0 30px rgba(236, 187, 79, 0.2);
+}
+
+/* Cursor animations for luxury feel */
+@keyframes cursor-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+.custom-cursor-dot.pulse {
+  animation: cursor-pulse 2s ease-in-out infinite;
+}
+
+/* Accessibility - Show cursor for keyboard navigation */
+.keyboard-navigation * {
+  cursor: auto !important;
+}
+
+.keyboard-navigation .custom-cursor-dot,
+.keyboard-navigation .custom-cursor-follower {
+  display: none !important;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .custom-cursor-dot,
+  .custom-cursor-follower {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .custom-cursor-dot.pulse {
+    animation: none !important;
+  }
+}
+
+/* Touch device fallback */
+@media (hover: none) and (pointer: coarse) {
+  .custom-cursor-dot,
+  .custom-cursor-follower {
+    display: none !important;
+  }
+  
+  * {
+    cursor: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .custom-cursor-dot {
+    background-color: #000000;
+    border: 1px solid #ffffff;
+  }
+  
+  .custom-cursor-follower {
+    border-color: #000000;
+    border-width: 2px;
+  }
+}
+
+/* Print styles - hide cursor */
+@media print {
+  .custom-cursor-dot,
+  .custom-cursor-follower {
+    display: none !important;
+  }
+}
+
+/* Performance optimizations */
+.custom-cursor-dot,
+.custom-cursor-follower {
+  backface-visibility: hidden;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* Cursor interaction zones */
+.cursor-zone-hover {
+  position: relative;
+}
+
+.cursor-zone-hover::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Special cursor states for specific elements */
+.dual-brand-entry-mask * {
+  cursor: none !important;
+}
+
+.dual-brand-entry-mask .custom-cursor-dot {
+  background-color: #ecbb4f;
+  box-shadow: 0 0 20px rgba(236, 187, 79, 0.6);
+}
+
+.dual-brand-entry-mask .custom-cursor-follower {
+  border-color: #ecbb4f;
+  box-shadow: 0 0 30px rgba(236, 187, 79, 0.3);
+}
+
+/* Video and media cursor states */
+video:hover ~ .custom-cursor-dot,
+.video-container:hover .custom-cursor-dot {
+  background-color: rgba(236, 187, 79, 0.8);
+  transform: scale(1.5);
+}
+
+video:hover ~ .custom-cursor-follower,
+.video-container:hover .custom-cursor-follower {
+  border-color: rgba(236, 187, 79, 0.8);
+  transform: scale(1.3);
+}
+
+/* Form element cursor states */
+input:hover ~ .custom-cursor-dot,
+textarea:hover ~ .custom-cursor-dot,
+select:hover ~ .custom-cursor-dot {
+  background-color: var(--theme-accent, #ecbb4f);
+  width: 3px;
+  height: 20px;
+  border-radius: 2px;
+}
+
+input:focus ~ .custom-cursor-dot,
+textarea:focus ~ .custom-cursor-dot,
+select:focus ~ .custom-cursor-dot {
+  animation: cursor-pulse 1s ease-in-out infinite;
+}

@@ -3,184 +3,552 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Ananta</title>
+    <title>Project Ananta - Luxury Service Apartments in Datia</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" href="/logos/company.svg" as="image" type="image/svg+xml" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Tiro+Devanagari+Hindi&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Tiro+Devanagari+Hindi&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/src/styles/index.css" />
   </head>
   <body style="overflow:hidden" class="bg-white text-black font-montserrat">
-    <!-- Splash / Pre-loader -->
-    <!-- Intro Overlay -->
-    <div id="intro" class="fixed inset-0 bg-white flex flex-col items-center justify-center z-50">
-      <button id="startBtn" class="relative flex flex-col items-center gap-2">
-        <div id="logoContainer" class="relative w-[600px] h-[440px] mb-8 flex items-center justify-center"></div>
-        <p id="tagline" class="text-2xl font-extralight font-montserrat">Welcome to Ananta</p>
-        <p class="text-sm uppercase tracking-wide">Click to view</p>
-      </button>
-      <div id="dotCursor" data-cursor class="w-4 h-4 bg-black rounded-full fixed pointer-events-none z-50"></div>
-    </div>
+    <!-- Dual Brand Logo Mask will be inserted here by JavaScript -->
 
+    <!-- Splash Section -->
     <section id="splash" class="h-screen flex items-center justify-center">
-      <h1
-        class="headline text-5xl md:text-8xl font-bold text-center font-tiro leading-tight"
-      >
+      <h1 class="headline text-5xl md:text-8xl font-bold text-center font-tiro leading-tight">
         अनन्त
       </h1>
     </section>
 
-    <!-- Hero -->
+    <!-- Hero Section with Cinematic Day-time Experience -->
     <section
       id="hero"
-      class="relative h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden"
+      class="relative h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden video-background-container hero-cinematic theme-day-time"
+      data-video-background="true"
+      data-video-sources='[{"src":"https://videos.pexels.com/video-files/2022395/2022395-uhd_3840_2160_25fps.mp4","type":"video/mp4","media":"(min-width: 768px)"},{"src":"https://videos.pexels.com/video-files/2022395/2022395-uhd_1920_1080_25fps.mp4","type":"video/mp4","media":"(max-width: 767px)"}]'
+      data-video-poster="https://images.pexels.com/photos/2022395/pexels-photo-2022395.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080"
+      data-video-fallback="https://images.pexels.com/photos/2022395/pexels-photo-2022395.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080"
+      data-video-autoplay="true"
+      data-video-muted="true"
+      data-video-loop="true"
+      data-video-playsinline="true"
+      role="banner"
+      aria-label="Hero section showcasing luxury service apartments"
     >
-      <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover" src="https://videos.pexels.com/video-files/2022395/2022395-uhd_3840_2160_25fps.mp4"></video>
-      <div class="relative z-10">
-        <h2 class="headline text-4xl md:text-6xl mb-6">
-          Luxury Service Apartments in Lucknow
-        </h2>
-        <a
-          href="#about"
-          class="mt-4 inline-block bg-black text-white px-8 py-3 rounded-full hover:bg-brand-gold transition"
-          >Know More</a
-        >
+      <!-- Hero content container with parallax -->
+      <div class="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 hero-content" data-parallax-speed="0.1" data-parallax-direction="up">
+        <header class="hero-header">
+          <h1 class="headline text-4xl md:text-6xl lg:text-7xl mb-6 text-white drop-shadow-lg font-montserrat font-light" 
+              data-text-preset="luxury-reveal" 
+              data-split-type="chars" 
+              data-stagger="0.03"
+              data-duration="1.2">
+            Luxury Service Apartments in Datia
+          </h1>
+          
+          <p class="hero-subtitle text-lg md:text-xl mb-8 text-white/90 font-montserrat font-light max-w-3xl mx-auto leading-relaxed"
+             data-text-preset="reveal-words"
+             data-delay="0.5"
+             data-stagger="0.08">
+            Experience unparalleled luxury living with world-class amenities, 
+            premium locations, and lifetime maintenance-free investment opportunities in the heart of Datia.
+          </p>
+        </header>
+        
+        <nav class="hero-actions" role="navigation" aria-label="Hero call-to-action">
+          <a
+            href="#about"
+            class="btn-luxury inline-flex items-center justify-center mt-4 bg-black/80 text-white px-8 py-3 rounded-full hover:bg-brand-gold transition-all duration-400 backdrop-blur-sm border-2 border-gold-primary/50"
+            data-cursor="hover"
+            data-animate="scale"
+            data-delay="1"
+            aria-label="Learn more about our luxury apartments"
+          >
+            <span>Discover Ananta</span>
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+          </a>
+          
+          <a
+            href="#contact"
+            class="btn-luxury btn-secondary inline-flex items-center justify-center mt-4 ml-4 bg-transparent text-white px-8 py-3 rounded-full border-2 border-white/30 hover:border-gold-primary hover:bg-gold-primary/10 transition-all duration-400 backdrop-blur-sm"
+            data-cursor="hover"
+            data-animate="scale"
+            data-delay="1.2"
+            aria-label="Contact us for more information"
+          >
+            <span>Get In Touch</span>
+          </a>
+        </nav>
       </div>
-        >Know More</a
-      >
+      
+      <!-- Scroll indicator with day theme -->
+      <div class="scroll-indicator absolute bottom-8 left-1/2 transform -translate-x-1/2 z-25 text-gold-primary/80 font-montserrat font-light text-sm tracking-wider uppercase"
+           data-animate="fade-up"
+           data-delay="2"
+           aria-label="Scroll down to explore more">
+        <span>Scroll to Explore</span>
+      </div>
     </section>
 
-    <!-- Stats Counters -->
-    <section id="stats" class="py-20 bg-white text-center">
-      <div class="max-w-screen-xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-        <div>
-          <span class="text-4xl md:text-5xl font-bold" data-counter="5">0</span>
-          <p class="mt-2 text-sm uppercase tracking-wide">Towers</p>
-        </div>
-        <div>
-          <span class="text-4xl md:text-5xl font-bold" data-counter="800">0</span>
-          <p class="mt-2 text-sm uppercase tracking-wide">Units</p>
-        </div>
-        <div>
-          <span class="text-4xl md:text-5xl font-bold" data-counter="18">0</span>
-          <p class="mt-2 text-sm uppercase tracking-wide">Amenities</p>
-        </div>
-        <div>
-          <span class="text-4xl md:text-5xl font-bold" data-counter="1">0</span>
-          <p class="mt-2 text-sm uppercase tracking-wide">Maintenance Fee</p>
-        </div>
-      </div>
+    <!-- Theme Transition Indicator -->
+    <div id="theme-indicator" class="fixed top-4 right-4 z-50 theme-aware-accent px-4 py-2 rounded-full font-montserrat font-light text-sm transition-all duration-600 ease-luxury">
+      <span class="theme-indicator"></span>
+      <span id="theme-name">Dawn</span> - <span id="scroll-progress">0%</span>
+    </div>
+
+    <!-- Enhanced Statistics Section with Day Theme -->
+    <section id="stats" class="section-padding theme-aware text-center stats-day-theme transition-all duration-600 ease-luxury">
+      <!-- Content will be dynamically generated by createStatsSection() -->
     </section>
 
-    <!-- About / Highlights -->
-    <section id="about" class="py-24 bg-white px-4 md:px-0 relative overflow-hidden">
-      <div class="max-w-screen-xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-        <div>
-          <h3 class="text-3xl md:text-4xl font-semibold mb-6">Premium Developments</h3>
-          <ul class="space-y-4 text-lg">
-            <li class="opacity-0 -translate-x-6 transition-all duration-700" data-list-item>Five towers of luxury service apartments</li>
-            <li class="opacity-0 -translate-x-6 transition-all duration-700" data-list-item>800 well-appointed units</li>
-            <li class="opacity-0 -translate-x-6 transition-all duration-700" data-list-item>18 exclusive amenities</li>
-            <li class="opacity-0 -translate-x-6 transition-all duration-700" data-list-item>Lifetime free maintenance</li>
-          </ul>
+    <!-- About Section with Dusk Theme Transition -->
+    <section id="about" class="section-padding theme-aware relative overflow-hidden about-dusk-theme" 
+             data-theme-section="dusk"
+             data-parallax-container="true"
+             role="main"
+             aria-label="About Project Ananta">
+      
+      <!-- Background parallax elements -->
+      <div class="absolute inset-0 z-0" data-parallax-bg="true">
+        <div class="absolute inset-0 bg-gradient-to-br from-transparent via-theme-accent/5 to-theme-accent/10 transition-all duration-1000 ease-luxury"></div>
+        <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-theme-accent/5 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-1/4 left-1/4 w-64 h-64 bg-theme-accent/3 rounded-full blur-2xl animate-pulse" style="animation-delay: 1s;"></div>
+      </div>
+      
+      <div class="container-luxury relative z-10">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          
+          <!-- Content Column with Slide Animations -->
+          <div class="space-y-8" data-about-content="true">
+            
+            <!-- Section Header -->
+            <header class="space-y-6" data-animate="slide-left" data-delay="0.2">
+              <div class="inline-flex items-center space-x-3 text-theme-accent font-montserrat font-light text-sm uppercase tracking-wider">
+                <div class="w-12 h-px bg-theme-accent"></div>
+                <span>Luxury Living Redefined</span>
+              </div>
+              
+              <h2 class="text-responsive-xl font-montserrat font-light text-theme-text leading-tight" 
+                  data-text-preset="luxury-reveal" 
+                  data-split-type="chars" 
+                  data-stagger="0.02">
+                About Project Ananta
+              </h2>
+              
+              <div class="w-24 h-1 bg-theme-accent rounded-full" data-animate="scale-x" data-delay="0.8"></div>
+            </header>
+            
+            <!-- Main Description -->
+            <div class="space-y-6" data-animate="slide-left" data-delay="0.4">
+              <p class="text-responsive-md text-theme-text-secondary font-montserrat font-light leading-relaxed">
+                Project Ananta represents the pinnacle of luxury living, offering 5-star pre-leased service apartments 
+                designed for discerning investors and residents. With 5 meticulously planned towers, each housing 466 premium suites, 
+                Ananta creates a perfect balance of opulence and comfort.
+              </p>
+              
+              <p class="text-responsive-md text-theme-text-secondary font-montserrat font-light leading-relaxed">
+                Our vision is to provide not just a residence, but a lifestyle that embodies luxury, convenience, 
+                and exceptional returns on investment. Each aspect of Project Ananta has been thoughtfully designed 
+                to ensure an unparalleled living experience.
+              </p>
+            </div>
+            
+            <!-- Key Features Grid -->
+            <div class="grid grid-cols-2 gap-6" data-animate="slide-left" data-delay="0.6">
+              
+              <div class="flex items-center space-x-4 card-luxury p-4 rounded-lg" data-feature-card="true">
+                <div class="w-12 h-12 rounded-full bg-theme-accent/20 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-theme-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-montserrat font-medium text-theme-text">5 Towers</p>
+                  <p class="text-sm text-theme-text-secondary font-light">Luxury Residences</p>
+                </div>
+              </div>
+              
+              <div class="flex items-center space-x-4 card-luxury p-4 rounded-lg" data-feature-card="true">
+                <div class="w-12 h-12 rounded-full bg-theme-accent/20 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-theme-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-montserrat font-medium text-theme-text">466 Units</p>
+                  <p class="text-sm text-theme-text-secondary font-light">Per Tower</p>
+                </div>
+              </div>
+              
+              <div class="flex items-center space-x-4 card-luxury p-4 rounded-lg" data-feature-card="true">
+                <div class="w-12 h-12 rounded-full bg-theme-accent/20 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-theme-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 8V6a2 2 0 012-2h2M4 16v2a2 2 0 002 2h2m8-16h2a2 2 0 012 2v2m-4 12h2a2 2 0 002-2v-2M9 12h6m-6 4h6m2-8H7a2 2 0 00-2 2v4a2 2 0 002 2h10a2 2 0 002-2v-4a2 2 0 00-2-2z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-montserrat font-medium text-theme-text">50-85 SQM</p>
+                  <p class="text-sm text-theme-text-secondary font-light">Unit Sizes</p>
+                </div>
+              </div>
+              
+              <div class="flex items-center space-x-4 card-luxury p-4 rounded-lg" data-feature-card="true">
+                <div class="w-12 h-12 rounded-full bg-theme-accent/20 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-theme-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V6a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1h5m6 0v1a1 1 0 001 1h6a1 1 0 001-1v-4a1 1 0 00-1-1h-5m-6 0H9a1 1 0 01-1-1v-4a1 1 0 011-1h6a1 1 0 011 1v4a1 1 0 01-1 1h-1z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-montserrat font-medium text-theme-text">24 Months</p>
+                  <p class="text-sm text-theme-text-secondary font-light">To Possession</p>
+                </div>
+              </div>
+              
+            </div>
+            
+            <!-- Call to Action -->
+            <div class="pt-4" data-animate="slide-left" data-delay="0.8">
+              <a href="#contact" 
+                 class="btn-luxury inline-flex items-center space-x-2 group"
+                 data-cursor="hover"
+                 aria-label="Learn more about investment opportunities">
+                <span>Explore Investment Opportunities</span>
+                <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" 
+                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              </a>
+            </div>
+            
+          </div>
+          
+          <!-- Visual Column with Parallax Effects -->
+          <div class="relative" data-about-visual="true">
+            
+            <!-- Main Image Container -->
+            <div class="relative z-10" data-animate="slide-right" data-delay="0.3">
+              <div class="relative overflow-hidden rounded-2xl shadow-2xl group">
+                
+                <!-- Background Image with Parallax -->
+                <div class="aspect-w-4 aspect-h-5 bg-theme-bg-secondary" data-parallax-element="0.2">
+                  <img src="/images/h0010.jpg" 
+                       alt="Project Ananta luxury apartment rendering showing modern architecture and premium finishes" 
+                       class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                       data-fade-img="true"
+                       loading="lazy" />
+                  
+                  <!-- Overlay with theme-aware gradient -->
+                  <div class="absolute inset-0 bg-gradient-to-t from-theme-bg/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+                
+                <!-- Floating Stats Card -->
+                <div class="absolute -bottom-6 -right-6 card-luxury p-6 rounded-xl shadow-xl backdrop-blur-sm" 
+                     data-animate="scale-in" 
+                     data-delay="1.2">
+                  <div class="text-center">
+                    <div class="text-3xl font-montserrat font-light text-theme-accent mb-1">2,330</div>
+                    <div class="text-sm text-theme-text-secondary font-light uppercase tracking-wider">Total Units</div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+            
+            <!-- Decorative Elements -->
+            <div class="absolute -top-8 -left-8 w-24 h-24 border border-theme-accent/30 rounded-full" 
+                 data-animate="rotate" 
+                 data-delay="1.5"></div>
+            <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-theme-accent/10 rounded-full blur-sm" 
+                 data-animate="pulse" 
+                 data-delay="2"></div>
+            
+          </div>
+          
         </div>
+      </div>
+      
+      <!-- Section transition indicator -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-theme-accent/60 font-montserrat font-light text-xs uppercase tracking-wider"
+           data-animate="fade-up" 
+           data-delay="2.5">
+        <span class="inline-flex items-center space-x-2">
+          <span>Transitioning to Dusk</span>
+          <div class="w-2 h-2 bg-theme-accent rounded-full animate-pulse"></div>
+        </span>
+      </div>
+      
+    </section>
+
+    <!-- Amenities Showcase Section -->
+    <section id="amenities" 
+             class="amenities-section py-24 bg-gradient-to-b from-theme-bg via-theme-bg-secondary to-theme-bg-tertiary relative overflow-hidden" 
+             data-amenities-section 
+             data-cursor="drag"
+             data-theme-section="dusk">
+      
+      <!-- Background Elements -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-20 left-10 w-32 h-32 border border-theme-accent/20 rounded-full"></div>
+        <div class="absolute bottom-20 right-10 w-24 h-24 bg-theme-accent/10 rounded-full blur-xl"></div>
+        <div class="absolute top-1/2 left-1/4 w-2 h-2 bg-theme-accent rounded-full animate-pulse"></div>
+        <div class="absolute top-1/3 right-1/3 w-1 h-1 bg-theme-accent rounded-full animate-pulse" style="animation-delay: 1s;"></div>
+      </div>
+      
+      <!-- Container -->
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- Content will be dynamically generated by amenities.js -->
+      </div>
+      
+      <!-- Section transition indicator -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-theme-accent/60 font-montserrat font-light text-xs uppercase tracking-wider"
+           data-animate="fade-up" 
+           data-delay="2.5">
+        <span class="inline-flex items-center space-x-2">
+          <span>Transitioning to Night</span>
+          <div class="w-2 h-2 bg-theme-accent rounded-full animate-pulse"></div>
+        </span>
+      </div>
+      
+    </section>
+
+    <!-- Testimonials Section with Night Theme -->
+    <section id="testimonials" class="py-24 bg-gradient-to-b from-gray-900 to-black text-white overflow-hidden" data-testimonials data-cursor="drag" data-theme-section="night">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <div class="inline-flex items-center space-x-3 text-gold-primary font-montserrat font-light text-sm uppercase tracking-wider mb-6">
+            <div class="w-12 h-px bg-gold-primary"></div>
+            <span>Client Testimonials</span>
+            <div class="w-12 h-px bg-gold-primary"></div>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-montserrat font-light mb-4">What Our Clients Say</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">Hear from satisfied investors and residents about their Project Ananta experience</p>
+        </div>
+        
         <div class="relative">
-          <img src="/images/h0010.jpg" alt="project render" class="w-full rounded-lg shadow-lg opacity-0 scale-95 transition-all duration-700" data-fade-img />
+          <div class="whitespace-nowrap overflow-hidden" data-track>
+            <div class="inline-block px-8 py-4 mx-4 bg-white/10 backdrop-blur-sm rounded-lg border border-gold-primary/20">
+              <p class="text-lg font-montserrat font-light text-white mb-2">"Excellent build quality and top-notch amenities!"</p>
+              <p class="text-sm text-gold-primary">- Satisfied Investor</p>
+            </div>
+            <div class="inline-block px-8 py-4 mx-4 bg-white/10 backdrop-blur-sm rounded-lg border border-gold-primary/20">
+              <p class="text-lg font-montserrat font-light text-white mb-2">"The maintenance-free promise sealed the deal."</p>
+              <p class="text-sm text-gold-primary">- Property Owner</p>
+            </div>
+            <div class="inline-block px-8 py-4 mx-4 bg-white/10 backdrop-blur-sm rounded-lg border border-gold-primary/20">
+              <p class="text-lg font-montserrat font-light text-white mb-2">"Smooth buying experience with the team."</p>
+              <p class="text-sm text-gold-primary">- Happy Customer</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Amenities -->
-    <section class="py-24 bg-white" data-amenities-scroll>
-      <div class="overflow-hidden" data-scroll-track>
-        <div class="flex gap-6">
-          <img src="https://images.pexels.com/photos/221457/pexels-photo-221457.jpeg?auto=compress&cs=tinysrgb&w=800" class="w-80 h-60 object-cover rounded-lg shadow"/>
-          <img src="https://images.pexels.com/photos/3771110/pexels-photo-3771110.jpeg?auto=compress&cs=tinysrgb&w=800" class="w-80 h-60 object-cover rounded-lg shadow"/>
-          <img src="https://images.pexels.com/photos/2507010/pexels-photo-2507010.jpeg?auto=compress&cs=tinysrgb&w=800" class="w-80 h-60 object-cover rounded-lg shadow"/>
-          <img src="https://images.pexels.com/photos/220551/pexels-photo-220551.jpeg?auto=compress&cs=tinysrgb&w=800" class="w-80 h-60 object-cover rounded-lg shadow"/>
-          <img src="https://images.pexels.com/photos/6434622/pexels-photo-6434622.jpeg?auto=compress&cs=tinysrgb&w=800" class="w-80 h-60 object-cover rounded-lg shadow"/>
-          <img src="https://images.pexels.com/photos/221457/pexels-photo-221457.jpeg?auto=compress&cs=tinysrgb&w=800" class="w-80 h-60 object-cover rounded-lg shadow"/>
-        </div>
-      </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="py-24 bg-gray-50 overflow-hidden" data-testimonials>
-      <div class="whitespace-nowrap" data-track>
-        <span class="inline-block px-8 text-xl md:text-2xl font-medium">“Excellent build quality and top-notch amenities!”</span>
-        <span class="inline-block px-8 text-xl md:text-2xl font-medium">“The maintenance-free promise sealed the deal.”</span>
-        <span class="inline-block px-8 text-xl md:text-2xl font-medium">“Smooth buying experience with the team.”</span>
-      </div>
-    </section>
-
-    <!-- Location -->
+    <!-- Location Section -->
     <section id="location" class="py-24 bg-white">
-      <div class="max-w-screen-xl mx-auto px-4">
-        <h3 class="text-3xl font-semibold mb-6 text-center">Location</h3>
-        <div id="map" class="w-full h-80 rounded-md overflow-hidden"></div>
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <div class="inline-flex items-center space-x-3 text-gold-primary font-montserrat font-light text-sm uppercase tracking-wider mb-6">
+            <div class="w-12 h-px bg-gold-primary"></div>
+            <span>Prime Location</span>
+            <div class="w-12 h-px bg-gold-primary"></div>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-montserrat font-light mb-4">Strategic Location in Datia</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">Perfectly positioned for connectivity, convenience, and growth potential</p>
+        </div>
+        
+        <div class="bg-gray-100 rounded-2xl overflow-hidden shadow-xl">
+          <div id="map" class="w-full h-96 bg-gradient-to-br from-gold-primary/20 to-gold-primary/10 flex items-center justify-center">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gold-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-montserrat font-medium text-gray-800 mb-2">Project Ananta</h3>
+              <p class="text-gray-600">Datia, Madhya Pradesh</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Our Group -->
-    <section id="group" class="py-24 bg-gray-50">
-      <div class="max-w-screen-xl mx-auto px-4">
-        <h3 class="text-3xl font-semibold mb-10 text-center">Our Group</h3>
+    <!-- Utilities Section -->
+    <section id="utilities" class="py-24 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <div class="inline-flex items-center space-x-3 text-gold-primary font-montserrat font-light text-sm uppercase tracking-wider mb-6">
+            <div class="w-12 h-px bg-gold-primary"></div>
+            <span>Essential Services</span>
+            <div class="w-12 h-px bg-gold-primary"></div>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-montserrat font-light mb-4">Premium Utilities</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">Comprehensive infrastructure and services for comfortable living</p>
+        </div>
+        
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-          <div class="opacity-0 translate-y-6 transition-all duration-700" data-group-item>
-            <img src="/images/dev1.png" alt="Dev 1" class="w-full h-24 object-contain" />
+          <div class="text-center group" data-group-item>
+            <div class="w-16 h-16 bg-gold-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-gold-primary/20 transition-colors duration-300">
+              <svg class="w-8 h-8 text-gold-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25c3.727 0 6.75 3.023 6.75 6.75 0 6.75-6.75 12.75-6.75 12.75S5.25 15.75 5.25 9c0-3.727 3.023-6.75 6.75-6.75z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0z"></path>
+              </svg>
+            </div>
+            <h3 class="font-montserrat font-medium text-gray-800 mb-2">24/7 Water Supply</h3>
+            <p class="text-sm text-gray-600">Uninterrupted water supply</p>
           </div>
-          <div class="opacity-0 translate-y-6 transition-all duration-700" data-group-item>
-            <img src="/images/dev2.png" alt="Dev 2" class="w-full h-24 object-contain" />
+          
+          <div class="text-center group" data-group-item>
+            <div class="w-16 h-16 bg-gold-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-gold-primary/20 transition-colors duration-300">
+              <svg class="w-8 h-8 text-gold-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"></path>
+              </svg>
+            </div>
+            <h3 class="font-montserrat font-medium text-gray-800 mb-2">Power Backup</h3>
+            <p class="text-sm text-gray-600">Generator backup system</p>
           </div>
-          <div class="opacity-0 translate-y-6 transition-all duration-700" data-group-item>
-            <img src="/images/dev3.png" alt="Dev 3" class="w-full h-24 object-contain" />
+          
+          <div class="text-center group" data-group-item>
+            <div class="w-16 h-16 bg-gold-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-gold-primary/20 transition-colors duration-300">
+              <svg class="w-8 h-8 text-gold-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12a9.75 9.75 0 0119.5 0v5.25a2.25 2.25 0 01-2.25 2.25H4.5A2.25 2.25 0 012.25 17.25V12z"></path>
+              </svg>
+            </div>
+            <h3 class="font-montserrat font-medium text-gray-800 mb-2">CCTV Security</h3>
+            <p class="text-sm text-gray-600">24/7 surveillance system</p>
           </div>
-          <div class="opacity-0 translate-y-6 transition-all duration-700" data-group-item>
-            <img src="/images/dev4.png" alt="Dev 4" class="w-full h-24 object-contain" />
+          
+          <div class="text-center group" data-group-item>
+            <div class="w-16 h-16 bg-gold-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-gold-primary/20 transition-colors duration-300">
+              <svg class="w-8 h-8 text-gold-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"></path>
+              </svg>
+            </div>
+            <h3 class="font-montserrat font-medium text-gray-800 mb-2">Club House</h3>
+            <p class="text-sm text-gray-600">Community facilities</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Utility -->
-    <section id="utility" class="py-24 bg-white">
-      <div class="max-w-screen-xl mx-auto px-4">
-        <h3 class="text-3xl font-semibold mb-10 text-center">Utilities</h3>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div class="opacity-0 translate-y-6 transition-all duration-700" data-group-item>
-            <svg class="mx-auto w-10 h-10 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25c3.727 0 6.75 3.023 6.75 6.75 0 6.75-6.75 12.75-6.75 12.75S5.25 15.75 5.25 9c0-3.727 3.023-6.75 6.75-6.75z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0z"></path></svg>
-            24/7 Water Supply
-          </div>
-          <div class="opacity-0 translate-y-6 transition-all duration-700" data-group-item>
-            <svg class="mx-auto w-10 h-10 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.095a1.125 1.125 0 011.125-1.125h.75A1.125 1.125 0 016 12.495v8.25a.375.375 0 00.375.375h11.25a.375.375 0 00.375-.375v-8.25a1.125 1.125 0 011.125-1.125h.75A1.125 1.125 0 0121 13.095v8.25c0 .621-.504 1.125-1.125 1.125H4.125A1.125 1.125 0 013 21.345v-8.25z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M12 3.75a1.5 1.5 0 011.5 1.5v11.25a1.5 1.5 0 11-3 0V5.25a1.5 1.5 0 011.5-1.5z"></path></svg>
-            Power Backup
-          </div>
-          <div class="opacity-0 translate-y-6 transition-all duration-700" data-group-item>
-            <svg class="mx-auto w-10 h-10 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12a9.75 9.75 0 0119.5 0v5.25a2.25 2.25 0 01-2.25 2.25H4.5A2.25 2.25 0 012.25 17.25V12z"></path></svg>
-            CCTV Security
-          </div>
-          <div class="opacity-0 translate-y-6 transition-all duration-700" data-group-item>
-            <svg class="mx-auto w-10 h-10 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-3A2.25 2.25 0 008.25 5.25V9M3 9h18M4.5 9v9.75A2.25 2.25 0 006.75 21h10.5A2.25 2.25 0 0019.5 18.75V9"/></svg>
-            Club House
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
+    <!-- Contact Section -->
     <section id="contact" class="py-24 bg-white">
-      <div class="max-w-md mx-auto px-4">
-        <h3 class="text-3xl font-semibold mb-6 text-center">Get in Touch</h3>
-        <form id="contactForm" class="space-y-4">
-          <input type="text" name="name" placeholder="Name" required class="w-full border px-4 py-2 rounded" />
-          <input type="email" name="email" placeholder="Email" required class="w-full border px-4 py-2 rounded" />
-          <textarea name="message" rows="4" placeholder="Message" required class="w-full border px-4 py-2 rounded"></textarea>
-          <button type="submit" class="bg-black text-white px-6 py-2 rounded w-full">Send</button>
-          <p data-status class="text-center text-sm mt-2"></p>
-        </form>
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-16">
+            <div class="inline-flex items-center space-x-3 text-gold-primary font-montserrat font-light text-sm uppercase tracking-wider mb-6">
+              <div class="w-12 h-px bg-gold-primary"></div>
+              <span>Get In Touch</span>
+              <div class="w-12 h-px bg-gold-primary"></div>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-montserrat font-light mb-4">Contact Us</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Ready to invest in luxury? Get in touch with our team for more information</p>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-12">
+            <!-- Contact Form -->
+            <div class="bg-gray-50 p-8 rounded-2xl">
+              <h3 class="text-xl font-montserrat font-medium mb-6">Send us a message</h3>
+              <form id="contactForm" class="space-y-6">
+                <div>
+                  <input type="text" name="name" placeholder="Your Name" required 
+                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-primary focus:border-transparent transition-colors font-montserrat" 
+                         data-cursor="text" />
+                </div>
+                <div>
+                  <input type="email" name="email" placeholder="Your Email" required 
+                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-primary focus:border-transparent transition-colors font-montserrat" 
+                         data-cursor="text" />
+                </div>
+                <div>
+                  <input type="tel" name="phone" placeholder="Your Phone" 
+                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-primary focus:border-transparent transition-colors font-montserrat" 
+                         data-cursor="text" />
+                </div>
+                <div>
+                  <textarea name="message" rows="4" placeholder="Your Message" required 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-primary focus:border-transparent transition-colors font-montserrat resize-none" 
+                            data-cursor="text"></textarea>
+                </div>
+                <button type="submit" 
+                        class="w-full bg-gold-primary text-white px-8 py-3 rounded-lg font-montserrat font-medium hover:bg-gold-primary/90 transition-colors duration-300" 
+                        data-cursor="hover">
+                  Send Message
+                </button>
+                <p data-status class="text-center text-sm mt-4"></p>
+              </form>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="space-y-8">
+              <div>
+                <h3 class="text-xl font-montserrat font-medium mb-6">Get in touch</h3>
+                <div class="space-y-4">
+                  <div class="flex items-start space-x-4">
+                    <div class="w-12 h-12 bg-gold-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <svg class="w-6 h-6 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="font-montserrat font-medium text-gray-800">Address</h4>
+                      <p class="text-gray-600">Project Ananta, Datia, Madhya Pradesh</p>
+                    </div>
+                  </div>
+                  
+                  <div class="flex items-start space-x-4">
+                    <div class="w-12 h-12 bg-gold-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <svg class="w-6 h-6 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="font-montserrat font-medium text-gray-800">Phone</h4>
+                      <p class="text-gray-600">+91 XXXXX XXXXX</p>
+                    </div>
+                  </div>
+                  
+                  <div class="flex items-start space-x-4">
+                    <div class="w-12 h-12 bg-gold-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <svg class="w-6 h-6 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="font-montserrat font-medium text-gray-800">Email</h4>
+                      <p class="text-gray-600">info@projectananta.com</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="bg-gradient-to-br from-gold-primary/10 to-gold-primary/5 p-6 rounded-2xl">
+                <h4 class="font-montserrat font-medium text-gray-800 mb-3">Office Hours</h4>
+                <div class="space-y-2 text-sm text-gray-600">
+                  <div class="flex justify-between">
+                    <span>Monday - Friday</span>
+                    <span>9:00 AM - 6:00 PM</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Saturday</span>
+                    <span>9:00 AM - 4:00 PM</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Sunday</span>
+                    <span>Closed</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 

@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 import { initContactForm } from '../contact.js';
 
 describe('Contact form', () => {
@@ -12,12 +12,25 @@ describe('Contact form', () => {
         <p data-status></p>
       </form>`;
     global.fetch = vi.fn(() => Promise.resolve({ ok: true }));
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.useRealTimers();
   });
 
   it('shows success text after submit', async () => {
     initContactForm();
-    document.querySelector('button').click();
-    await vi.runAllTicks();
+    
+    // Trigger form submission
+    const form = document.querySelector('#contactForm');
+    const submitEvent = new Event('submit', { bubbles: true, cancelable: true });
+    form.dispatchEvent(submitEvent);
+    
+    // Wait for async operations to complete
+    await vi.runAllTimersAsync();
+    
     expect(document.querySelector('[data-status]').textContent).toMatch(/thank you/i);
   });
 });

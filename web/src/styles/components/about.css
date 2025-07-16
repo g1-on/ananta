@@ -1,0 +1,381 @@
+/**
+ * About Section Styles with Dusk Theme Transition
+ * Implements luxury Gold/Black contrast with theme-aware colors
+ */
+
+/* About Section Base Styles */
+#about {
+  position: relative;
+  background: var(--theme-bg);
+  color: var(--theme-text);
+  transition: all var(--transition-theme) var(--transition-luxury);
+}
+
+/* Theme-aware background gradients */
+#about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    var(--theme-bg) 0%,
+    var(--theme-bg-secondary) 50%,
+    var(--theme-bg) 100%
+  );
+  opacity: 0.8;
+  z-index: 1;
+  transition: opacity var(--transition-theme) var(--transition-luxury);
+}
+
+/* Content positioning */
+#about .container-luxury {
+  position: relative;
+  z-index: 10;
+}
+
+/* Dusk theme specific styles */
+#about.theme-dusk-active {
+  background: linear-gradient(
+    135deg,
+    #2a2a2a 0%,
+    #1a1a1a 50%,
+    #000000 100%
+  );
+}
+
+#about.theme-dusk-active::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.05) 0%,
+    rgba(236, 187, 79, 0.08) 50%,
+    rgba(212, 175, 55, 0.03) 100%
+  );
+  opacity: 1;
+}
+
+/* Parallax background elements */
+[data-parallax-bg] {
+  will-change: transform;
+}
+
+[data-parallax-bg] .bg-gradient-to-br {
+  background: linear-gradient(
+    to bottom right,
+    transparent 0%,
+    var(--theme-accent-light) 5%,
+    var(--theme-accent) 10%,
+    transparent 100%
+  );
+  transition: background var(--transition-theme) var(--transition-luxury);
+}
+
+/* Animated background elements */
+[data-parallax-bg] .animate-pulse:nth-child(2) {
+  background: radial-gradient(
+    circle,
+    var(--theme-accent) 0%,
+    transparent 70%
+  );
+  opacity: 0.1;
+  transition: background var(--transition-theme) var(--transition-luxury);
+}
+
+[data-parallax-bg] .animate-pulse:nth-child(3) {
+  background: radial-gradient(
+    circle,
+    var(--theme-accent-light) 0%,
+    transparent 70%
+  );
+  opacity: 0.05;
+  transition: background var(--transition-theme) var(--transition-luxury);
+}
+
+/* Content section styles */
+[data-about-content] {
+  will-change: transform;
+}
+
+/* Section header styles */
+[data-about-content] header {
+  margin-bottom: 2rem;
+}
+
+[data-about-content] .inline-flex {
+  color: var(--theme-accent);
+  transition: color var(--transition-theme) var(--transition-luxury);
+}
+
+[data-about-content] .inline-flex .w-12 {
+  background-color: var(--theme-accent);
+  transition: background-color var(--transition-theme) var(--transition-luxury);
+}
+
+/* Typography with theme awareness */
+.text-theme-text {
+  color: var(--theme-text);
+  transition: color var(--transition-theme) var(--transition-luxury);
+}
+
+.text-theme-text-secondary {
+  color: var(--theme-text-secondary);
+  transition: color var(--transition-theme) var(--transition-luxury);
+}
+
+.text-theme-accent {
+  color: var(--theme-accent);
+  transition: color var(--transition-theme) var(--transition-luxury);
+}
+
+.bg-theme-accent {
+  background-color: var(--theme-accent);
+  transition: background-color var(--transition-theme) var(--transition-luxury);
+}
+
+/* Feature cards with luxury styling */
+[data-feature-card] {
+  background: var(--theme-bg-secondary);
+  border: 1px solid var(--theme-border);
+  color: var(--theme-text);
+  box-shadow: 0 4px 6px var(--theme-shadow);
+  backdrop-filter: blur(10px);
+  transition: all var(--transition-slow) var(--transition-luxury),
+              background-color var(--transition-theme) var(--transition-luxury),
+              border-color var(--transition-theme) var(--transition-luxury),
+              color var(--transition-theme) var(--transition-luxury),
+              box-shadow var(--transition-theme) var(--transition-luxury);
+  will-change: transform;
+}
+
+[data-feature-card]:hover {
+  box-shadow: 0 12px 25px var(--theme-shadow);
+  border-color: var(--theme-accent);
+}
+
+/* Feature card icons */
+[data-feature-card] .bg-theme-accent\/20 {
+  background-color: rgba(236, 187, 79, 0.2);
+  transition: background-color var(--transition-theme) var(--transition-luxury);
+}
+
+/* Dusk theme feature card adjustments */
+#about.theme-dusk-active [data-feature-card] .bg-theme-accent\/20 {
+  background-color: rgba(255, 215, 0, 0.25);
+}
+
+#about.theme-dusk-active [data-feature-card] {
+  background: rgba(42, 42, 42, 0.8);
+  border-color: rgba(255, 215, 0, 0.2);
+  box-shadow: 0 4px 6px rgba(255, 215, 0, 0.1);
+}
+
+#about.theme-dusk-active [data-feature-card]:hover {
+  background: rgba(42, 42, 42, 0.95);
+  border-color: var(--theme-accent);
+  box-shadow: 0 12px 25px rgba(255, 215, 0, 0.2);
+}
+
+/* Visual section styles */
+[data-about-visual] {
+  will-change: transform;
+}
+
+/* Image container with luxury effects */
+[data-about-visual] .aspect-w-4 {
+  aspect-ratio: 4 / 5;
+}
+
+[data-about-visual] .group:hover .absolute.inset-0 {
+  background: linear-gradient(
+    to top,
+    var(--theme-bg) 20%,
+    transparent 50%,
+    transparent 100%
+  );
+}
+
+/* Floating stats card */
+[data-about-visual] .card-luxury {
+  background: var(--theme-bg-secondary);
+  border: 1px solid var(--theme-border);
+  color: var(--theme-text);
+  box-shadow: 0 8px 25px var(--theme-shadow);
+  backdrop-filter: blur(15px);
+  transition: all var(--transition-slow) var(--transition-luxury),
+              background-color var(--transition-theme) var(--transition-luxury),
+              border-color var(--transition-theme) var(--transition-luxury),
+              color var(--transition-theme) var(--transition-luxury),
+              box-shadow var(--transition-theme) var(--transition-luxury);
+}
+
+/* Dusk theme floating card */
+#about.theme-dusk-active [data-about-visual] .card-luxury {
+  background: rgba(26, 26, 26, 0.9);
+  border-color: rgba(255, 215, 0, 0.3);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.15);
+}
+
+/* Decorative elements */
+[data-about-visual] .border-theme-accent\/30 {
+  border-color: rgba(236, 187, 79, 0.3);
+  transition: border-color var(--transition-theme) var(--transition-luxury);
+}
+
+[data-about-visual] .bg-theme-accent\/10 {
+  background-color: rgba(236, 187, 79, 0.1);
+  transition: background-color var(--transition-theme) var(--transition-luxury);
+}
+
+/* Dusk theme decorative elements */
+#about.theme-dusk-active [data-about-visual] .border-theme-accent\/30 {
+  border-color: rgba(255, 215, 0, 0.4);
+}
+
+#about.theme-dusk-active [data-about-visual] .bg-theme-accent\/10 {
+  background-color: rgba(255, 215, 0, 0.15);
+}
+
+/* Button styles with theme awareness */
+#about .btn-luxury {
+  border-color: var(--theme-accent);
+  color: var(--theme-accent);
+  transition: all var(--transition-normal) var(--transition-luxury),
+              border-color var(--transition-theme) var(--transition-luxury),
+              color var(--transition-theme) var(--transition-luxury);
+}
+
+#about .btn-luxury::before {
+  background: var(--theme-accent);
+  transition: transform var(--transition-normal) var(--transition-luxury),
+              background-color var(--transition-theme) var(--transition-luxury);
+}
+
+#about .btn-luxury:hover {
+  color: var(--theme-bg);
+}
+
+/* Section transition indicator */
+#about .absolute.bottom-8 {
+  color: rgba(236, 187, 79, 0.6);
+  transition: color var(--transition-theme) var(--transition-luxury);
+}
+
+#about.theme-dusk-active .absolute.bottom-8 {
+  color: rgba(255, 215, 0, 0.8);
+}
+
+#about .absolute.bottom-8 .bg-theme-accent {
+  background-color: var(--theme-accent);
+  transition: background-color var(--transition-theme) var(--transition-luxury);
+}
+
+/* Animation performance optimizations */
+[data-animate] {
+  will-change: transform, opacity;
+}
+
+[data-parallax-element] {
+  will-change: transform;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  #about .grid.lg\\:grid-cols-2 {
+    gap: 3rem;
+  }
+  
+  [data-about-visual] .aspect-w-4 {
+    aspect-ratio: 16 / 10;
+  }
+  
+  [data-about-visual] .-bottom-6.-right-6 {
+    bottom: -1rem;
+    right: -1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #about {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  
+  #about .grid.lg\\:grid-cols-2 {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  [data-about-content] .grid.grid-cols-2 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  [data-feature-card] {
+    padding: 1rem;
+  }
+  
+  [data-about-visual] .-top-8.-left-8 {
+    top: -1rem;
+    left: -1rem;
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  [data-about-visual] .-bottom-4.-left-4 {
+    bottom: -0.5rem;
+    left: -0.5rem;
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  #about * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  [data-parallax-bg],
+  [data-parallax-element] {
+    transform: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  #about {
+    background: var(--theme-bg);
+    color: var(--theme-text);
+  }
+  
+  [data-feature-card] {
+    border-width: 2px;
+    border-color: var(--theme-accent);
+  }
+  
+  #about .btn-luxury {
+    border-width: 2px;
+  }
+}
+
+/* Print styles */
+@media print {
+  #about {
+    background: white !important;
+    color: black !important;
+  }
+  
+  [data-parallax-bg],
+  .absolute.bottom-8 {
+    display: none !important;
+  }
+  
+  [data-feature-card] {
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+}

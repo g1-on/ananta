@@ -1,11 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Hide system cursor across site (use custom dot) */
-body {
-  cursor: none;
+/* Import component styles */
+@import './components/navigation.css';
+@import './components/stats.css';
+@import './components/about.css';
+@import './components/amenities.css';
+
+/* CSS Custom Properties for Theme Transitions */
+:root {
+  /* Theme colors - dynamically updated by themeTransition.js */
+  --theme-bg: #ffffff;
+  --theme-bg-secondary: #f8f8f8;
+  --theme-text: #000000;
+  --theme-text-secondary: #1a1a1a;
+  --theme-accent: #ecbb4f;
+  --theme-accent-light: #ffd700;
+  --theme-accent-dark: #d4af37;
+  --theme-border: #e0e0e0;
+  --theme-shadow: rgba(236, 187, 79, 0.1);
+  
+  /* Animation timing */
+  --transition-fast: 0.2s;
+  --transition-normal: 0.3s;
+  --transition-slow: 0.5s;
+  --transition-luxury: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-theme: 0.6s;
+  
+  /* Luxury color theory ratios */
+  --color-dominant: var(--theme-bg);      /* 60% */
+  --color-secondary: var(--theme-text);   /* 30% */
+  --color-accent: var(--theme-accent);    /* 10% */
 }
+
+/* Theme-aware component styles */
+.theme-aware {
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
+  border-color: var(--theme-border);
+  transition: background-color var(--transition-theme) var(--transition-luxury),
+              color var(--transition-theme) var(--transition-luxury),
+              border-color var(--transition-theme) var(--transition-luxury);
+}
+
+.theme-aware-secondary {
+  background-color: var(--theme-bg-secondary);
+  color: var(--theme-text-secondary);
+  transition: background-color var(--transition-theme) var(--transition-luxury),
+              color var(--transition-theme) var(--transition-luxury);
+}
+
+.theme-aware-accent {
+  background-color: var(--theme-accent);
+  color: var(--theme-bg);
+  transition: background-color var(--transition-theme) var(--transition-luxury),
+              color var(--transition-theme) var(--transition-luxury);
+}
+
+/* Theme transition indicators */
+[data-theme="dawn"] .theme-indicator::before { content: "🌅"; }
+[data-theme="day"] .theme-indicator::before { content: "☀️"; }
+[data-theme="dusk"] .theme-indicator::before { content: "🌆"; }
+[data-theme="night"] .theme-indicator::before { content: "🌙"; }
+
+/* Base styles */
+@layer base {
+  * {
+    @apply transition-luxury;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  body {
+    @apply font-montserrat-thin font-thin;
+    background-color: var(--theme-bg);
+    color: var(--theme-text);
+    transition: background-color var(--transition-theme) var(--transition-luxury),
+                color var(--transition-theme) var(--transition-luxury);
+  }
+  
+  /* Typography hierarchy */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-montserrat font-light;
+    letter-spacing: 0.02em;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-6xl lg:text-7xl;
+    font-weight: 100;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+    font-weight: 200;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl lg:text-4xl;
+    font-weight: 300;
+  }
+  
+  /* Smooth scrolling for all browsers */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Custom scrollbar with theme awareness */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--theme-bg-secondary);
+    transition: background-color var(--transition-theme) var(--transition-luxury);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--theme-accent);
+    border-radius: 4px;
+    transition: background-color var(--transition-theme) var(--transition-luxury);
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--theme-accent-dark);
+  }
+}
+
+/* Component styles */
+@layer components {
+  /* Luxury button styles with theme awareness */
+  .btn-luxury {
+    @apply px-8 py-4 font-montserrat font-light text-sm uppercase tracking-wider;
+    @apply relative overflow-hidden;
+    border: 1px solid var(--theme-accent);
+    background: transparent;
+    color: var(--theme-accent);
+    transition: all var(--transition-normal) var(--transition-luxury),
+                border-color var(--transition-theme) var(--transition-luxury),
+                color var(--transition-theme) var(--transition-luxury);
+  }
+  
+  .btn-luxury::before {
+    content: '';
+    @apply absolute inset-0 transform -translate-x-full;
+    background: var(--theme-accent);
+    transition: transform var(--transition-normal) var(--transition-luxury),
+                background-color var(--transition-theme) var(--transition-luxury);
+    z-index: -1;
+  }
+  
+  .btn-luxury:hover {
+    color: var(--theme-bg);
+  }
+  
+  .btn-luxury:hover::before {
+    @apply translate-x-0;
+  }
+  
+  /* Theme-aware accent elements */
+  .accent-gold {
+    color: var(--theme-accent);
+    transition: color var(--transition-theme) var(--transition-luxury);
+  }
+  
+  .bg-accent {
+    background-color: var(--theme-accent);
+    transition: background-color var(--transition-theme) var(--transition-luxury);
+  }
+  
+  /* Luxury card styles with theme awareness */
+  .card-luxury {
+    background-color: var(--theme-bg-secondary);
+    border: 1px solid var(--theme-border);
+    color: var(--theme-text);
+    box-shadow: 0 4px 6px var(--theme-shadow);
+    backdrop-filter: blur(10px);
+    transition: all var(--transition-slow) var(--transition-luxury),
+                background-color var(--transition-theme) var(--transition-luxury),
+                border-color var(--transition-theme) var(--transition-luxury),
+                color var(--transition-theme) var(--transition-luxury),
+                box-shadow var(--transition-theme) var(--transition-luxury);
+  }
+  
+  .card-luxury:hover {
+    box-shadow: 0 8px 25px var(--theme-shadow);
+    transform: translateY(-2px);
+  }
+  
+  /* Section spacing */
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+  
+  /* Container styles */
+  .container-luxury {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Text effects */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #ecbb4f 0%, #d4af37 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Loading states */
+  .loading-shimmer {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+}
+
+/* Utility styles */
+@layer utilities {
+  /* Animation utilities */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  
+  .animate-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Responsive text sizes */
+  .text-responsive-xl {
+    @apply text-2xl md:text-4xl lg:text-6xl;
+  }
+  
+  .text-responsive-lg {
+    @apply text-xl md:text-2xl lg:text-4xl;
+  }
+  
+  .text-responsive-md {
+    @apply text-lg md:text-xl lg:text-2xl;
+  }
+  
+  /* Spacing utilities */
+  .space-luxury > * + * {
+    @apply mt-8 md:mt-12 lg:mt-16;
+  }
+  
+  /* Focus styles for accessibility */
+  .focus-luxury:focus {
+    @apply outline-none ring-2 ring-gold-primary ring-offset-2;
+  }
+  
+  /* Print styles */
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+  }
+}
+
+/* Gold color definitions */
+.text-gold-primary {
+  color: var(--theme-accent, #ecbb4f);
+}
+
+.bg-gold-primary {
+  background-color: var(--theme-accent, #ecbb4f);
+}
+
+.border-gold-primary {
+  border-color: var(--theme-accent, #ecbb4f);
+}
+
+.ring-gold-primary {
+  --tw-ring-color: var(--theme-accent, #ecbb4f);
+}
+
+.focus\:ring-gold-primary:focus {
+  --tw-ring-color: var(--theme-accent, #ecbb4f);
+}
+
+.hover\:bg-gold-primary:hover {
+  background-color: var(--theme-accent, #ecbb4f);
+}
+
+.hover\:border-gold-primary:hover {
+  border-color: var(--theme-accent, #ecbb4f);
+}
+
+/* Custom cursor will handle cursor hiding */
 
 html,
 body {
