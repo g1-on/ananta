@@ -1,0 +1,12 @@
+# _config.yml
+
+# Exclude development files and directories from the Jekyll build process.
+# This prevents errors and speeds up the build.
+exclude:
+  - node_modules
+  - Gemfile
+  - Gemfile.lock
+  - package.json
+  - package-lock.json
+  - README.md
+  - docs/
