@@ -13,7 +13,7 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Swiper.js CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     
@@ -27,136 +27,265 @@
             --chatbot-text: #E5E7EB;
         }
 
-        /* --- Full Page Swiper Styles --- */
-        html, body {
-            position: relative;
-            height: 100%;
-            overflow: hidden; /* Prevent default browser scrollbar */
-            background-color: #000000;
+        /* --- Splash Screen Styles --- */
+        body.splash-active {
+            overflow: hidden;
         }
+        #splash-screen {
+            height: 100vh;
+            width: 100%;
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 9999;
+            transition: opacity 0.8s ease-out, visibility 0s 0.8s;
+        }
+        #splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .splash-content {
+            text-align: center;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #splash-ring-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90vw;
+            height: 90vh;
+            max-width: 700px;
+            max-height: 700px;
+            object-fit: contain;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .splash-ananta {
+            font-family: 'Tiro Devanagari Hindi', serif;
+            font-size: 4rem; /* Base size for mobile */
+            color: #ecbb4f;
+            font-weight: 400;
+            text-transform: none;
+            animation: glow 2.5s ease-in-out infinite alternate;
+            position: relative;
+            z-index: 11;
+        }
+        @media (min-width: 640px) {
+            .splash-ananta {
+                font-size: 7rem;
+            }
+        }
+        @keyframes glow {
+            from {
+                text-shadow: 1px 1px 0 #5a4014, 2px 2px 0 #5a4014, 3px 3px 0 #5a4014, 4px 4px 0 #5a4014, 5px 5px 0 #5a4014, 0 0 5px rgba(252, 234, 187, 0.8), 0 0 15px rgba(236, 187, 79, 0.7), 0 0 30px rgba(231, 179, 61, 0.5);
+            }
+            to {
+                text-shadow: 0 0 10px rgba(252, 234, 187, 0.9), 0 0 25px rgba(236, 187, 79, 0.8), 0 0 40px rgba(231, 179, 61, 0.6);
+            }
+        }
+        .scroll-down-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            font-weight: 200;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            animation: bounce 2s ease-in-out infinite;
+            z-index: 100;
+        }
+        .scroll-down-indicator svg { width: 24px; height: 24px; margin: 0 auto 5px; }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+            40% { transform: translate(-50%, -10px); }
+            60% { transform: translate(-50%, -5px); }
+        }
+        nav { position: sticky; top: 0; z-index: 50; }
+        
         body {
             font-family: 'Montserrat', sans-serif;
             color: #D1D5DB;
+            background-color: #000000;
             font-weight: 200;
             text-transform: uppercase;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        .main-swiper {
-            width: 100%;
-            height: 100%;
-        }
-        .swiper-slide {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-y: auto; /* IMPORTANT: Allows scrolling *within* a slide if content is too tall */
-            padding-top: 8rem; /* Space for fixed nav on all slides but the first */
-            padding-bottom: 2rem;
-        }
-        .swiper-slide:first-child {
-            padding-top: 0; /* Hero slide doesn't need top padding */
-        }
-        .swiper-pagination-bullet {
-            background-color: #fff !important;
-            opacity: 0.5 !important;
-            width: 10px !important;
-            height: 10px !important;
-            transition: all 0.3s ease !important;
-        }
-        .swiper-pagination-bullet-active {
-            background-color: var(--chatbot-gold) !important;
-            opacity: 1 !important;
-            width: 12px !important;
-            height: 12px !import;
-        }
-        /* --- END: Full Page Swiper Styles --- */
-
-        /* --- Splash Screen Styles --- */
-        body.splash-active { overflow: hidden; }
-        #splash-screen {
-            height: 100vh; width: 100%; background-color: #000000; display: flex; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; overflow: hidden; z-index: 9999; transition: opacity 0.8s ease-out, visibility 0s 0.8s;
-        }
-        #splash-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-        .splash-content { text-align: center; position: relative; display: flex; justify-content: center; align-items: center; }
-        #splash-ring-video {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90vw; height: 90vh; max-width: 700px; max-height: 700px; object-fit: contain; pointer-events: none; z-index: 10;
-        }
-        .splash-ananta {
-            font-family: 'Tiro Devanagari Hindi', serif; font-size: 4rem; color: #ecbb4f; font-weight: 400; text-transform: none; animation: glow 2.5s ease-in-out infinite alternate; position: relative; z-index: 11;
-        }
-        @media (min-width: 640px) { .splash-ananta { font-size: 7rem; } }
-        @keyframes glow {
-            from { text-shadow: 1px 1px 0 #5a4014, 2px 2px 0 #5a4014, 3px 3px 0 #5a4014, 4px 4px 0 #5a4014, 5px 5px 0 #5a4014, 0 0 5px rgba(252, 234, 187, 0.8), 0 0 15px rgba(236, 187, 79, 0.7), 0 0 30px rgba(231, 179, 61, 0.5); }
-            to { text-shadow: 0 0 10px rgba(252, 234, 187, 0.9), 0 0 25px rgba(236, 187, 79, 0.8), 0 0 40px rgba(231, 179, 61, 0.6); }
-        }
-        .scroll-down-indicator {
-            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: rgba(255, 255, 255, 0.7); text-align: center; font-weight: 200; font-size: 0.8rem; letter-spacing: 1px; animation: bounce 2s ease-in-out infinite; z-index: 100;
-        }
-        .scroll-down-indicator svg { width: 24px; height: 24px; margin: 0 auto 5px; }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); } 40% { transform: translate(-50%, -10px); } 60% { transform: translate(-50%, -5px); } }
-
-        /* --- Navigation Styles --- */
-        nav {
-            position: fixed;
-            top: -200px; /* Initially hidden above viewport */
-            left: 0;
-            z-index: 50;
-            transition: top 0.5s ease-in-out;
-        }
-        nav.nav-visible {
-            top: 0; /* Slide into view */
-        }
-        
         h1, h2, h3, h4, h5, h6, p, span, div, li, a, label, legend, th, td, button, input, textarea, select { font-weight: inherit; }
         strong, b { font-weight: 700; }
-        .btn { display: inline-block; padding: 12px 28px; background: var(--gold-gradient); background-size: 200% auto; color: #111; text-decoration: none; font-weight: 600; border-radius: 5px; transition: transform 0.3s ease, box-shadow 0.3s ease, background-position 0.4s ease; border: none; cursor: pointer; text-align: center; }
+        .btn {
+            display: inline-block; padding: 12px 28px; background: var(--gold-gradient); background-size: 200% auto; color: #111; text-decoration: none; font-weight: 600; border-radius: 5px; transition: transform 0.3s ease, box-shadow 0.3s ease, background-position 0.4s ease; border: none; cursor: pointer; text-align: center;
+        }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(191, 149, 63, 0.2); background-position: right center; }
-        .logo-circle { width: 220px; height: 220px; border-image-slice: 1; border-image-source: var(--gold-gradient); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 20px; animation: pulse 4s infinite ease-in-out; }
-        @media (min-width: 768px) { .logo-circle { width: 280px; height: 280px; } }
-        .ananta-text { font-family: 'Tiro Devanagari Hindi', serif; font-size: 3.5rem; color: #ecbb4f; text-shadow: 0 0 5px rgba(236, 187, 79, 0.5), 0 0 15px rgba(236, 187, 79, 0.5), 0 0 30px rgba(236, 187, 79, 0.4); }
-        @media (min-width: 768px) { .ananta-text { font-size: 5rem; } }
+        .logo-circle {
+            width: 220px;
+            height: 220px;
+            border-image-slice: 1; border-image-source: var(--gold-gradient); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 20px; animation: pulse 4s infinite ease-in-out;
+        }
+        @media (min-width: 768px) {
+            .logo-circle {
+                width: 280px;
+                height: 280px;
+            }
+        }
+        .ananta-text {
+            font-family: 'Tiro Devanagari Hindi', serif;
+            font-size: 3.5rem; /* Base for mobile */
+            color: #ecbb4f; text-shadow: 0 0 5px rgba(236, 187, 79, 0.5), 0 0 15px rgba(236, 187, 79, 0.5), 0 0 30px rgba(236, 187, 79, 0.4);
+        }
+        @media (min-width: 768px) {
+            .ananta-text {
+                font-size: 5rem;
+            }
+        }
+
         .hero-sentence { display: block; opacity: 0; transform: translateY(25px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .hero-sentence.visible { opacity: 1; transform: translateY(0); }
+        .scroll-to-top { position: fixed; bottom: 20px; right: 20px; background-color: #9c7c38; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: opacity 0.3s ease; z-index: 100; font-size: 1.5rem; }
+        .scroll-to-top.visible { opacity: 1; }
         .counter-value { font-family: 'Montserrat', sans-serif; font-weight: 500; }
-        .testimonial-scroller-container { overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); }
-        .testimonial-scroller { display: flex; width: max-content; animation: scroll 40s linear infinite; }
-        .testimonial-scroller-container:hover .testimonial-scroller { animation-play-state: paused; }
-        .testimonial-card { transition: all 0.3s ease; flex-shrink: 0; width: 90vw; max-width: 384px; }
-        .testimonial-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); }
-        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        #animated-hero-bg { background-image: url('images/h0010.jpg'); background-size: cover; background-position: center 100%; animation: rise 10s ease-out forwards; animation-delay: 1.5s; }
+
+        #animated-hero-bg {
+            background-image: url('images/h0010.jpg');
+            background-size: cover;
+            background-position: center 100%;
+            animation: rise 10s ease-out forwards;
+            animation-delay: 1.5s;
+        }
         @keyframes rise { from { background-position: center 100%; } to { background-position: center 50%; } }
         
-        /* --- Animation Control for Slides --- */
-        .swiper-slide > * {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
-        }
-        .swiper-slide-active > * {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        #about-content { opacity: 0; transform: translateY(40px); transition: opacity 1s ease-out, transform 1s ease-out; }
+        #about-content.visible { opacity: 1; transform: translateY(0); }
         .info-card { transition: all 0.3s ease-out; transform-style: preserve-3d; }
         .info-card:hover { box-shadow: 0 0 15px rgba(191, 149, 63, 0.3), 0 0 30px rgba(191, 149, 63, 0.2); }
         .list-item { opacity: 0; transform: translateX(-20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
-        .swiper-slide-active .list-item { opacity: 1; transform: translateX(0); }
-        
-        .amenities-wrapper { height: 80vh; max-height: 600px; position: relative; margin-top: 2rem; display: none; }
-        @media (min-width: 768px) { .amenities-wrapper { display: block; } }
-        .hero-bg_wrap-cols { display: flex; gap: 1rem; width: 100%; height: 100%; }
-        .hero-bg_wrap-col { flex: 1; height: 100%; overflow: hidden; position: relative; }
-        .hero-bg_wrap-slides { display: flex; flex-direction: column; gap: 1rem; animation-timing-function: linear; animation-iteration-count: infinite; }
-        .hero-bg_wrap_slide img { width: 100%; height: auto; object-fit: cover; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
-        .v-scroll { animation-name: v-scroll-down; animation-duration: 45s; }
-        .scroll2 { animation-name: v-scroll-up; animation-duration: 60s; }
-        .scroll3 { animation-name: v-scroll-down; animation-duration: 50s; }
-        @keyframes v-scroll-down { from { transform: translateY(0%); } to { transform: translateY(-100%); } }
-        @keyframes v-scroll-up { from { transform: translateY(-100%); } to { transform: translateY(0%); } }
-        .hero-bg-gradient_overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(16, 23, 42, 0.1) 0%, transparent 20%, transparent 80%, rgba(16, 23, 42, 0.8) 100%); pointer-events: none; }
+        #about.visible .list-item { opacity: 1; transform: translateX(0); }
 
-        /* --- Chatbot Styles (Unaffected by Swiper) --- */
+        /* --- Swiper Styles for Amenities --- */
+        #amenities .swiper {
+            width: 100%;
+            max-width: 450px;
+            height: 450px;
+            position: relative;
+            margin: 2rem auto;
+        }
+        #amenities .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            background-color: var(--chatbot-light-dark);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            box-sizing: border-box;
+            color: white;
+            border: 1px solid var(--chatbot-gold);
+        }
+        #amenities .swiper-slide img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .swiper-slide-content {
+            position: relative;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            backdrop-filter: blur(4px);
+        }
+        .swiper-slide-active .swiper-slide-content {
+            transform: translateY(0);
+            opacity: 1;
+            transition-delay: 0.4s;
+        }
+        .swiper-slide-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--chatbot-gold);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        .swiper-slide-content p {
+            font-size: 0.8rem;
+            text-transform: none;
+            font-weight: 200;
+        }
+
+        /* --- Swiper Styles for Testimonials --- */
+        #testimonials .swiper {
+            width: 100%;
+            max-width: 500px; /* Wider for text content */
+            height: 350px; /* Shorter than image cube */
+            margin-top: 2rem;
+        }
+        #testimonials .swiper-slide {
+            background: rgba(31, 41, 55, 0.7); /* bg-gray-800 with opacity */
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--chatbot-gold);
+            border-radius: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2.5rem;
+            box-sizing: border-box;
+        }
+        #testimonials .testimonial-content-wrapper {
+             text-align: left;
+             width: 100%;
+             font-size: 1rem;
+             text-transform: none;
+             font-weight: 200;
+        }
+        #testimonials .testimonial-content-wrapper p {
+            min-height: 120px;
+            font-style: italic;
+            color: #D1D5DB; /* text-gray-300 */
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+        #testimonials .testimonial-content-wrapper h4 {
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #E5E7EB; /* text-gray-200 */
+        }
+
+        /* Generic Swiper Pagination & Cube Styles */
+        .swiper-pagination-bullet {
+            background-color: #fff;
+            opacity: 0.6;
+        }
+        .swiper-pagination-bullet-active {
+            background: var(--chatbot-gold);
+            opacity: 1;
+        }
+        .swiper-cube .swiper-slide-shadow-left,
+        .swiper-cube .swiper-slide-shadow-right,
+        .swiper-cube .swiper-slide-shadow-top,
+        .swiper-cube .swiper-slide-shadow-bottom {
+            background: rgba(0,0,0,0.9);
+        }
+
+        /* Chatbot Styles */
         #chatbot-toggle-button { position: fixed; bottom: 25px; left: 25px; width: 60px; height: 60px; background: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728); color: #111; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); z-index: 998; transition: transform 0.3s ease; font-family: 'Montserrat', sans-serif; font-size: 2rem; font-weight: 700; }
         #chatbot-toggle-button:hover { transform: scale(1.1); }
         #chatbot-container { position: fixed; bottom: 100px; left: 25px; width: 350px; max-width: 90vw; height: 500px; max-height: 70vh; background-color: var(--chatbot-dark); border: 1px solid var(--chatbot-gold); border-radius: 10px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); z-index: 999; display: flex; flex-direction: column; overflow: hidden; transform: scale(0.95) translateY(10px); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: bottom left; visibility: hidden; }
@@ -184,7 +313,7 @@
     </style>
 </head>
 <body class="splash-active">
-    <section id="splash-screen">
+      <section id="splash-screen">
         <div class="splash-content">
             <video id="splash-ring-video" autoplay muted playsinline preload="auto">
                 <source src="images/Q (1).mp4" type="video/mp4">
@@ -193,267 +322,305 @@
             <h1 class="splash-ananta">अनंता</h1>
         </div>
         <div class="scroll-down-indicator">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
-            <span>Scroll or Swipe</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+            </svg>
+            <span>Scroll Down</span>
         </div>
     </section>
     
     <!-- Navigation -->
-    <nav class="w-full" style="background: linear-gradient(100deg, #6c5b31 0%, #c4a65a 20%, #e6d396 50%, #c4a65a 80%, #6c5b31 100%);">
+    <nav class="w-full sticky top-0 z-50" style="background: linear-gradient(100deg, #6c5b31 0%, #c4a65a 20%, #e6d396 50%, #c4a65a 80%, #6c5b31 100%);">
         <div class="px-4 sm:px-6 lg:px-8 py-2 flex justify-start items-center">
             <img src="images/Global One consulting final logo.svg" alt="Global One Consulting Logo" class="h-24 md:h-28">
         </div>
     </nav>
-    
-    <!-- Main Swiper Container -->
-    <div class="swiper main-swiper">
-        <div class="swiper-wrapper">
 
-            <!-- Slide 1: Hero Section -->
-            <div class="swiper-slide">
-                <section id="home" class="w-full h-full flex items-center justify-center relative">
-                    <div class="absolute inset-0 overflow-hidden z-0"><div id="animated-hero-bg" class="w-full h-full"></div></div>
-                    <div class="absolute inset-0 z-[1]"></div>
-                    <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-[2]">
-                        <div class="logo-circle"><h1 class="ananta-text">अनंता</h1></div>
-                        <div id="hero-paragraph-container" class="text-white text-lg md:text-2xl mb-8 max-w-3xl mx-auto">
-                            <p>Redefining Luxury Living with 5-Star Pre-Leased Service Apartments. A unique opportunity for guaranteed returns and exclusive lifestyle benefits.</p>
-                        </div>
-                        <div class="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6">
-                            <a href="Why Choose Project Ananta (5).pdf" class="btn text-base md:text-xl w-full sm:w-auto">Download Investment Plan </a>
-                        </div>
-                    </div>
-                </section>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section h-screen flex items-center justify-center relative">
+        <div class="absolute inset-0 overflow-hidden z-0">
+            <div id="animated-hero-bg" class="w-full h-full"></div>
+        </div>
+        <div class="absolute inset-0 z-[1]"></div>
+        <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-[2]">
+            <div class="logo-circle">
+                <h1 class="ananta-text">अनंता</h1>
             </div>
+            <div id="hero-paragraph-container" class="text-white text-lg md:text-2xl mb-8 max-w-3xl mx-auto">
+                <p>Redefining Luxury Living with 5-Star Pre-Leased Service Apartments. A unique opportunity for guaranteed returns and exclusive lifestyle benefits.</p>
+            </div>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6">
+                <a href="Why Choose Project Ananta (5).pdf" class="btn text-base md:text-xl w-full sm:w-auto">Download Investment Plan </a>
+            </div>
+        </div>
+    </section>
 
-            <!-- Slide 2: Stats Section -->
-            <div class="swiper-slide">
-                <section class="w-full flex items-center bg-gray-800 relative overflow-hidden">
-                    <div class="absolute inset-0 z-0">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover" loading="lazy"><source src="images/4525107-uhd_3840_2160_24fps - Trim.mp4" type="video/mp4"></video>
-                        <div class="absolute inset-0 bg-black opacity-60"></div>
-                    </div>
-                    <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                            <div class="p-4"><div class="counter-value text-6xl md:text-8xl text-[#9c7c38] mb-2" data-target="5">0</div><p class="text-gray-400 text-sm">Luxury Towers</p></div>
-                            <div class="p-4"><div class="counter-value text-6xl md:text-8xl text-[#9c7c38] mb-2" data-target="460">0</div><p class="text-gray-400 text-sm">Units Per Tower</p></div>
-                            <div class="p-4"><div class="counter-value text-6xl md:text-8xl text-[#9c7c38] mb-2" data-target="24">0</div><p class="text-gray-400 text-sm">Months to Possession</p></div>
-                            <div class="p-4"><div class="counter-value text-6xl md:text-8xl text-[#9c7c38] mb-2" data-target="15">0</div><p class="text-gray-400 text-sm">Days Complimentary Stay</p></div>
-                        </div>
-                    </div>
-                </section>
+    <!-- Stats Section -->
+    <section class="py-10 bg-gray-800 relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover" loading="lazy">
+                <source src="images/4525107-uhd_3840_2160_24fps.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="absolute inset-0 opacity-60"></div>
+        </div>
+        <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-3 relative z-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-4"><div class="counter-value text-6xl md:text-8xl text-[#9c7c38] mb-2" data-target="5">0</div><p class="text-gray-400 text-sm">Luxury Towers</p></div>
+                <div class="p-4"><div class="counter-value text-6xl md:text-8xl text-[#9c7c38] mb-2" data-target="460">0</div><p class="text-gray-400 text-sm">Units Per Tower</p></div>
+                <div class="p-4"><div class="counter-value text-6xl md:text-8xl text-[#9c7c38] mb-2" data-target="24">0</div><p class="text-gray-400 text-sm">Months to Possession</p></div>
+                <div class="p-4"><div class="counter-value text-6xl md:text-8xl text-[#9c7c38] mb-2" data-target="15">0</div><p class="text-gray-400 text-sm">Days Complimentary Stay</p></div>
             </div>
+        </div>
+    </section>
 
-            <!-- Slide 3: About Section -->
-            <div class="swiper-slide">
-                <section id="about" class="w-full flex items-center bg-gray-900 relative overflow-hidden">
-                     <div class="absolute inset-0 z-0">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover" loading="lazy"><source src="images/7578550-uhd_3840_2160_30fps - Trim.mp4" type="video/mp4"></video>
-                        <div class="absolute inset-0 bg-black opacity-80"></div>
-                    </div>
-                    <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                        <div class="text-center mb-12">
-                            <h2 class="text-3xl md:text-4xl mb-4 text-white">Premium Developments</h2>
-                            <div class="w-24 h-1 bg-[#9c7c38] mx-auto mb-6"></div>
-                            <p class="text-white max-w-3xl mx-auto">We create luxury properties that stand as landmarks of architectural excellence and comfort</p>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-                           <div class="info-card bg-gray-800 bg-opacity-70 rounded-lg shadow-xl p-6 md:p-8 flex flex-col justify-center">
-                                <h3 class="text-xl text-gray-100 mb-6 text-center"><strong>Project Highlights</strong></h3>
-                                <ul class="space-y-4 text-gray-300">
-                                    <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 00-1 1v2.586L6.707 8.293a1 1 0 00-1.414 1.414L8.586 13H5a1 1 0 00-1 1v2a1 1 0 001 1h10a1 1 0 001-1v-2a1 1 0 00-1-1h-3.586l3.293-3.293a1 1 0 00-1.414-1.414L11 6.586V4a1 1 0 00-1-1z" clip-rule="evenodd" /></svg></span><span><strong>5 Towers</strong> of luxury service apartments</span></li>
-                                    <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg></span><span><strong>460 Units</strong> in each tower</span></li>
-                                    <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 2a1 1 0 00-1 1v1H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H9V3a1 1 0 00-1-1zM5 8h10v8H5V8z" clip-rule="evenodd" /></svg></span><span><strong>Unit Sizes:</strong> 50 sqm and 135 sqm</span></li>
-                                    <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M8.433 7.418c.158-.103.346-.196.567-.267v1.698a2.5 2.5 0 00-.567-.267z" /><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.713 .418 1.5 1.5 0 00-2.28 2.28a3.5 3.5 0 011.282 2.565V14a1 1 0 102 0v-.535a3.5 3.5 0 011.282-2.565 1.5 1.5 0 00-2.28-2.28.051.051.051.051A4.535 4.535 0 0011 5.092V5z" clip-rule="evenodd" /></svg></span><span><strong>Launch Price:</strong> ₹32,50,000</span></li>
-                                    <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" /><path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd" /></svg></span><span><strong>Down Payment:</strong> ₹8,12,500</span></li>
-                                </ul>
-                            </div>
-                            <div class="info-card bg-gray-800 bg-opacity-70 rounded-lg shadow-xl p-6 md:p-8 flex flex-col justify-center">
-                                <h3 class="text-xl text-gray-100 mb-6 text-center"><strong>Investment Benefits</strong></h3>
-                                <ul class="space-y-4 text-gray-300">
-                                    <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.532 1.532 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.532 1.532 0 01-.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" /></svg></span><span>Lifetime free maintenance</span></li>
-                                    <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5.068l.153.153L10 10l7.682-4.779A11.954 11.954 0 0110 1.944zM18 8.118l-8 5-8-5V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" clip-rule="evenodd" /><path fill-rule="evenodd" d="M10 18a2 2 0 001.995-1.858L10 14.586 2.005 16.142A2 2 0 004 18h6z" clip-rule="evenodd" /></svg></span><span>Safe investment with buyback guarantee</span></li>
-                                    <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" /></svg></span><span>15 days complimentary stay per year</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-900 relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover" loading="lazy">
+                <source src="images/7578550-uhd_3840_2160_30fps - Trim.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="absolute inset-0 opacity-80"></div>
+        </div>
+        <div id="about-content" class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl mb-4 text-white">Premium Developments</h2>
+                <div class="w-24 h-1 bg-[#9c7c38] mx-auto mb-6"></div>
+                <p class="text-white max-w-3xl mx-auto">We create luxury properties that stand as landmarks of architectural excellence and comfort</p>
             </div>
-
-            <!-- Slide 4: Amenities Section -->
-            <div class="swiper-slide">
-                <section id="amenities" class="w-full flex flex-col items-center justify-center bg-gray-900 overflow-hidden">
-                    <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="text-center mb-12">
-                            <h2 class="text-3xl md:text-4xl text-white uppercase tracking-widest font-light">Exclusive Amenities</h2>
-                            <div class="w-24 h-[2px] bg-[#9c7c38] mx-auto mt-4 mb-6"></div>
-                            <p class="text-gray-400 max-w-3xl mx-auto uppercase text-sm tracking-wider font-extralight">A glimpse into the world-class amenities designed to provide an unparalleled luxury experience.</p>
-                        </div>
-                        <div class="amenities-wrapper">
-                            <div class="hero-bg_wrap-cols">
-                                <div class="hero-bg_wrap-col">
-                                    <div class="hero-bg_wrap-slides v-scroll">
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/221457/pexels-photo-221457.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Luxury Swimming Pool" /></div>
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/3771110/pexels-photo-3771110.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Spa and Wellness Center" /></div>
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/803975/pexels-photo-803975.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="State-of-the-art Gym" /></div>
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/262047/pexels-photo-262047.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Elegant Hotel Room" /></div>
-                                    </div>
-                                    <div class="hero-bg_wrap-slides v-scroll">
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/221457/pexels-photo-221457.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Luxury Swimming Pool" /></div>
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/3771110/pexels-photo-3771110.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Spa and Wellness Center" /></div>
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/803975/pexels-photo-803975.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="State-of-the-art Gym" /></div>
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/262047/pexels-photo-262047.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Elegant Hotel Room" /></div>
-                                    </div>
-                                </div>
-                                <div class="hero-bg_wrap-col">
-                                    <div class="hero-bg_wrap-slides scroll2">
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Fine Dining Restaurant" /></div>
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Spacious Apartment Interior" /></div>
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/3144580/pexels-photo-3144580.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Modern Bar and Lounge" /></div>
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Comfortable Living Area" /></div>
-                                    </div>
-                                    <div class="hero-bg_wrap-slides scroll2">
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Fine Dining Restaurant" /></div>
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Spacious Apartment Interior" /></div>
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/3144580/pexels-photo-3144580.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Modern Bar and Lounge" /></div>
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Comfortable Living Area" /></div>
-                                    </div>
-                                </div>
-                                <div class="hero-bg_wrap-col">
-                                    <div class="hero-bg_wrap-slides scroll3">
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/2507010/pexels-photo-2507010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Rooftop Terrace" /></div>
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/220551/pexels-photo-220551.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Business Conference Room" /></div>
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/6434622/pexels-photo-6434622.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Private Cinema" /></div>
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/439391/pexels-photo-439391.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Lobby and Concierge Desk" /></div>
-                                    </div>
-                                    <div class="hero-bg_wrap-slides scroll3">
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/2507010/pexels-photo-2507010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Rooftop Terrace" /></div>
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/220551/pexels-photo-220551.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Business Conference Room" /></div>
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/6434622/pexels-photo-6434622.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Private Cinema" /></div>
-                                        <div class="hero-bg_wrap_slide"><img src="https://images.pexels.com/photos/439391/pexels-photo-439391.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Lobby and Concierge Desk" /></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hero-bg-gradient_overlay"></div>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:hidden">
-                            <div class="h-64 rounded-lg shadow-xl overflow-hidden"><img src="https://images.pexels.com/photos/221457/pexels-photo-221457.jpeg" alt="Pool" class="w-full h-full object-cover"></div>
-                            <div class="h-64 rounded-lg shadow-xl overflow-hidden"><img src="https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg" alt="Restaurant" class="w-full h-full object-cover"></div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- Slide 5: Testimonials Section -->
-            <div class="swiper-slide">
-                <section class="w-full flex items-center bg-gray-800 relative overflow-hidden">
-                    <div class="absolute inset-0 z-0"><video autoplay loop muted playsinline class="w-full h-full object-cover" loading="lazy"><source src="images/testimonials_background.mp4" type="video/mp4"></video><div class="absolute inset-0 bg-black opacity-75"></div></div>
-                    <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                         <div class="text-center mb-12"><h2 class="text-3xl md:text-4xl text-gray-100 mb-4">What Our Investors Say</h2><div class="w-24 h-1 bg-[#9c7c38] mx-auto mb-6"></div><p class="text-gray-400 max-w-3xl mx-auto">Hear from our satisfied investors.</p></div>
-                         <div class="testimonial-scroller-container">
-                            <div class="testimonial-scroller space-x-8">
-                                <div class="testimonial-card bg-gray-700 bg-opacity-50 p-8 rounded-lg shadow-lg"><p class="text-gray-300 mb-6 h-32">Investing in Project Ananta has been one of my best financial decisions. The guaranteed rental income and buyback option provide peace of mind.</p><div class="flex items-center"><div class="w-12 h-12 bg-[#9c7c38] rounded-full flex items-center justify-center text-white text-xl mr-4">RK</div><div><h4 class="text-gray-100">Rajesh Kumar</h4></div></div></div>
-                                <div class="testimonial-card bg-gray-700 bg-opacity-50 p-8 rounded-lg shadow-lg"><p class="text-gray-300 mb-6 h-32">The complimentary stay is an incredible perk. My family loves visiting, and the investment returns have been consistently excellent.</p><div class="flex items-center"><div class="w-12 h-12 bg-[#9c7c38] rounded-full flex items-center justify-center text-white text-xl mr-4">SP</div><div><h4 class="text-gray-100">Sunita Patel</h4></div></div></div>
-                                <div class="testimonial-card bg-gray-700 bg-opacity-50 p-8 rounded-lg shadow-lg"><p class="text-gray-300 mb-6 h-32">The lifetime free maintenance and guaranteed returns make this a truly hassle-free investment. Highly recommended.</p><div class="flex items-center"><div class="w-12 h-12 bg-[#9c7c38] rounded-full flex items-center justify-center text-white text-xl mr-4">AM</div><div><h4 class="text-gray-100">Amit Mehta</h4></div></div></div>
-                                <div class="testimonial-card bg-gray-700 bg-opacity-50 p-8 rounded-lg shadow-lg" aria-hidden="true"><p class="text-gray-300 mb-6 h-32">Investing in Project Ananta has been one of my best financial decisions. The guaranteed rental income and buyback option provide peace of mind.</p><div class="flex items-center"><div class="w-12 h-12 bg-[#9c7c38] rounded-full flex items-center justify-center text-white text-xl mr-4">RK</div><div><h4 class="text-gray-100">Rajesh Kumar</h4></div></div></div>
-                                <div class="testimonial-card bg-gray-700 bg-opacity-50 p-8 rounded-lg shadow-lg" aria-hidden="true"><p class="text-gray-300 mb-6 h-32">The complimentary stay is an incredible perk. My family loves visiting, and the investment returns have been consistently excellent.</p><div class="flex items-center"><div class="w-12 h-12 bg-[#9c7c38] rounded-full flex items-center justify-center text-white text-xl mr-4">SP</div><div><h4 class="text-gray-100">Sunita Patel</h4></div></div></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- Slide 6: Location Section -->
-            <div class="swiper-slide">
-                 <section id="location" class="w-full flex items-center bg-gray-900 relative overflow-hidden">
-                    <div class="absolute inset-0 z-0"><video autoplay loop muted playsinline class="w-full h-full object-cover" loading="lazy"><source src="images/location_overview_background.mp4" type="video/mp4"></video><div class="absolute inset-0 bg-black opacity-80"></div></div>
-                    <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                        <div class="text-center mb-12"><h2 class="text-3xl md:text-4xl text-gray-100 mb-4">Prime Location</h2><div class="w-24 h-1 bg-[#9c7c38] mx-auto mb-6"></div><p class="text-gray-400 max-w-3xl mx-auto">Strategically located to offer convenience, connectivity, and a serene environment.</p></div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                            <div class="bg-gray-800 bg-opacity-60 p-4 rounded-lg shadow-xl">
-                                <div class="w-full h-80 md:h-96 rounded-lg overflow-hidden border-2 border-gray-600">
-                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3578.100913076135!2d78.44328407421946!3d25.63967667724213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDM4JzIyLjgiTiA3OMKwMjYnNDUuMSJF!5e0!3m2!1sen!2sin!4v1678888888888!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                </div>
-                            </div>
-                            <div class="bg-gray-800 bg-opacity-60 p-6 md:p-8 rounded-lg shadow-md">
-                                <h3 class="text-2xl text-gray-100 mb-6 text-[#9c7c38]">Nearby Conveniences</h3>
-                                <ul class="space-y-4 text-gray-300">
-                                    <li class="flex items-center"><span class="mr-2">•</span><span>Gwalior Airport (GWL) - Approx. 75 km</span></li>
-                                    <li class="flex items-center"><span class="mr-2">•</span><span>Datia Railway Station - Approx. 3 km</span></li>
-                                    <li class="flex items-center"><span class="mr-2">•</span><span>Pitambara Peeth Temple - Approx. 2 km</span></li>
-                                    <li class="flex items-center"><span class="mr-2">•</span><span>NH 44 Highway Access</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            
-            <!-- Slide 7: Contact Section -->
-             <div class="swiper-slide">
-                <section id="contact" class="w-full flex items-center bg-black">
-                    <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                        <div class="text-center mb-12"><h2 class="text-3xl md:text-4xl text-gray-100 mb-4">Get in Touch</h2><div class="w-24 h-1 bg-[#9c7c38] mx-auto mb-6"></div><p class="text-gray-100 max-w-3xl mx-auto">Ready to invest? Contact us today.</p></div>
-                        <div class="max-w-4xl mx-auto">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div class="bg-gray-700 bg-opacity-60 p-6 md:p-8 rounded-lg shadow-md contact-form">
-                                    <h3 class="text-xl text-gray-100 mb-4">Send Us a Message</h3>
-                                    <form id="main-contact-form">
-                                        <div class="mb-4"><label for="main-name" class="block text-gray-300 mb-2 text-sm">Full Name</label><input type="text" id="main-name" name="name" class="w-full px-3 py-2 rounded-lg bg-gray-900 text-white" required></div>
-                                        <div class="mb-4"><label for="main-email" class="block text-gray-300 mb-2 text-sm">Email Address</label><input type="email" id="main-email" name="email" class="w-full px-3 py-2 rounded-lg bg-gray-900 text-white" required></div>
-                                        <div class="mb-6"><label for="main-interest" class="block text-gray-300 mb-2 text-sm">I'm interested in...</label><select id="main-interest" name="message" class="w-full px-3 py-2 rounded-lg bg-gray-900 text-white" required><option value="" disabled selected>Please select an option</option><option value="Provide a catalog">Provide a catalog</option><option value="Provide an investment plan">Provide an investment plan</option></select></div>
-                                        <div><button type="submit" class="btn w-full">Send Message</button></div>
-                                        <div id="form-status-message" class="mt-4 text-center"></div>
-                                    </form>
-                                </div>
-                                <div class="bg-gray-700 bg-opacity-60 p-6 md:p-8 rounded-lg shadow-md">
-                                    <h3 class="text-xl text-gray-100 mb-6">Contact Information</h3>
-                                    <ul class="space-y-6 text-gray-300">
-                                        <li><strong>Address:</strong><br>Global One Consulting, 123 Luxury Avenue, India</li>
-                                        <li><strong>Phone:</strong><br><a href="tel:+911234567890" class="hover:text-[#9c7c38] transition">+91 123 456 7890</a></li>
-                                        <li><strong>Email:</strong><br><a href="mailto:invest@globaloneconsulting.com" class="hover:text-[#9c7c38] transition">invest@globaloneconsulting.com</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            
-            <!-- Slide 8: Group & Footer -->
-            <div class="swiper-slide">
-                <div class="w-full h-full flex flex-col">
-                    <section id="our-group" class="flex-grow flex items-center" style="background: linear-gradient(100deg, #6c5b31 0%, #c4a65a 20%, #e6d396 50%, #c4a65a 80%, #6c5b31 100%);">
-                        <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-                            <div class="text-center mb-12"><h2 class="text-3xl md:text-4xl text-white mb-4">OUR GROUP</h2><div class="w-24 h-1 bg-yellow-600 mx-auto"></div></div>
-                            <div class="grid grid-cols-3 gap-y-12 gap-x-8 items-center text-center text-black">
-                                <div><h3 class="text-lg md:text-2xl">GLOBAL ONE</h3><p class="text-xs">MINES & MINERALS</p></div>
-                                <div><h3 class="text-lg md:text-2xl">GLOBAL ONE</h3><p class="text-xs">CONSULTING</p></div>
-                                <div><h3 class="text-lg md:text-2xl">GLOBAL ONE</h3><p class="text-xs">INDUSTRIES</p></div>
-                                <div><h3 class="text-lg md:text-2xl">GLOBAL ONE</h3><p class="text-xs">RETAILS</p></div>
-                                <div class="flex justify-center"><img src="images/10.png" alt="Global One Group Logo" class="w-32 h-32 md:w-40 md:h-40" loading="lazy"></div>
-                                <div><h3 class="text-lg md:text-2xl">GLOBAL ONE</h3><p class="text-xs">AIR WAYS</p></div>
-                                <div><h3 class="text-lg md:text-2xl">GLOBAL ONE</h3><p class="text-xs">TECHSOLUTIONS</p></div>
-                                <div><h3 class="text-lg md:text-2xl">GLOBAL ONE</h3><p class="text-xs">ASSETS MANAGEMENT</p></div>
-                                <div><h3 class="text-lg md:text-2xl">GLOBAL ONE</h3><p class="text-xs">HOLDINGS</p></div>
-                            </div>
-                        </div>
-                    </section>
-                    <footer class="bg-gray-900 text-gray-400 py-8">
-                        <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
-                            <p>© <span id="currentYear"></span> Global One Consulting. All Rights Reserved.</p>
-                        </div>
-                    </footer>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+                <div class="info-card bg-gray-800 bg-opacity-70 rounded-lg shadow-xl p-6 md:p-8 flex flex-col justify-center">
+                    <h3 class="text-xl text-gray-100 mb-6 text-center"><strong>Project Highlights</strong></h3>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 00-1 1v2.586L6.707 8.293a1 1 0 00-1.414 1.414L8.586 13H5a1 1 0 00-1 1v2a1 1 0 001 1h10a1 1 0 001-1v-2a1 1 0 00-1-1h-3.586l3.293-3.293a1 1 0 00-1.414-1.414L11 6.586V4a1 1 0 00-1-1z" clip-rule="evenodd" /></svg></span><span><strong>5 Towers</strong> of luxury service apartments</span></li>
+                        <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg></span><span><strong>460 Units</strong> in each tower</span></li>
+                        <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 2a1 1 0 00-1 1v1H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H9V3a1 1 0 00-1-1zM5 8h10v8H5V8z" clip-rule="evenodd" /></svg></span><span><strong>Unit Sizes:</strong> 50 sqm and 135 sqm</span></li>
+                        <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M8.433 7.418c.158-.103.346-.196.567-.267v1.698a2.5 2.5 0 00-.567-.267z" /><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.713 .418 1.5 1.5 0 00-2.28 2.28a3.5 3.5 0 011.282 2.565V14a1 1 0 102 0v-.535a3.5 3.5 0 011.282-2.565 1.5 1.5 0 00-2.28-2.28.051.051.051.051A4.535 4.535 0 0011 5.092V5z" clip-rule="evenodd" /></svg></span><span><strong>Launch Price:</strong> ₹32,50,000</span></li>
+                        <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" /><path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd" /></svg></span><span><strong>Down Payment:</strong> ₹8,12,500</span></li>
+                        <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" /></svg></span><span><strong>Monthly Rental:</strong> ₹25,000</span></li>
+                        <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" /></svg></span><span><strong>Possession:</strong> In 24 months</span></li>
+                    </ul>
                 </div>
+                <div class="info-card bg-gray-800 bg-opacity-70 rounded-lg shadow-xl p-6 md:p-8 flex flex-col justify-center">
+                    <h3 class="text-xl text-gray-100 mb-6 text-center"><strong>Investment Benefits</strong></h3>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.532 1.532 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.532 1.532 0 01-.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" /></svg></span><span>Lifetime free maintenance</span></li>
+                        <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5.068l.153.153L10 10l7.682-4.779A11.954 11.954 0 0110 1.944zM18 8.118l-8 5-8-5V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" clip-rule="evenodd" /><path fill-rule="evenodd" d="M10 18a2 2 0 001.995-1.858L10 14.586 2.005 16.142A2 2 0 004 18h6z" clip-rule="evenodd" /></svg></span><span>Safe investment with buyback guarantee</span></li>
+                        <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" /></svg></span><span>Any day withdrawal facility</span></li>
+                        <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" /></svg></span><span>15 days complimentary stay per year</span></li>
+                        <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.518.759a1.037 1.037 0 00-.54 1.06A11.952 11.952 0 008.5 16.5a1.037 1.037 0 001.06-.54l.759-1.518a1 1 0 011.06-.54h4.435l.836.986A1 1 0 0117 17.847V19a1 1 0 01-1 1h-2a1 1 0 01-1-1v-.847a1 1 0 01.153-.512l.654-.766-3.053-3.053a1 1 0 00-1.414 0l-3.053 3.053-.766.654a1 1 0 01-.512.153H3a1 1 0 01-1-1V4a1 1 0 011-1z" /></svg></span><span>Complimentary food & beverages</span></li>
+                        <li class="list-item flex items-start"><span class="text-[#9c7c38] mr-3 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.934L13.033 17.256A1 1 0 0112 18a1 1 0 01-.967-.744L9.854 12.8l-3.354-1.934a1 1 0 010-1.732l3.354-1.934L11.033 2.744A1 1 0 0112 2z" /></svg></span><span>Free access to all recreational activities</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Amenities Section -->
+    <section id="amenities" class="py-16 bg-gray-900 overflow-hidden">
+        <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl text-white uppercase tracking-widest font-light">Exclusive Amenities</h2>
+                <div class="w-24 h-[2px] bg-[#9c7c38] mx-auto mt-4 mb-6"></div>
+                <p class="text-gray-400 max-w-3xl mx-auto uppercase text-sm tracking-wider font-extralight">A glimpse into the world-class amenities designed to provide an unparalleled luxury experience.</p>
+            </div>
+            
+            <div class="swiper amenitiesSwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="https://images.pexels.com/photos/221457/pexels-photo-221457.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Luxury Swimming Pool" />
+                        <div class="swiper-slide-content">
+                            <h3>Infinity Pool</h3>
+                            <p>Relax and rejuvenate in our temperature-controlled luxury pool.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.pexels.com/photos/803975/pexels-photo-803975.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="State-of-the-art Gym" />
+                        <div class="swiper-slide-content">
+                            <h3>Fitness Center</h3>
+                            <p>Stay active with our fully-equipped, modern gymnasium.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Fine Dining Restaurant" />
+                        <div class="swiper-slide-content">
+                            <h3>Fine Dining</h3>
+                            <p>Experience gourmet cuisine at our exclusive in-house restaurant.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.pexels.com/photos/3771110/pexels-photo-3771110.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Spa and Wellness Center" />
+                        <div class="swiper-slide-content">
+                            <h3>Wellness Spa</h3>
+                            <p>Indulge in a range of therapies for complete relaxation.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.pexels.com/photos/6434622/pexels-photo-6434622.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Private Cinema" />
+                        <div class="swiper-slide-content">
+                            <h3>Private Cinema</h3>
+                            <p>Enjoy movie nights in our exclusive, state-of-the-art theater.</p>
+                        </div>
+                    </div>
+                     <div class="swiper-slide">
+                        <img src="https://images.pexels.com/photos/2507010/pexels-photo-2507010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Rooftop Terrace" />
+                        <div class="swiper-slide-content">
+                            <h3>Rooftop Lounge</h3>
+                            <p>Unwind with panoramic views from our stunning rooftop terrace.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
             </div>
 
         </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-    </div>
+    </section>
 
-    <!-- Chatbot Components (Fixed position, unaffected by swiper) -->
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 bg-gray-800 relative overflow-hidden">
+        <div class="absolute inset-0 z-0"><video autoplay loop muted playsinline class="w-full h-full object-cover" loading="lazy"><source src="images/testimonials_background.mp4" type="video/mp4"></video><div class="absolute inset-0 bg-black opacity-75"></div></div>
+        <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl text-gray-100 mb-4">What Our Investors Say</h2><div class="w-24 h-1 bg-[#9c7c38] mx-auto mb-6"></div><p class="text-gray-400 max-w-3xl mx-auto">Hear from our satisfied investors who have already secured their place in Project Ananta.</p>
+            </div>
+            
+            <!-- Swiper container for Testimonials -->
+            <div class="swiper testimonialsSwiper">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="swiper-slide">
+                        <div class="testimonial-content-wrapper">
+                            <p>"Investing in Project Ananta has been one of my best financial decisions. The guaranteed rental income and buyback option provide peace of mind."</p>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-[#9c7c38] rounded-full flex items-center justify-center text-white text-xl mr-4">RK</div>
+                                <div><h4>Rajesh Kumar</h4></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="swiper-slide">
+                        <div class="testimonial-content-wrapper">
+                            <p>"The complimentary stay is an incredible perk. My family loves visiting, and the investment returns have been consistently excellent."</p>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-[#9c7c38] rounded-full flex items-center justify-center text-white text-xl mr-4">SP</div>
+                                <div><h4>Sunita Patel</h4></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="swiper-slide">
+                        <div class="testimonial-content-wrapper">
+                            <p>"The lifetime free maintenance and guaranteed returns make this a truly hassle-free investment. Highly recommended for any portfolio."</p>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-[#9c7c38] rounded-full flex items-center justify-center text-white text-xl mr-4">AM</div>
+                                <div><h4>Amit Mehta</h4></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+
+        </div>
+    </section>
+
+<!-- Location Section -->
+<section id="location" class="py-16 bg-gray-900 relative overflow-hidden">
+    <div class="absolute inset-0 z-0"><video autoplay loop muted playsinline class="w-full h-full object-cover" loading="lazy"><source src="images/location_overview_background.mp4" type="video/mp4"></video><div class="absolute inset-0 bg-black opacity-80"></div></div>
+    <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-12"><h2 class="text-3xl md:text-4xl text-gray-100 mb-4">Prime Location</h2><div class="w-24 h-1 bg-[#9c7c38] mx-auto mb-6"></div><p class="text-gray-400 max-w-3xl mx-auto">Project Ananta is strategically located to offer convenience, connectivity, and a serene environment.</p></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="bg-gray-800 bg-opacity-60 p-4 rounded-lg shadow-xl">
+                <div class="w-full h-80 md:h-96 rounded-lg overflow-hidden border-2 border-gray-600">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3578.100913076135!2d78.44328407421946!3d25.63967667724213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDM4JzIyLjgiTiA3OMKwMjYnNDUuMSJF!5e0!3m2!1sen!2sin!4v1678888888888!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+            <div class="bg-gray-800 bg-opacity-60 p-6 md:p-8 rounded-lg shadow-md">
+                <h3 class="text-2xl text-gray-100 mb-6 text-[#9c7c38]">Nearby Conveniences</h3>
+                <ul class="space-y-4 text-gray-300">
+                    <li class="flex items-center"><span class="contact-icon-placeholder mr-2">•</span> <span>Gwalior Airport (GWL) - Approx. 75 km</span></li>
+                    <li class="flex items-center"><span class="contact-icon-placeholder mr-2">•</span> <span>Datia Railway Station - Approx. 3 km</span></li>
+                    <li class="flex items-center"><span class="contact-icon-placeholder mr-2">•</span> <span>Pitambara Peeth Temple - Approx. 2 km</span></li>
+                    <li class="flex items-center"><span class="contact-icon-placeholder mr-2">•</span> <span>Local Markets & Shops - 10 mins drive</span></li>
+                    <li class="flex items-center"><span class="contact-icon-placeholder mr-2">•</span> <span>District Hospital - 15 mins drive</span></li>
+                    <li class="flex items-center"><span class="contact-icon-placeholder mr-2">•</span> <span>NH 44 (Srinagar-Kanyakumari Highway) Access</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-black text-white">
+        <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12"><h2 class="text-3xl md:text-4xl text-gray-100 mb-4">Get in Touch</h2><div class="w-24 h-1 bg-[#9c7c38] mx-auto mb-6"></div><p class="text-gray-100 max-w-3xl mx-auto">Ready to invest? Contact us today, and our expert team will assist you.</p></div>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-700 bg-opacity-60 p-6 md:p-8 rounded-lg shadow-md contact-form">
+                        <h3 class="text-xl text-gray-100 mb-4">Send Us a Message</h3>
+                        <form id="main-contact-form">
+                            <div class="mb-4"><label for="main-name" class="block text-gray-300 mb-2 text-sm">Full Name</label><input type="text" id="main-name" name="name" class="w-full px-3 py-2 rounded-lg bg-gray-900 text-white" required></div>
+                            <div class="mb-4"><label for="main-email" class="block text-gray-300 mb-2 text-sm">Email Address</label><input type="email" id="main-email" name="email" class="w-full px-3 py-2 rounded-lg bg-gray-900 text-white" required></div>
+                            <div class="mb-4"><label for="main-phone" class="block text-gray-300 mb-2 text-sm">Mobile Number</label><input type="tel" id="main-phone" name="phone" class="w-full px-3 py-2 rounded-lg bg-gray-900 text-white"></div>
+                              <div class="mb-6">
+                                <label for="main-interest" class="block text-gray-300 mb-2 text-sm">I'm interested in...</label>
+                               <select id="main-interest" name="message" class="w-full px-3 py-2 rounded-lg bg-gray-900 text-white" required>
+                                    <option value="" disabled selected>Please select an option</option>
+                                    <option value="Provide a catalog">Provide a catalog</option>
+                                    <option value="Provide an investment plan">Provide an investment plan</option>
+                                    <option value="Provide brochures">Provide brochures</option>
+                                </select>
+                            </div>
+                            <div><button type="submit" class="btn w-full">Send Message</button></div>
+                        </form>
+                        <div id="form-status-message" class="mt-4 text-center"></div>
+                    </div>
+                    <div class="bg-gray-700 bg-opacity-60 p-6 md:p-8 rounded-lg shadow-md">
+                        <h3 class="text-xl text-gray-100 mb-6">Contact Information</h3>
+                        <ul class="space-y-6 text-gray-300">
+                            <li class="flex items-start"><div><strong>Address:</strong><br>Global One Consulting, 123 Luxury Avenue, Metropolis Business Park, Suite 500, India 110001</div></li>
+                            <li class="flex items-start"><div><strong>Phone:</strong><br><a href="tel:+911234567890" class="hover:text-[#9c7c38] transition">+91 123 456 7890</a></div></li>
+                            <li class="flex items-start"><div><strong>Email:</strong><br><a href="mailto:invest@globaloneconsulting.com" class="hover:text-[#9c7c38] transition">invest@globaloneconsulting.com</a></div></li>
+                            <li class="flex items-start"><div><strong>Hours:</strong><br>Mon - Fri: 9:00 AM - 6:00 PM</div></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Group Section -->
+    <section id="our-group" class="py-20" style="background: linear-gradient(100deg, #6c5b31 0%, #c4a65a 20%, #e6d396 50%, #c4a65a 80%, #6c5b31 100%);">
+        <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12"><h2 class="text-3xl md:text-4xl text-white mb-4">OUR GROUP</h2><div class="w-24 h-1 bg-yellow-600 mx-auto"></div></div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-y-16 gap-x-8 items-center text-center text-black" style="font-family: 'Montserrat', sans-serif; font-weight: 200; text-transform: uppercase;">
+                <div><h3 class="text-lg md:text-2xl tracking-widest">GLOBAL ONE</h3><p class="text-xs md:text-sm tracking-wider mt-2">MINES & MINERALS CORP</p></div>
+                <div><h3 class="text-lg md:text-2xl tracking-widest">GLOBAL ONE</h3><p class="text-xs md:text-sm tracking-wider mt-2">CONSULTING</p></div>
+                <div><h3 class="text-lg md:text-2xl tracking-widest">GLOBAL ONE</h3><p class="text-xs md:text-sm tracking-wider mt-2">INDUSTRIES</p></div>
+                <div><h3 class="text-lg md:text-2xl tracking-widest">GLOBAL ONE</h3><p class="text-xs md:text-sm tracking-wider mt-2">RETAILS</p></div>
+                <div class="flex justify-center"><img src="images/10.png" alt="Global One Group Logo" class="w-32 h-32 md:w-40 md:h-40" loading="lazy"></div>
+                <div><h3 class="text-lg md:text-2xl tracking-widest">GLOBAL ONE</h3><p class="text-xs md:text-sm tracking-wider mt-2">AIR WAYS</p></div>
+                <div><h3 class="text-lg md:text-2xl tracking-widest">GLOBAL ONE</h3><p class="text-xs md:text-sm tracking-wider mt-2">TECHSOLUTIONS</p></div>
+                <div><h3 class="text-lg md:text-2xl tracking-widest">GLOBAL ONE</h3><p class="text-xs md:text-sm tracking-wider mt-2">ASSETS MANAGEMENT</p></div>
+                <div><h3 class="text-lg md:text-2xl tracking-widest">GLOBAL ONE</h3><p class="text-xs md:text-sm tracking-wider mt-2">HOLDINGS</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-center md:text-left">
+                <div><h3 class="text-xl text-white mb-4"><span class="text-[#9c7c38]">Global</span>One Consulting</h3><p class="text-sm text-gray-500">Your trusted partner in luxury real estate investments.</p></div>
+                <div><h3 class="text-xl text-white mb-4">Quick Links</h3><ul class="space-y-2"><li><a href="#about" class="hover:text-[#9c7c38]">About Us</a></li><li><a href="#amenities" class="hover:text-[#9c7c38]">Amenities</a></li><li><a href="#contact" class="hover:text-[#9c7c38]">Contact</a></li></ul></div>
+                <div><h3 class="text-xl text-white mb-4">Follow Us</h3><div class="flex space-x-4 justify-center md:justify-start"><a href="#" class="hover:text-[#9c7c38]">Facebook</a><a href="#" class="hover:text-[#9c7c38]">Twitter</a><a href="#" class="hover:text-[#9c7c38]">Instagram</a></div></div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-sm text-gray-500"><p>© <span id="currentYear"></span> Global One Consulting. All Rights Reserved.</p></div>
+        </div>
+    </footer>
+
+    <!-- Chatbot Components (hidden on mobile via CSS) -->
     <div id="chatbot-toggle-button">A</div>
     <div id="chatbot-container">
         <div id="chatbot-header">
@@ -473,104 +640,70 @@
         </div>
     </div>
 
-    <!-- Swiper.js -->
+    <!-- Scroll to Top Button -->
+    <div class="scroll-to-top"> ↑ </div>
+
+    <!-- Swiper.js Script -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    
-    <!-- Your Custom JavaScript -->
+
+     <!-- Your Custom JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- Splash Screen ---
             setTimeout(() => {
-                document.getElementById('splash-screen')?.classList.add('hidden');
+                const splashScreen = document.getElementById('splash-screen');
+                if (splashScreen) {
+                    splashScreen.classList.add('hidden');
+                }
                 document.body.classList.remove('splash-active');
             }, 4000);
-
-            const nav = document.querySelector('nav');
-
-            // --- Function to Animate Counters ---
-            function animateCounter(element, target, duration = 2000) {
-                 if (element.hasAnimated) return; // Prevent re-animating
-                 element.hasAnimated = true;
-                let start = 0;
-                const increment = target / (duration / 16);
-                const timer = setInterval(() => {
-                    start += increment;
-                    element.textContent = Math.ceil(start).toLocaleString('en-IN');
-                    if (start >= target) {
-                        element.textContent = target.toLocaleString('en-IN');
-                        clearInterval(timer);
-                    }
-                }, 16);
-                if (target === 0) element.textContent = '0';
-            }
             
-            // --- Function to Trigger Animations on Active Slide ---
-            const triggerSlideAnimations = (swiperInstance) => {
-                const activeSlide = swiperInstance.slides[swiperInstance.activeIndex];
-                if (!activeSlide) return;
+            // --- Contact Form Submission Logic ---
+            const mainContactForm = document.getElementById('main-contact-form');
+            if (mainContactForm) {
+                const formStatusMessage = document.getElementById('form-status-message');
+                const submitButton = mainContactForm.querySelector('button[type="submit"]');
 
-                // Animate list items if they exist
-                const listItems = activeSlide.querySelectorAll('.list-item');
-                listItems.forEach((item, index) => {
-                    item.style.transitionDelay = `${index * 100}ms`;
-                });
+                mainContactForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
 
-                // Animate counters if they exist
-                const counters = activeSlide.querySelectorAll('.counter-value');
-                counters.forEach(counter => {
-                    const target = parseInt(counter.dataset.target, 10);
-                    animateCounter(counter, target);
-                });
-            };
-            
-            // --- Swiper Initialization ---
-            const mainSwiper = new Swiper('.main-swiper', {
-                // Use the desired 3D effect
-                effect: 'cube',
-                grabCursor: true,
-                cubeEffect: {
-                    shadow: true,
-                    slideShadows: true,
-                    shadowOffset: 20,
-                    shadowScale: 0.94,
-                },
+                    const originalButtonText = submitButton.textContent;
+                    submitButton.textContent = 'Sending...';
+                    submitButton.disabled = true;
+                    formStatusMessage.textContent = '';
+                    formStatusMessage.className = 'mt-4 text-center';
 
-                // Core options for vertical full-page scrolling
-                direction: 'vertical',
-                slidesPerView: 1,
-                spaceBetween: 0,
-                mousewheel: true,
-                speed: 1000,
-                keyboard: {
-                    enabled: true,
-                },
-                
-                // Pagination dots
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                
-                // Events to control animations and UI elements
-                on: {
-                    init: function () {
-                        // Trigger animations for the first slide on page load
-                        triggerSlideAnimations(this);
-                    },
-                    slideChange: function () {
-                        // Toggle Nav visibility based on slide index
-                        if (this.activeIndex > 0) {
-                            nav.classList.add('nav-visible');
+                    const formData = new FormData(mainContactForm);
+                    const data = Object.fromEntries(formData.entries());
+
+                    try {
+                        const response = await fetch('/api/contact', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json', },
+                            body: JSON.stringify(data),
+                        });
+
+                        const result = await response.json();
+
+                        if (response.ok) {
+                            formStatusMessage.textContent = result.message || 'Message sent successfully!';
+                            formStatusMessage.classList.add('text-green-400');
+                            mainContactForm.reset();
+                            submitButton.textContent = 'Sent!';
                         } else {
-                            nav.classList.remove('nav-visible');
+                            throw new Error(result.message || 'An unknown server error occurred.');
                         }
-                        // Trigger animations for the newly active slide
-                        triggerSlideAnimations(this);
-                    },
-                },
-            });
+                    } catch (error) {
+                        console.error('Form submission error:', error);
+                        formStatusMessage.textContent = error.message || 'Could not connect. Please try again.';
+                        formStatusMessage.classList.add('text-red-400');
+                        submitButton.textContent = originalButtonText;
+                        submitButton.disabled = false;
+                    }
+                });
+            }
 
-            // --- Hero Text Animation (Runs once on load) ---
+            // --- ALL OTHER FRONTEND JAVASCRIPT ---
             const paragraphContainer = document.getElementById('hero-paragraph-container');
             if (paragraphContainer) {
                 const originalP = paragraphContainer.querySelector('p');
@@ -583,13 +716,69 @@
                         span.className = 'hero-sentence';
                         span.textContent = sentence.trim();
                         originalP.appendChild(span);
-                        setTimeout(() => span.classList.add('visible'), (index * 1200) + 1000);
+                        setTimeout(() => {
+                            span.classList.add('visible');
+                        }, (index * 1200) + 1000);
                     });
                 }
             }
-            
-            // --- 3D Card Hover Effect ---
-            document.querySelectorAll('.info-card').forEach(card => {
+
+            const scrollToTopButton = document.querySelector('.scroll-to-top');
+            if (scrollToTopButton) {
+                window.addEventListener('scroll', () => {
+                    scrollToTopButton.classList.toggle('visible', window.pageYOffset > 300);
+                });
+                scrollToTopButton.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            function animateCounter(element, target, duration = 2000) {
+                let start = 0;
+                const increment = target / (duration / 16);
+                const timer = setInterval(() => {
+                    start += increment;
+                    element.textContent = Math.ceil(start).toLocaleString('en-IN');
+                    if (start >= target) {
+                        element.textContent = target.toLocaleString('en-IN');
+                        clearInterval(timer);
+                    }
+                }, 16);
+                if (target === 0) element.textContent = '0';
+            }
+            const counters = document.querySelectorAll('.counter-value');
+            const counterObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(entry.target.dataset.target, 10);
+                        animateCounter(entry.target, target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            counters.forEach(counter => counterObserver.observe(counter));
+
+            const aboutSection = document.getElementById('about');
+            const aboutContent = document.getElementById('about-content');
+            if (aboutSection && aboutContent) {
+                const aboutObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            aboutContent.classList.add('visible');
+                            aboutSection.classList.add('visible');
+                            const listItems = aboutSection.querySelectorAll('.list-item');
+                            listItems.forEach((item, index) => {
+                                item.style.transitionDelay = `${index * 100}ms`;
+                            });
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.2 });
+                aboutObserver.observe(aboutSection);
+            }
+
+            const infoCards = document.querySelectorAll('.info-card');
+            infoCards.forEach(card => {
                 card.addEventListener('mousemove', (e) => {
                     const rect = card.getBoundingClientRect();
                     const x = e.clientX - rect.left;
@@ -597,31 +786,70 @@
                     const { width, height } = rect;
                     const rotateX = (y / height - 0.5) * -15;
                     const rotateY = (x / width - 0.5) * 15;
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
                 });
                 card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
                 });
             });
 
-            // --- Footer Year ---
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-            
-            // --- Contact Form Logic ---
-            const mainContactForm = document.getElementById('main-contact-form');
-            if (mainContactForm) {
-                const formStatusMessage = document.getElementById('form-status-message');
-                mainContactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    // Basic simulation for demonstration
-                    formStatusMessage.textContent = 'Thank you! Your message has been sent.';
-                    formStatusMessage.className = 'mt-4 text-center text-green-400';
-                    mainContactForm.reset();
-                    setTimeout(() => formStatusMessage.textContent = '', 5000);
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href.length > 1) {
+                        const targetElement = document.querySelector(href);
+                        if (targetElement) {
+                            e.preventDefault();
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
                 });
-            }
+            });
 
-            // --- Chatbot Logic ---
+            const currentYearSpan = document.getElementById('currentYear');
+            if(currentYearSpan) currentYearSpan.textContent = new Date().getFullYear();
+            
+            // --- Swiper for Amenities Initialization ---
+            var amenitiesSwiper = new Swiper(".amenitiesSwiper", {
+                effect: "cube",
+                grabCursor: true,
+                cubeEffect: {
+                    shadow: true,
+                    slideShadows: true,
+                    shadowOffset: 20,
+                    shadowScale: 0.94,
+                },
+                pagination: {
+                    el: "#amenities .swiper-pagination",
+                },
+                loop: true,
+                autoplay: {
+                    delay: 3500,
+                    disableOnInteraction: false,
+                },
+            });
+
+            // --- Swiper for Testimonials Initialization ---
+            var testimonialsSwiper = new Swiper(".testimonialsSwiper", {
+                effect: "cube",
+                grabCursor: true,
+                cubeEffect: {
+                    shadow: true,
+                    slideShadows: true,
+                    shadowOffset: 20,
+                    shadowScale: 0.94,
+                },
+                pagination: {
+                    el: "#testimonials .swiper-pagination",
+                    clickable: true,
+                },
+                loop: true,
+                autoplay: {
+                    delay: 5000, // Longer delay for reading text
+                    disableOnInteraction: false,
+                },
+            });
+
             function initializeChatbot() {
                 const toggleButton = document.getElementById('chatbot-toggle-button');
                 const chatContainer = document.getElementById('chatbot-container');
@@ -630,15 +858,9 @@
                 const chatForm = document.getElementById('chatbot-form');
                 const inputField = document.getElementById('chatbot-input');
                 const knowledgeBase = {
-                    "cost|price|investment": "The launch price for a unit in Project Ananta starts at ₹32,50,000. For a full breakdown, please download the Investment Plan.",
-                    "amenities|facilities": "We offer a luxury pool, gym, community hall, 24/7 security, and much more. You can see a preview on the Amenities slide.",
-                    "benefits|returns|rental": "Investors enjoy a guaranteed monthly rental of ₹25,000, a buyback guarantee, and 15 days of complimentary stay annually.",
-                    "location|address": "Project Ananta is strategically located in Datia, Madhya Pradesh, near the main highway and key local landmarks.",
-                    "contact|phone|email": "You can reach our sales team via the contact form on the 'Get in Touch' slide or by emailing invest@globaloneconsulting.com.",
-                    "possession|completion": "Possession for the first phase is planned within 24 months from the launch date.",
-                    "hello|hi|hey": "Hello! I am the Ananta Assistant. How can I help you with Project Ananta today?",
+                    "cost|price|investment|how much": "The launch price for a unit in Project Ananta starts at ₹32,50,000, with a 25% down payment of ₹8,12,500. For a full breakdown, please download the Investment Plan from our website.", "amenities|facilities|features": "Project Ananta offers exclusive amenities like a luxury swimming pool, a state-of-the-art gym, fine dining, a wellness spa, a private cinema, and a rooftop lounge. You can see them in our Amenities gallery.", "benefits|returns|guarantee|buyback|rental": "Investors enjoy a guaranteed monthly rental of ₹25,000. Key benefits include lifetime free maintenance, a buyback guarantee with assured appreciation, and 15 days of complimentary stay annually.", "location|where|address": "Project Ananta is strategically located in Datia, Madhya Pradesh, near the main highway and the Datia Railway Station. For a detailed map, please see the Location section on our website.", "contact|phone|email|touch": "You can reach our sales team via phone at <a href='tel:+911234567890'>+91 123 456 7890</a> or by email at <a href='mailto:invest@globaloneconsulting.com'>invest@globaloneconsulting.com</a>. You can also use the contact form on our website.", "possession|when|ready|completion": "Possession for the first phase of units is planned within 24 months from the launch.", "highlights|units|towers|size": "Project Ananta consists of 5 luxury towers with 460 units each. We offer two configurations: 50 sqm and 135 sqm apartments.", "hello|hi|hey": "Hello! I am the Ananta Assistant. How can I help you with Project Ananta today?", "thanks|thank you": "You're welcome! Feel free to ask if anything else comes to mind.", "bye|goodbye": "Goodbye! We look forward to hearing from you soon. Have a great day!"
                 };
-                const defaultResponse = "I'm sorry, I can only answer questions about the project's price, location, or amenities. For other inquiries, please use the contact form.";
+                const defaultResponse = "I'm sorry, I can only answer questions about Project Ananta. Please try asking about the price, location, or amenities. For other inquiries, please use the contact form.";
 
                 const toggleChat = (forceOpen = false, forceClose = false) => {
                     const isVisible = chatContainer.classList.contains('visible');
@@ -700,7 +922,20 @@
                 toggleButton.addEventListener('click', () => toggleChat());
                 closeButton.addEventListener('click', () => toggleChat(false, true));
                 chatForm.addEventListener('submit', handleFormSubmit);
+
+                const autoOpenChat = () => {
+                    const hasAutoOpened = sessionStorage.getItem('anantaChatAutoOpened');
+                    if (!hasAutoOpened) {
+                        setTimeout(() => {
+                            toggleChat(true);
+                            sessionStorage.setItem('anantaChatAutoOpened', 'true');
+                        }, 5000); 
+                    }
+                };
+
+                autoOpenChat();
             }
+
             initializeChatbot();
         });
     </script>
